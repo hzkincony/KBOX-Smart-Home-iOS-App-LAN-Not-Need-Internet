@@ -1,0 +1,6 @@
+framework module Pods_KBOX {
+  umbrella header "Pods-KBOX-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,39 @@
+//
+//  DeviceManager.h
+//  KBOX
+//
+//  Created by 顾越超 on 2019/4/2.
+//  Copyright © 2019 kincony. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "KinconyDeviceRLMObject.h"
+#import "KinconyDevice.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+typedef enum {
+    DeviceAddErrorCode_None = 0,
+    DeviceAddErrorCode_AlreadyExists
+} DeviceAddErrorCode;
+
+typedef enum {
+    KinconyDeviceType_Relay = 0
+}KinconyDeviceType;
+
+@interface KinconyDeviceManager : NSObject
+
++ (KinconyDeviceManager*)sharedManager;
+
+- (NSError*)addDevice:(NSInteger)relayNum withIp:(NSString*)ipAddress withPort:(NSInteger)port;
+- (KinconyDeviceRLMObject*)findDeviceByIp:(NSString*)ipAddress;
+- (NSArray*)getAllConnectDevice;
+- (RLMResults*)getAllDevice;
+- (void)deleteDevice:(KinconyDevice*)device;
+- (void)deleteAllDevice;
+- (void)addDevices:(NSMutableArray*)devices;
+- (void)editDevice:(KinconyDeviceRLMObject*)device name:(NSString*)name deviceImageName:(NSString*)imageName;
+
+@end
+
+NS_ASSUME_NONNULL_END

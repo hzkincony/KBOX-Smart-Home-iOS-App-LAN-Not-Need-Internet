@@ -1,0 +1,743 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		65151D692255D60C00BE8951 /* RelayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65151D682255D60C00BE8951 /* RelayCell.m */; };
+		65151D6C2255D87300BE8951 /* RelayCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 65151D6B2255D87300BE8951 /* RelayCellVM.m */; };
+		65376CCE22670F64005CA511 /* SceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65376CCD22670F64005CA511 /* SceneViewController.m */; };
+		65376CD122670F76005CA511 /* SceneVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 65376CD022670F76005CA511 /* SceneVM.m */; };
+		653A2F0D2254447A0058C6AB /* KinconyRelay.m in Sources */ = {isa = PBXBuildFile; fileRef = 653A2F0C2254447A0058C6AB /* KinconyRelay.m */; };
+		653A2F1122544A930058C6AB /* KinconyDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 653A2F1022544A930058C6AB /* KinconyDevice.m */; };
+		653A2F1422549D910058C6AB /* KinconyDeviceRLMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 653A2F1322549D910058C6AB /* KinconyDeviceRLMObject.m */; };
+		653E28EC225C2DE400774EAE /* DeviceImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 653E28EB225C2DE400774EAE /* DeviceImageCell.m */; };
+		653E28EF225C2DF900774EAE /* DeviceImageCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 653E28EE225C2DF900774EAE /* DeviceImageCellVM.m */; };
+		653E28F2225C409600774EAE /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653E28F1225C409600774EAE /* TabBarViewController.m */; };
+		653E28F5225C6BA000774EAE /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653E28F4225C6BA000774EAE /* SettingViewController.m */; };
+		653E28F8225C6BB200774EAE /* SettingVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 653E28F7225C6BB200774EAE /* SettingVM.m */; };
+		653E28FB225C71F200774EAE /* DeviceManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653E28FA225C71F200774EAE /* DeviceManagerViewController.m */; };
+		653E28FE225C720F00774EAE /* DeviceManagerVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 653E28FD225C720F00774EAE /* DeviceManagerVM.m */; };
+		653E2901225C7A9E00774EAE /* DeviceManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 653E2900225C7A9E00774EAE /* DeviceManagerCell.m */; };
+		653E2904225C7AB100774EAE /* DeviceManagerCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 653E2903225C7AB100774EAE /* DeviceManagerCellVM.m */; };
+		654248262251AE1C00E30D54 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 654248252251AE1C00E30D54 /* AppDelegate.m */; };
+		6542482C2251AE1C00E30D54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6542482A2251AE1C00E30D54 /* Main.storyboard */; };
+		6542482E2251AE1E00E30D54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6542482D2251AE1E00E30D54 /* Assets.xcassets */; };
+		654248312251AE1E00E30D54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6542482F2251AE1E00E30D54 /* LaunchScreen.storyboard */; };
+		654248342251AE1E00E30D54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 654248332251AE1E00E30D54 /* main.m */; };
+		654248512251AFCC00E30D54 /* GLBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6542484B2251AFCC00E30D54 /* GLBaseViewController.m */; };
+		654248522251AFCC00E30D54 /* GLBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6542484C2251AFCC00E30D54 /* GLBaseTableViewController.m */; };
+		654248532251AFCC00E30D54 /* GLViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 654248502251AFCC00E30D54 /* GLViewModel.m */; };
+		654E9523225B329E00561050 /* DeviceEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 654E9522225B329E00561050 /* DeviceEditViewController.m */; };
+		654E9526225B32AE00561050 /* DeviceEditVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 654E9525225B32AE00561050 /* DeviceEditVM.m */; };
+		654E9529225B378A00561050 /* DeviceImageChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 654E9528225B378A00561050 /* DeviceImageChooseViewController.m */; };
+		654E952C225B379E00561050 /* DeviceImageChooseVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 654E952B225B379E00561050 /* DeviceImageChooseVM.m */; };
+		655FA9202269632E009EE0D9 /* SceneDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 655FA91F2269632E009EE0D9 /* SceneDeviceCell.m */; };
+		655FA92322696510009EE0D9 /* SceneDeviceCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 655FA92222696510009EE0D9 /* SceneDeviceCellVM.m */; };
+		655FA9262269AC21009EE0D9 /* SceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 655FA9252269AC21009EE0D9 /* SceneCell.m */; };
+		655FA9292269AC32009EE0D9 /* SceneCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 655FA9282269AC32009EE0D9 /* SceneCellVM.m */; };
+		656C2983225F2565008B3844 /* KinconyDeviceState.m in Sources */ = {isa = PBXBuildFile; fileRef = 656C2982225F2565008B3844 /* KinconyDeviceState.m */; };
+		657DD5382252F38F00C7C3B0 /* DeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 657DD5372252F38F00C7C3B0 /* DeviceListViewController.m */; };
+		657DD53B2252F3E700C7C3B0 /* DeviceListVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 657DD53A2252F3E700C7C3B0 /* DeviceListVM.m */; };
+		657DD547225300D100C7C3B0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 657DD549225300D100C7C3B0 /* Localizable.strings */; };
+		657DD5532253350500C7C3B0 /* KinconyDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 657DD5522253350500C7C3B0 /* KinconyDeviceManager.m */; };
+		657DD55622533AC800C7C3B0 /* KinconySocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 657DD55522533AC800C7C3B0 /* KinconySocketManager.m */; };
+		657EEC902268469500708CCD /* KinconySceneDeviceRLMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EEC8F2268469500708CCD /* KinconySceneDeviceRLMObject.m */; };
+		657EEC932268478400708CCD /* KinconySceneRLMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EEC922268478400708CCD /* KinconySceneRLMObject.m */; };
+		657EEC96226848B700708CCD /* KinconySceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EEC95226848B700708CCD /* KinconySceneManager.m */; };
+		657EEC99226848E400708CCD /* SceneEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EEC98226848E400708CCD /* SceneEditViewController.m */; };
+		657EEC9C226848F300708CCD /* SceneEditVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EEC9B226848F300708CCD /* SceneEditVM.m */; };
+		657EEC9F22684FFE00708CCD /* ChooseSceneDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EEC9E22684FFE00708CCD /* ChooseSceneDeviceViewController.m */; };
+		657EECA22268501200708CCD /* ChooseSceneDeviceVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA12268501200708CCD /* ChooseSceneDeviceVM.m */; };
+		657EECA52268518E00708CCD /* SceneDeviceChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA42268518E00708CCD /* SceneDeviceChooseCell.m */; };
+		657EECA8226851A600708CCD /* SceneDeviceChooseCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA7226851A600708CCD /* SceneDeviceChooseCellVM.m */; };
+		D00B75208E25ADDDC30D9F8B /* libPods-KBOX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92F0A5253904B91AC1AE7B4A /* libPods-KBOX.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		32BD1C05F661E6C1ABF8045F /* Pods-KBOX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KBOX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KBOX/Pods-KBOX.debug.xcconfig"; sourceTree = "<group>"; };
+		65151D672255D60C00BE8951 /* RelayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RelayCell.h; sourceTree = "<group>"; };
+		65151D682255D60C00BE8951 /* RelayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RelayCell.m; sourceTree = "<group>"; };
+		65151D6A2255D87300BE8951 /* RelayCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RelayCellVM.h; sourceTree = "<group>"; };
+		65151D6B2255D87300BE8951 /* RelayCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RelayCellVM.m; sourceTree = "<group>"; };
+		65376CCC22670F64005CA511 /* SceneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneViewController.h; sourceTree = "<group>"; };
+		65376CCD22670F64005CA511 /* SceneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneViewController.m; sourceTree = "<group>"; };
+		65376CCF22670F76005CA511 /* SceneVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneVM.h; sourceTree = "<group>"; };
+		65376CD022670F76005CA511 /* SceneVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneVM.m; sourceTree = "<group>"; };
+		653A2F0B2254447A0058C6AB /* KinconyRelay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconyRelay.h; sourceTree = "<group>"; };
+		653A2F0C2254447A0058C6AB /* KinconyRelay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconyRelay.m; sourceTree = "<group>"; };
+		653A2F0F22544A930058C6AB /* KinconyDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconyDevice.h; sourceTree = "<group>"; };
+		653A2F1022544A930058C6AB /* KinconyDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconyDevice.m; sourceTree = "<group>"; };
+		653A2F1222549D910058C6AB /* KinconyDeviceRLMObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconyDeviceRLMObject.h; sourceTree = "<group>"; };
+		653A2F1322549D910058C6AB /* KinconyDeviceRLMObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconyDeviceRLMObject.m; sourceTree = "<group>"; };
+		653E28EA225C2DE400774EAE /* DeviceImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceImageCell.h; sourceTree = "<group>"; };
+		653E28EB225C2DE400774EAE /* DeviceImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceImageCell.m; sourceTree = "<group>"; };
+		653E28ED225C2DF900774EAE /* DeviceImageCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceImageCellVM.h; sourceTree = "<group>"; };
+		653E28EE225C2DF900774EAE /* DeviceImageCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceImageCellVM.m; sourceTree = "<group>"; };
+		653E28F0225C409600774EAE /* TabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
+		653E28F1225C409600774EAE /* TabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
+		653E28F3225C6BA000774EAE /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		653E28F4225C6BA000774EAE /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		653E28F6225C6BB200774EAE /* SettingVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingVM.h; sourceTree = "<group>"; };
+		653E28F7225C6BB200774EAE /* SettingVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingVM.m; sourceTree = "<group>"; };
+		653E28F9225C71F200774EAE /* DeviceManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceManagerViewController.h; sourceTree = "<group>"; };
+		653E28FA225C71F200774EAE /* DeviceManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceManagerViewController.m; sourceTree = "<group>"; };
+		653E28FC225C720F00774EAE /* DeviceManagerVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceManagerVM.h; sourceTree = "<group>"; };
+		653E28FD225C720F00774EAE /* DeviceManagerVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceManagerVM.m; sourceTree = "<group>"; };
+		653E28FF225C7A9E00774EAE /* DeviceManagerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceManagerCell.h; sourceTree = "<group>"; };
+		653E2900225C7A9E00774EAE /* DeviceManagerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceManagerCell.m; sourceTree = "<group>"; };
+		653E2902225C7AB100774EAE /* DeviceManagerCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceManagerCellVM.h; sourceTree = "<group>"; };
+		653E2903225C7AB100774EAE /* DeviceManagerCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceManagerCellVM.m; sourceTree = "<group>"; };
+		654248212251AE1C00E30D54 /* KBOX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KBOX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		654248242251AE1C00E30D54 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		654248252251AE1C00E30D54 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6542482B2251AE1C00E30D54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6542482D2251AE1E00E30D54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		654248302251AE1E00E30D54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		654248322251AE1E00E30D54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		654248332251AE1E00E30D54 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6542484B2251AFCC00E30D54 /* GLBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBaseViewController.m; sourceTree = "<group>"; };
+		6542484C2251AFCC00E30D54 /* GLBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBaseTableViewController.m; sourceTree = "<group>"; };
+		6542484D2251AFCC00E30D54 /* GLViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLViewModel.h; sourceTree = "<group>"; };
+		6542484E2251AFCC00E30D54 /* GLBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBaseViewController.h; sourceTree = "<group>"; };
+		6542484F2251AFCC00E30D54 /* GLBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBaseTableViewController.h; sourceTree = "<group>"; };
+		654248502251AFCC00E30D54 /* GLViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLViewModel.m; sourceTree = "<group>"; };
+		654E9521225B329E00561050 /* DeviceEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceEditViewController.h; sourceTree = "<group>"; };
+		654E9522225B329E00561050 /* DeviceEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceEditViewController.m; sourceTree = "<group>"; };
+		654E9524225B32AE00561050 /* DeviceEditVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceEditVM.h; sourceTree = "<group>"; };
+		654E9525225B32AE00561050 /* DeviceEditVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceEditVM.m; sourceTree = "<group>"; };
+		654E9527225B378A00561050 /* DeviceImageChooseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceImageChooseViewController.h; sourceTree = "<group>"; };
+		654E9528225B378A00561050 /* DeviceImageChooseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceImageChooseViewController.m; sourceTree = "<group>"; };
+		654E952A225B379E00561050 /* DeviceImageChooseVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceImageChooseVM.h; sourceTree = "<group>"; };
+		654E952B225B379E00561050 /* DeviceImageChooseVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceImageChooseVM.m; sourceTree = "<group>"; };
+		655FA91E2269632E009EE0D9 /* SceneDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDeviceCell.h; sourceTree = "<group>"; };
+		655FA91F2269632E009EE0D9 /* SceneDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDeviceCell.m; sourceTree = "<group>"; };
+		655FA92122696510009EE0D9 /* SceneDeviceCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDeviceCellVM.h; sourceTree = "<group>"; };
+		655FA92222696510009EE0D9 /* SceneDeviceCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDeviceCellVM.m; sourceTree = "<group>"; };
+		655FA9242269AC21009EE0D9 /* SceneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneCell.h; sourceTree = "<group>"; };
+		655FA9252269AC21009EE0D9 /* SceneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneCell.m; sourceTree = "<group>"; };
+		655FA9272269AC32009EE0D9 /* SceneCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneCellVM.h; sourceTree = "<group>"; };
+		655FA9282269AC32009EE0D9 /* SceneCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneCellVM.m; sourceTree = "<group>"; };
+		656C2981225F2565008B3844 /* KinconyDeviceState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconyDeviceState.h; sourceTree = "<group>"; };
+		656C2982225F2565008B3844 /* KinconyDeviceState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconyDeviceState.m; sourceTree = "<group>"; };
+		657DD5362252F38F00C7C3B0 /* DeviceListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceListViewController.h; sourceTree = "<group>"; };
+		657DD5372252F38F00C7C3B0 /* DeviceListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceListViewController.m; sourceTree = "<group>"; };
+		657DD5392252F3E700C7C3B0 /* DeviceListVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceListVM.h; sourceTree = "<group>"; };
+		657DD53A2252F3E700C7C3B0 /* DeviceListVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceListVM.m; sourceTree = "<group>"; };
+		657DD5422252FD6700C7C3B0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		657DD5432252FD6700C7C3B0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		657DD548225300D100C7C3B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		657DD54A225300D300C7C3B0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		657DD5512253350500C7C3B0 /* KinconyDeviceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconyDeviceManager.h; sourceTree = "<group>"; };
+		657DD5522253350500C7C3B0 /* KinconyDeviceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconyDeviceManager.m; sourceTree = "<group>"; };
+		657DD55422533AC800C7C3B0 /* KinconySocketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconySocketManager.h; sourceTree = "<group>"; };
+		657DD55522533AC800C7C3B0 /* KinconySocketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconySocketManager.m; sourceTree = "<group>"; };
+		657EEC8E2268469500708CCD /* KinconySceneDeviceRLMObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconySceneDeviceRLMObject.h; sourceTree = "<group>"; };
+		657EEC8F2268469500708CCD /* KinconySceneDeviceRLMObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconySceneDeviceRLMObject.m; sourceTree = "<group>"; };
+		657EEC912268478400708CCD /* KinconySceneRLMObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconySceneRLMObject.h; sourceTree = "<group>"; };
+		657EEC922268478400708CCD /* KinconySceneRLMObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconySceneRLMObject.m; sourceTree = "<group>"; };
+		657EEC94226848B700708CCD /* KinconySceneManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconySceneManager.h; sourceTree = "<group>"; };
+		657EEC95226848B700708CCD /* KinconySceneManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconySceneManager.m; sourceTree = "<group>"; };
+		657EEC97226848E400708CCD /* SceneEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneEditViewController.h; sourceTree = "<group>"; };
+		657EEC98226848E400708CCD /* SceneEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneEditViewController.m; sourceTree = "<group>"; };
+		657EEC9A226848F300708CCD /* SceneEditVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneEditVM.h; sourceTree = "<group>"; };
+		657EEC9B226848F300708CCD /* SceneEditVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneEditVM.m; sourceTree = "<group>"; };
+		657EEC9D22684FFE00708CCD /* ChooseSceneDeviceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseSceneDeviceViewController.h; sourceTree = "<group>"; };
+		657EEC9E22684FFE00708CCD /* ChooseSceneDeviceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseSceneDeviceViewController.m; sourceTree = "<group>"; };
+		657EECA02268501200708CCD /* ChooseSceneDeviceVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseSceneDeviceVM.h; sourceTree = "<group>"; };
+		657EECA12268501200708CCD /* ChooseSceneDeviceVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseSceneDeviceVM.m; sourceTree = "<group>"; };
+		657EECA32268518E00708CCD /* SceneDeviceChooseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDeviceChooseCell.h; sourceTree = "<group>"; };
+		657EECA42268518E00708CCD /* SceneDeviceChooseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDeviceChooseCell.m; sourceTree = "<group>"; };
+		657EECA6226851A600708CCD /* SceneDeviceChooseCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDeviceChooseCellVM.h; sourceTree = "<group>"; };
+		657EECA7226851A600708CCD /* SceneDeviceChooseCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDeviceChooseCellVM.m; sourceTree = "<group>"; };
+		92F0A5253904B91AC1AE7B4A /* libPods-KBOX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KBOX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2444A22FD7B6ABC97ED758E /* Pods-KBOX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KBOX.release.xcconfig"; path = "Pods/Target Support Files/Pods-KBOX/Pods-KBOX.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6542481E2251AE1C00E30D54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D00B75208E25ADDDC30D9F8B /* libPods-KBOX.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0FAF05136D6588FCFC87C7E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				92F0A5253904B91AC1AE7B4A /* libPods-KBOX.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		653A2F0E2254496F0058C6AB /* KinconyRelaySDK */ = {
+			isa = PBXGroup;
+			children = (
+				657DD53C2252F55B00C7C3B0 /* Models */,
+				653A2F0B2254447A0058C6AB /* KinconyRelay.h */,
+				653A2F0C2254447A0058C6AB /* KinconyRelay.m */,
+				657DD5512253350500C7C3B0 /* KinconyDeviceManager.h */,
+				657DD5522253350500C7C3B0 /* KinconyDeviceManager.m */,
+				657DD55422533AC800C7C3B0 /* KinconySocketManager.h */,
+				657DD55522533AC800C7C3B0 /* KinconySocketManager.m */,
+				657EEC94226848B700708CCD /* KinconySceneManager.h */,
+				657EEC95226848B700708CCD /* KinconySceneManager.m */,
+			);
+			path = KinconyRelaySDK;
+			sourceTree = "<group>";
+		};
+		654248182251AE1C00E30D54 = {
+			isa = PBXGroup;
+			children = (
+				654248232251AE1C00E30D54 /* KBOX */,
+				654248222251AE1C00E30D54 /* Products */,
+				684050FA2E3925DFC1A6B29D /* Pods */,
+				0FAF05136D6588FCFC87C7E8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		654248222251AE1C00E30D54 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				654248212251AE1C00E30D54 /* KBOX.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		654248232251AE1C00E30D54 /* KBOX */ = {
+			isa = PBXGroup;
+			children = (
+				6542483D2251AEBF00E30D54 /* Resource */,
+				6542483F2251AEBF00E30D54 /* Vendor */,
+				6542483C2251AEBF00E30D54 /* Manager */,
+				653A2F0E2254496F0058C6AB /* KinconyRelaySDK */,
+				6542483B2251AEBF00E30D54 /* Classes */,
+				6542483A2251AEBF00E30D54 /* Views */,
+				654248242251AE1C00E30D54 /* AppDelegate.h */,
+				654248252251AE1C00E30D54 /* AppDelegate.m */,
+				654248322251AE1E00E30D54 /* Info.plist */,
+				654248332251AE1E00E30D54 /* main.m */,
+			);
+			path = KBOX;
+			sourceTree = "<group>";
+		};
+		6542483A2251AEBF00E30D54 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				65151D672255D60C00BE8951 /* RelayCell.h */,
+				65151D682255D60C00BE8951 /* RelayCell.m */,
+				65151D6A2255D87300BE8951 /* RelayCellVM.h */,
+				65151D6B2255D87300BE8951 /* RelayCellVM.m */,
+				653E28EA225C2DE400774EAE /* DeviceImageCell.h */,
+				653E28EB225C2DE400774EAE /* DeviceImageCell.m */,
+				653E28ED225C2DF900774EAE /* DeviceImageCellVM.h */,
+				653E28EE225C2DF900774EAE /* DeviceImageCellVM.m */,
+				653E28FF225C7A9E00774EAE /* DeviceManagerCell.h */,
+				653E2900225C7A9E00774EAE /* DeviceManagerCell.m */,
+				653E2902225C7AB100774EAE /* DeviceManagerCellVM.h */,
+				653E2903225C7AB100774EAE /* DeviceManagerCellVM.m */,
+				657EECA32268518E00708CCD /* SceneDeviceChooseCell.h */,
+				657EECA42268518E00708CCD /* SceneDeviceChooseCell.m */,
+				657EECA6226851A600708CCD /* SceneDeviceChooseCellVM.h */,
+				657EECA7226851A600708CCD /* SceneDeviceChooseCellVM.m */,
+				655FA91E2269632E009EE0D9 /* SceneDeviceCell.h */,
+				655FA91F2269632E009EE0D9 /* SceneDeviceCell.m */,
+				655FA92122696510009EE0D9 /* SceneDeviceCellVM.h */,
+				655FA92222696510009EE0D9 /* SceneDeviceCellVM.m */,
+				655FA9242269AC21009EE0D9 /* SceneCell.h */,
+				655FA9252269AC21009EE0D9 /* SceneCell.m */,
+				655FA9272269AC32009EE0D9 /* SceneCellVM.h */,
+				655FA9282269AC32009EE0D9 /* SceneCellVM.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6542483B2251AEBF00E30D54 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6542484A2251AFCC00E30D54 /* BaseClasses */,
+				653E28F0225C409600774EAE /* TabBarViewController.h */,
+				653E28F1225C409600774EAE /* TabBarViewController.m */,
+				657DD5362252F38F00C7C3B0 /* DeviceListViewController.h */,
+				657DD5372252F38F00C7C3B0 /* DeviceListViewController.m */,
+				657DD5392252F3E700C7C3B0 /* DeviceListVM.h */,
+				657DD53A2252F3E700C7C3B0 /* DeviceListVM.m */,
+				654E9521225B329E00561050 /* DeviceEditViewController.h */,
+				654E9522225B329E00561050 /* DeviceEditViewController.m */,
+				654E9524225B32AE00561050 /* DeviceEditVM.h */,
+				654E9525225B32AE00561050 /* DeviceEditVM.m */,
+				654E9527225B378A00561050 /* DeviceImageChooseViewController.h */,
+				654E9528225B378A00561050 /* DeviceImageChooseViewController.m */,
+				654E952A225B379E00561050 /* DeviceImageChooseVM.h */,
+				654E952B225B379E00561050 /* DeviceImageChooseVM.m */,
+				653E28F3225C6BA000774EAE /* SettingViewController.h */,
+				653E28F4225C6BA000774EAE /* SettingViewController.m */,
+				653E28F6225C6BB200774EAE /* SettingVM.h */,
+				653E28F7225C6BB200774EAE /* SettingVM.m */,
+				653E28F9225C71F200774EAE /* DeviceManagerViewController.h */,
+				653E28FA225C71F200774EAE /* DeviceManagerViewController.m */,
+				653E28FC225C720F00774EAE /* DeviceManagerVM.h */,
+				653E28FD225C720F00774EAE /* DeviceManagerVM.m */,
+				65376CCC22670F64005CA511 /* SceneViewController.h */,
+				65376CCD22670F64005CA511 /* SceneViewController.m */,
+				65376CCF22670F76005CA511 /* SceneVM.h */,
+				65376CD022670F76005CA511 /* SceneVM.m */,
+				657EEC97226848E400708CCD /* SceneEditViewController.h */,
+				657EEC98226848E400708CCD /* SceneEditViewController.m */,
+				657EEC9A226848F300708CCD /* SceneEditVM.h */,
+				657EEC9B226848F300708CCD /* SceneEditVM.m */,
+				657EEC9D22684FFE00708CCD /* ChooseSceneDeviceViewController.h */,
+				657EEC9E22684FFE00708CCD /* ChooseSceneDeviceViewController.m */,
+				657EECA02268501200708CCD /* ChooseSceneDeviceVM.h */,
+				657EECA12268501200708CCD /* ChooseSceneDeviceVM.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		6542483C2251AEBF00E30D54 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		6542483D2251AEBF00E30D54 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				6542483E2251AEBF00E30D54 /* images */,
+				6542482A2251AE1C00E30D54 /* Main.storyboard */,
+				6542482D2251AE1E00E30D54 /* Assets.xcassets */,
+				6542482F2251AE1E00E30D54 /* LaunchScreen.storyboard */,
+				657DD549225300D100C7C3B0 /* Localizable.strings */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		6542483E2251AEBF00E30D54 /* images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		6542483F2251AEBF00E30D54 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		6542484A2251AFCC00E30D54 /* BaseClasses */ = {
+			isa = PBXGroup;
+			children = (
+				6542484E2251AFCC00E30D54 /* GLBaseViewController.h */,
+				6542484B2251AFCC00E30D54 /* GLBaseViewController.m */,
+				6542484F2251AFCC00E30D54 /* GLBaseTableViewController.h */,
+				6542484C2251AFCC00E30D54 /* GLBaseTableViewController.m */,
+				6542484D2251AFCC00E30D54 /* GLViewModel.h */,
+				654248502251AFCC00E30D54 /* GLViewModel.m */,
+			);
+			path = BaseClasses;
+			sourceTree = "<group>";
+		};
+		657DD53C2252F55B00C7C3B0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				653A2F0F22544A930058C6AB /* KinconyDevice.h */,
+				653A2F1022544A930058C6AB /* KinconyDevice.m */,
+				653A2F1222549D910058C6AB /* KinconyDeviceRLMObject.h */,
+				653A2F1322549D910058C6AB /* KinconyDeviceRLMObject.m */,
+				656C2981225F2565008B3844 /* KinconyDeviceState.h */,
+				656C2982225F2565008B3844 /* KinconyDeviceState.m */,
+				657EEC8E2268469500708CCD /* KinconySceneDeviceRLMObject.h */,
+				657EEC8F2268469500708CCD /* KinconySceneDeviceRLMObject.m */,
+				657EEC912268478400708CCD /* KinconySceneRLMObject.h */,
+				657EEC922268478400708CCD /* KinconySceneRLMObject.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		684050FA2E3925DFC1A6B29D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				32BD1C05F661E6C1ABF8045F /* Pods-KBOX.debug.xcconfig */,
+				C2444A22FD7B6ABC97ED758E /* Pods-KBOX.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		654248202251AE1C00E30D54 /* KBOX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 654248372251AE1E00E30D54 /* Build configuration list for PBXNativeTarget "KBOX" */;
+			buildPhases = (
+				A0DA5B91437522B1E71CE552 /* [CP] Check Pods Manifest.lock */,
+				6542481D2251AE1C00E30D54 /* Sources */,
+				6542481E2251AE1C00E30D54 /* Frameworks */,
+				6542481F2251AE1C00E30D54 /* Resources */,
+				C63E890B1F4DC2AC888B6123 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KBOX;
+			productName = KBOX;
+			productReference = 654248212251AE1C00E30D54 /* KBOX.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		654248192251AE1C00E30D54 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = kincony;
+				TargetAttributes = {
+					654248202251AE1C00E30D54 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 6542481C2251AE1C00E30D54 /* Build configuration list for PBXProject "KBOX" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = 654248182251AE1C00E30D54;
+			productRefGroup = 654248222251AE1C00E30D54 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				654248202251AE1C00E30D54 /* KBOX */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6542481F2251AE1C00E30D54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				654248312251AE1E00E30D54 /* LaunchScreen.storyboard in Resources */,
+				657DD547225300D100C7C3B0 /* Localizable.strings in Resources */,
+				6542482E2251AE1E00E30D54 /* Assets.xcassets in Resources */,
+				6542482C2251AE1C00E30D54 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A0DA5B91437522B1E71CE552 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KBOX-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C63E890B1F4DC2AC888B6123 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-KBOX/Pods-KBOX-resources.sh",
+				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KBOX/Pods-KBOX-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6542481D2251AE1C00E30D54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				654E9529225B378A00561050 /* DeviceImageChooseViewController.m in Sources */,
+				657EECA52268518E00708CCD /* SceneDeviceChooseCell.m in Sources */,
+				657EECA8226851A600708CCD /* SceneDeviceChooseCellVM.m in Sources */,
+				655FA92322696510009EE0D9 /* SceneDeviceCellVM.m in Sources */,
+				65376CCE22670F64005CA511 /* SceneViewController.m in Sources */,
+				657DD53B2252F3E700C7C3B0 /* DeviceListVM.m in Sources */,
+				65151D692255D60C00BE8951 /* RelayCell.m in Sources */,
+				657EEC902268469500708CCD /* KinconySceneDeviceRLMObject.m in Sources */,
+				654E9526225B32AE00561050 /* DeviceEditVM.m in Sources */,
+				653E28EF225C2DF900774EAE /* DeviceImageCellVM.m in Sources */,
+				654E9523225B329E00561050 /* DeviceEditViewController.m in Sources */,
+				65151D6C2255D87300BE8951 /* RelayCellVM.m in Sources */,
+				653A2F0D2254447A0058C6AB /* KinconyRelay.m in Sources */,
+				657EEC9F22684FFE00708CCD /* ChooseSceneDeviceViewController.m in Sources */,
+				655FA9262269AC21009EE0D9 /* SceneCell.m in Sources */,
+				65376CD122670F76005CA511 /* SceneVM.m in Sources */,
+				655FA9292269AC32009EE0D9 /* SceneCellVM.m in Sources */,
+				657EEC9C226848F300708CCD /* SceneEditVM.m in Sources */,
+				657DD5532253350500C7C3B0 /* KinconyDeviceManager.m in Sources */,
+				653E28F5225C6BA000774EAE /* SettingViewController.m in Sources */,
+				653E28FB225C71F200774EAE /* DeviceManagerViewController.m in Sources */,
+				654248532251AFCC00E30D54 /* GLViewModel.m in Sources */,
+				654E952C225B379E00561050 /* DeviceImageChooseVM.m in Sources */,
+				653E2904225C7AB100774EAE /* DeviceManagerCellVM.m in Sources */,
+				653A2F1122544A930058C6AB /* KinconyDevice.m in Sources */,
+				653E28EC225C2DE400774EAE /* DeviceImageCell.m in Sources */,
+				654248342251AE1E00E30D54 /* main.m in Sources */,
+				653E28F8225C6BB200774EAE /* SettingVM.m in Sources */,
+				657EEC99226848E400708CCD /* SceneEditViewController.m in Sources */,
+				653A2F1422549D910058C6AB /* KinconyDeviceRLMObject.m in Sources */,
+				656C2983225F2565008B3844 /* KinconyDeviceState.m in Sources */,
+				657DD5382252F38F00C7C3B0 /* DeviceListViewController.m in Sources */,
+				653E28F2225C409600774EAE /* TabBarViewController.m in Sources */,
+				654248522251AFCC00E30D54 /* GLBaseTableViewController.m in Sources */,
+				657EEC96226848B700708CCD /* KinconySceneManager.m in Sources */,
+				653E2901225C7A9E00774EAE /* DeviceManagerCell.m in Sources */,
+				653E28FE225C720F00774EAE /* DeviceManagerVM.m in Sources */,
+				655FA9202269632E009EE0D9 /* SceneDeviceCell.m in Sources */,
+				657DD55622533AC800C7C3B0 /* KinconySocketManager.m in Sources */,
+				657EEC932268478400708CCD /* KinconySceneRLMObject.m in Sources */,
+				654248512251AFCC00E30D54 /* GLBaseViewController.m in Sources */,
+				654248262251AE1C00E30D54 /* AppDelegate.m in Sources */,
+				657EECA22268501200708CCD /* ChooseSceneDeviceVM.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6542482A2251AE1C00E30D54 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6542482B2251AE1C00E30D54 /* Base */,
+				657DD5422252FD6700C7C3B0 /* zh-Hans */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6542482F2251AE1E00E30D54 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				654248302251AE1E00E30D54 /* Base */,
+				657DD5432252FD6700C7C3B0 /* zh-Hans */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		657DD549225300D100C7C3B0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				657DD548225300D100C7C3B0 /* en */,
+				657DD54A225300D300C7C3B0 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		654248352251AE1E00E30D54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		654248362251AE1E00E30D54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		654248382251AE1E00E30D54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32BD1C05F661E6C1ABF8045F /* Pods-KBOX.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FCKZPWQ8Z4;
+				INFOPLIST_FILE = KBOX/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hificat.KBOX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "kbox dev profile";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		654248392251AE1E00E30D54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2444A22FD7B6ABC97ED758E /* Pods-KBOX.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FCKZPWQ8Z4;
+				INFOPLIST_FILE = KBOX/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hificat.KBOX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "kbox dis profile";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6542481C2251AE1C00E30D54 /* Build configuration list for PBXProject "KBOX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				654248352251AE1E00E30D54 /* Debug */,
+				654248362251AE1E00E30D54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		654248372251AE1E00E30D54 /* Build configuration list for PBXNativeTarget "KBOX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				654248382251AE1E00E30D54 /* Debug */,
+				654248392251AE1E00E30D54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 654248192251AE1C00E30D54 /* Project object */;
+}

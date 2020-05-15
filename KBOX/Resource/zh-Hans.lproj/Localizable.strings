@@ -1,0 +1,35 @@
+/* 
+  Localizable.strings
+  KBOX
+
+  Created by 顾越超 on 2019/4/2.
+  Copyright © 2019 kincony. All rights reserved.
+*/
+
+"addDeviceAlertTitle" = "添加设备";
+"cancelBtn" = "取消";
+"inputAddressPlaceholder" = "输入IP";
+"inputPortPlaceholder" = "输入端口";
+"doneBtn" = "确定";
+"deviceAlreadyExists" = "设备已存在";
+"editBtn" = "编辑";
+"editTitle" = "编辑";
+"noNameHudMsg" = "请输入名称";
+"deviceImagesTitle" = "设备图片";
+"tabbarDevices" = "设备";
+"tabbarSetting" = "设置";
+"settingDevices" = "设备";
+"settingVersionCellTitle" = "版本号";
+"devicesListTitle" = "设备";
+"tabbarScene" = "情景模式";
+"sceneEditTitleAdd" = "新增";
+"sceneEditTitleEdit" = "编辑";
+"sceneEditNameInput" = "输入情景模式名称";
+"sceneEditChooseDeviceBtn" = "选择设备";
+"chooseDeviceVcTitle" = "选择设备";
+"noSceneNameHudMsg" = "请输入名称";
+"sceneCellDelete" = "删除";
+"sceneCellEdit" = "编辑";
+"sceneDeviceChoosed" = "设备添加成功";
+"deviceEditName" = "名称";
+"deviceEditIcon" = "图标";

@@ -1,0 +1,35 @@
+/* 
+  Localizable.strings
+  KBOX
+
+  Created by 顾越超 on 2019/4/2.
+  Copyright © 2019 kincony. All rights reserved.
+*/
+
+"addDeviceAlertTitle" = "Add device";
+"cancelBtn" = "Cancel";
+"inputAddressPlaceholder" = "Input IP";
+"inputPortPlaceholder" = "Input port";
+"doneBtn" = "Done";
+"deviceAlreadyExists" = "device already exists";
+"editBtn" = "Edit";
+"editTitle" = "Edit";
+"noNameHudMsg" = "Please input name";
+"deviceImagesTitle" = "Device image";
+"tabbarDevices" = "Devices";
+"tabbarSetting" = "Setting";
+"settingDevices" = "Devices";
+"settingVersionCellTitle" = "Version";
+"devicesListTitle" = "Devices";
+"tabbarScene" = "Scene";
+"sceneEditTitleAdd" = "Add";
+"sceneEditTitleEdit" = "Edit";
+"sceneEditNameInput" = "input scene name";
+"sceneEditChooseDeviceBtn" = "choose device";
+"chooseDeviceVcTitle" = "choose device";
+"noSceneNameHudMsg" = "Please input name";
+"sceneCellDelete" = "delete";
+"sceneCellEdit" = "edit";
+"sceneDeviceChoosed" = "Device added successfully";
+"deviceEditName" = "Name";
+"deviceEditIcon" = "Icon";
