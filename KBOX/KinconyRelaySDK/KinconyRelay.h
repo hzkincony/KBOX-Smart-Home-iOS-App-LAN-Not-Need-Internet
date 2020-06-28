@@ -31,7 +31,7 @@ typedef void (^DeviceAddResultBlock) (NSError *error);
 
 - (void)exchangeDevicesIndex:(NSMutableArray*)devices;
 
-- (void)editDevice:(KinconyDeviceRLMObject*)device name:(NSString*)name deviceImageName:(NSString*)imageName;
+- (void)editDevice:(KinconyDeviceRLMObject*)device name:(NSString*)name deviceImageName:(NSString*)imageName deviceTouchImageName:(NSString*)touchImageName controlMode:(NSInteger)controlModel;
 
 - (void)deleteDevice:(KinconyDevice*)device;
 

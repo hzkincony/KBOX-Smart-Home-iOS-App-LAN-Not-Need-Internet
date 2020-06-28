@@ -15,8 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RelayCellVM : GLViewModel
 
 @property (nonatomic, strong) UIImage *deviceImage;
+@property (nonatomic, strong) UIImage *deviceTouchImage;
 @property (nonatomic, strong) NSString *deviceName;
 @property (nonatomic, strong) NSNumber *deviceOn;
+@property (nonatomic, strong) NSNumber *controlModel;
 
 - (id)initWithDevice:(KinconyDeviceRLMObject*)device;
 - (KinconyDeviceRLMObject*)getDevice;

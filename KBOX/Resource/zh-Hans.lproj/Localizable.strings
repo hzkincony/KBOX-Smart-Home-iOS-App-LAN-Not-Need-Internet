@@ -33,3 +33,11 @@
 "sceneDeviceChoosed" = "设备添加成功";
 "deviceEditName" = "名称";
 "deviceEditIcon" = "图标";
+"pleaseInputIP" = "请输入IP";
+"pleaseInputPort" = "请输入端口";
+"pleaseChooseModel" = "请选择类型";
+"Model" = "类型";
+"ControlModel" = "控制方式";
+"TouchIcon" = "触控图标";
+"Click" = "点击";
+"Touch" = "触摸";

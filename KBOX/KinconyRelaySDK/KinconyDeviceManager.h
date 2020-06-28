@@ -32,7 +32,7 @@ typedef enum {
 - (void)deleteDevice:(KinconyDevice*)device;
 - (void)deleteAllDevice;
 - (void)addDevices:(NSMutableArray*)devices;
-- (void)editDevice:(KinconyDeviceRLMObject*)device name:(NSString*)name deviceImageName:(NSString*)imageName;
+- (void)editDevice:(KinconyDeviceRLMObject*)device name:(NSString*)name deviceImageName:(NSString*)imageName deviceTouchImageName:(NSString*)touchImageName controlMode:(NSInteger)controlModel;
 
 @end
 

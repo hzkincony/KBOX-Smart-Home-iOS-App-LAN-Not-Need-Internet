@@ -18,7 +18,7 @@
 
 - (void)chooseImageIndex:(NSInteger)index {
     DeviceImageCellVM *deviceImageCellVM = [self.deviceImageCellVMList objectAtIndex:index];
-    [self.delegate choosedImageName:deviceImageCellVM.imageName];
+    [self.delegate choosedImageName:deviceImageCellVM.imageName chooseType:self.chooseType];
 }
 
 #pragma mark - private methods

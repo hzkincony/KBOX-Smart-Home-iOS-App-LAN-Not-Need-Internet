@@ -88,8 +88,8 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
     [[KinconyDeviceManager sharedManager] addDevices:newDevices];
 }
 
-- (void)editDevice:(KinconyDeviceRLMObject*)device name:(NSString*)name deviceImageName:(NSString*)imageName {
-    [[KinconyDeviceManager sharedManager] editDevice:device name:name deviceImageName:imageName];
+- (void)editDevice:(KinconyDeviceRLMObject*)device name:(NSString*)name deviceImageName:(NSString*)imageName deviceTouchImageName:(NSString*)touchImageName controlMode:(NSInteger)controlModel {
+    [[KinconyDeviceManager sharedManager] editDevice:device name:name deviceImageName:imageName deviceTouchImageName:touchImageName controlMode:controlModel];
 }
 
 - (void)deleteDevice:(KinconyDevice *)device {

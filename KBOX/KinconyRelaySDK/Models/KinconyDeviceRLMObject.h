@@ -18,7 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *num;
 @property NSString *name;
 @property NSString *image;
+@property NSString *touchImage;
 @property NSInteger type;
+@property NSInteger controlModel;               //0:click   1:touch
 
 @end
 

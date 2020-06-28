@@ -17,12 +17,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) KinconyDeviceRLMObject *device;
 @property (nonatomic, strong) RACSubject *editDeviceSignal;
 @property (nonatomic, strong) UIImage *deviceImage;
+@property (nonatomic, strong) UIImage *deviceTouchImage;
 @property (nonatomic, strong) NSString *deviceName;
+@property (nonatomic, strong) NSNumber *controlModel;                   //@0:click   @1:touch
 
 - (void)getData;
 - (BOOL)isValidInput;
 - (void)editDevice;
 - (DeviceImageChooseVM*)getDeviceImageChooseVM;
+- (DeviceImageChooseVM*)getDeviceTouchImageChooseVM;
 
 @end
 

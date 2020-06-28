@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *deviceImageView;
 @property (weak, nonatomic) IBOutlet UILabel *deviceNameLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *deviceSwitch;
+@property (weak, nonatomic) IBOutlet UIButton *touchButton;
 
 - (IBAction)deviceSwitchChanged:(id)sender;
 
@@ -53,28 +54,36 @@
     RAC(self.deviceImageView, image) = [RACObserve(self.viewModel, deviceImage) takeUntil:self.rac_prepareForReuseSignal];
     RAC(self.deviceNameLabel, text) = [RACObserve(self.viewModel, deviceName) takeUntil:self.rac_prepareForReuseSignal];
     
-//    @weakify(self);
-//    [RACObserve(self.viewModel, deviceOn) subscribeNext:^(id  _Nullable x) {
-//        @strongify(self);
-//        BOOL on = [x boolValue];
-//        [self.deviceSwitch setOn:on animated:YES];
-////        [self reloadTableView];
-////        [self reloadInputViews];
-//    }];
+    @weakify(self);
+    [RACObserve(self.viewModel, deviceTouchImage) subscribeNext:^(id  _Nullable x) {
+        @strongify(self);
+        [self.touchButton setImage:x forState:(UIControlStateNormal)];
+    }];
+    
+    [RACObserve(self.viewModel, controlModel) subscribeNext:^(id  _Nullable x) {
+        @strongify(self);
+        if ([x isEqualToNumber:@1]) {
+            self.deviceSwitch.hidden = YES;
+            self.touchButton.hidden = NO;
+        } else {
+            self.deviceSwitch.hidden = NO;
+            self.touchButton.hidden = YES;
+        }
+    }];
+    
+    [[self.touchButton rac_signalForControlEvents:(UIControlEventTouchDown)] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        @strongify(self);
+        [self.viewModel changeDeviceState:YES];
+    }];
+    
+    [[self.touchButton rac_signalForControlEvents:(UIControlEventTouchUpInside)] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        @strongify(self);
+        [self.viewModel changeDeviceState:NO];
+    }];
 }
 
 - (void)getData {
     [self.deviceSwitch setOn:[self.viewModel.deviceOn boolValue] animated:YES];
 }
-
-//- (void)reloadTableView {
-//    id view = [self superview];
-//    while (view && ![view isKindOfClass:[UITableView class]]) {
-//        view = [view superview];
-//    }
-//
-//    UITableView *tableView = view;
-//    [tableView reloadData];
-//}
 
 @end

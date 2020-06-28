@@ -33,3 +33,11 @@
 "sceneDeviceChoosed" = "Device added successfully";
 "deviceEditName" = "Name";
 "deviceEditIcon" = "Icon";
+"pleaseInputIP" = "Please input IP";
+"pleaseInputPort" = "Please input port";
+"pleaseChooseModel" = "Please choose model";
+"Model" = "model";
+"ControlModel" = "Control Model";
+"TouchIcon" = "Touch Icon";
+"Click" = "Click";
+"Touch" = "Touch";

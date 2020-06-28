@@ -11,9 +11,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum {
+    ChooseTypeDevice = 0,
+    ChooseTypeTouch
+} DeviceImageChooseVMType;
+
 @protocol DeviceImageChooseVMDelegate <NSObject>
 
-- (void)choosedImageName:(NSString*)imageName;
+- (void)choosedImageName:(NSString*)imageName chooseType:(DeviceImageChooseVMType)chooseType;
 
 @end
 
@@ -21,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *deviceImageCellVMList;
 @property (nonatomic, weak) id<DeviceImageChooseVMDelegate> delegate;
+@property (nonatomic, assign) DeviceImageChooseVMType chooseType;
 
 - (void)chooseImageIndex:(NSInteger)index;
 

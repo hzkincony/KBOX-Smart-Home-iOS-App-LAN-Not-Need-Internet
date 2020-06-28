@@ -54,6 +54,8 @@
 		657EECA22268501200708CCD /* ChooseSceneDeviceVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA12268501200708CCD /* ChooseSceneDeviceVM.m */; };
 		657EECA52268518E00708CCD /* SceneDeviceChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA42268518E00708CCD /* SceneDeviceChooseCell.m */; };
 		657EECA8226851A600708CCD /* SceneDeviceChooseCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA7226851A600708CCD /* SceneDeviceChooseCellVM.m */; };
+		65C392CB24A21A7A00AFBF12 /* DeviceAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C392CA24A21A7A00AFBF12 /* DeviceAddViewController.m */; };
+		65C392CE24A21AC600AFBF12 /* DeviceAddVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C392CD24A21AC600AFBF12 /* DeviceAddVM.m */; };
 		E81906082EF64AE3584A1903 /* libPods-KBOX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 941BCD525FEE9D0CBC5D85CD /* libPods-KBOX.a */; };
 /* End PBXBuildFile section */
 
@@ -127,7 +129,6 @@
 		657DD5372252F38F00C7C3B0 /* DeviceListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceListViewController.m; sourceTree = "<group>"; };
 		657DD5392252F3E700C7C3B0 /* DeviceListVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceListVM.h; sourceTree = "<group>"; };
 		657DD53A2252F3E700C7C3B0 /* DeviceListVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceListVM.m; sourceTree = "<group>"; };
-		657DD5422252FD6700C7C3B0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		657DD5432252FD6700C7C3B0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		657DD548225300D100C7C3B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		657DD54A225300D300C7C3B0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -153,6 +154,10 @@
 		657EECA42268518E00708CCD /* SceneDeviceChooseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDeviceChooseCell.m; sourceTree = "<group>"; };
 		657EECA6226851A600708CCD /* SceneDeviceChooseCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDeviceChooseCellVM.h; sourceTree = "<group>"; };
 		657EECA7226851A600708CCD /* SceneDeviceChooseCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDeviceChooseCellVM.m; sourceTree = "<group>"; };
+		65C392C924A21A7A00AFBF12 /* DeviceAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceAddViewController.h; sourceTree = "<group>"; };
+		65C392CA24A21A7A00AFBF12 /* DeviceAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceAddViewController.m; sourceTree = "<group>"; };
+		65C392CC24A21AC600AFBF12 /* DeviceAddVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceAddVM.h; sourceTree = "<group>"; };
+		65C392CD24A21AC600AFBF12 /* DeviceAddVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceAddVM.m; sourceTree = "<group>"; };
 		918B1AF3AD3E311F26948FE1 /* Pods-KBOX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KBOX.release.xcconfig"; path = "Target Support Files/Pods-KBOX/Pods-KBOX.release.xcconfig"; sourceTree = "<group>"; };
 		941BCD525FEE9D0CBC5D85CD /* libPods-KBOX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KBOX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -297,6 +302,10 @@
 				657EEC9E22684FFE00708CCD /* ChooseSceneDeviceViewController.m */,
 				657EECA02268501200708CCD /* ChooseSceneDeviceVM.h */,
 				657EECA12268501200708CCD /* ChooseSceneDeviceVM.m */,
+				65C392C924A21A7A00AFBF12 /* DeviceAddViewController.h */,
+				65C392CA24A21A7A00AFBF12 /* DeviceAddViewController.m */,
+				65C392CC24A21AC600AFBF12 /* DeviceAddVM.h */,
+				65C392CD24A21AC600AFBF12 /* DeviceAddVM.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -370,7 +379,6 @@
 				30E9B57DCE282250FF3686D9 /* Pods-KBOX.debug.xcconfig */,
 				918B1AF3AD3E311F26948FE1 /* Pods-KBOX.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -492,8 +500,10 @@
 			files = (
 				654E9529225B378A00561050 /* DeviceImageChooseViewController.m in Sources */,
 				657EECA52268518E00708CCD /* SceneDeviceChooseCell.m in Sources */,
+				65C392CE24A21AC600AFBF12 /* DeviceAddVM.m in Sources */,
 				657EECA8226851A600708CCD /* SceneDeviceChooseCellVM.m in Sources */,
 				655FA92322696510009EE0D9 /* SceneDeviceCellVM.m in Sources */,
+				65C392CB24A21A7A00AFBF12 /* DeviceAddViewController.m in Sources */,
 				65376CCE22670F64005CA511 /* SceneViewController.m in Sources */,
 				657DD53B2252F3E700C7C3B0 /* DeviceListVM.m in Sources */,
 				65151D692255D60C00BE8951 /* RelayCell.m in Sources */,
@@ -543,7 +553,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				6542482B2251AE1C00E30D54 /* Base */,
-				657DD5422252FD6700C7C3B0 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

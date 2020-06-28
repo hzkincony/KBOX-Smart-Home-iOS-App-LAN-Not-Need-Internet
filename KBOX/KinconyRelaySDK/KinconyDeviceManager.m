@@ -43,6 +43,8 @@ static KinconyDeviceManager *sharedManager = nil;
         device.name = [NSString stringWithFormat:@"%@-%d", ipLastNum, i];
         device.image = @"icon1";
         device.type = KinconyDeviceType_Relay;
+        device.controlModel = 0;
+        device.touchImage = @"icon1";
         [deviceArray addObject:device];
     }
     
@@ -101,11 +103,13 @@ static KinconyDeviceManager *sharedManager = nil;
     [realm commitWriteTransaction];
 }
 
-- (void)editDevice:(KinconyDeviceRLMObject*)device name:(NSString*)name deviceImageName:(NSString*)imageName {
+- (void)editDevice:(KinconyDeviceRLMObject*)device name:(NSString*)name deviceImageName:(NSString*)imageName deviceTouchImageName:(NSString*)touchImageName controlMode:(NSInteger)controlModel {
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
     device.name = name;
     device.image = imageName;
+    device.touchImage = touchImageName;
+    device.controlModel = controlModel;
     [realm commitWriteTransaction];
 }
 

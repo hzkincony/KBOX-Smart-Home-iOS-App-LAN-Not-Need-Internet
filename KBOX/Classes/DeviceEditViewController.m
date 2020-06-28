@@ -12,6 +12,8 @@
 @interface DeviceEditViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *deviceImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *deviceTouchImageView;
+@property (weak, nonatomic) IBOutlet UILabel *controlModelLabel;
 @property (weak, nonatomic) IBOutlet UITextField *deviceNameTextField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
@@ -36,6 +38,9 @@
     if ([segue.identifier isEqualToString:@"ShowImageChooseSegue"]) {
         DeviceImageChooseViewController *deviceImageChooseViewController = [segue destinationViewController];
         deviceImageChooseViewController.viewModel = [self.viewModel getDeviceImageChooseVM];
+    } else if ([segue.identifier isEqualToString:@"ShowTouchImageChooseSegue"]) {
+        DeviceImageChooseViewController *deviceImageChooseViewController = [segue destinationViewController];
+        deviceImageChooseViewController.viewModel = [self.viewModel getDeviceTouchImageChooseVM];
     }
 }
 
@@ -48,18 +53,39 @@
         header = NSLocalizedString(@"deviceEditName", nil);
     } else if (section == 1) {
         header = NSLocalizedString(@"deviceEditIcon", nil);
+    } else if (section == 2) {
+        header = NSLocalizedString(@"ControlModel", nil);
+    } else if (section == 3) {
+        header = NSLocalizedString(@"TouchIcon", nil);
     }
     
     return header;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2 && indexPath.row == 0) {
+        [self showControlModelChooseAlert];
+    }
 }
 
 #pragma mark - private methods
 
 - (void)initialzieModel {
     RAC(self.deviceImageView, image) = RACObserve(self.viewModel, deviceImage);
+    RAC(self.deviceTouchImageView, image) = RACObserve(self.viewModel, deviceTouchImage);
     RAC(self.deviceNameTextField, text) = RACObserve(self.viewModel, deviceName);
     
     @weakify(self);
+    [RACObserve(self.viewModel, controlModel) subscribeNext:^(id  _Nullable x) {
+        @strongify(self);
+        NSInteger controlModel = [x integerValue];
+        if (controlModel == 1) {
+            self.controlModelLabel.text = NSLocalizedString(@"Touch", nil);
+        } else {
+            self.controlModelLabel.text = NSLocalizedString(@"Click", nil);
+        }
+    }];
+    
     self.doneButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         @strongify(self);
         self.viewModel.deviceName = self.deviceNameTextField.text;
@@ -78,6 +104,22 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
     }];
+}
+
+- (void)showControlModelChooseAlert {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
+    
+    UIAlertAction *clickAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Click", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        self.viewModel.controlModel = @0;
+    }];
+    [alertController addAction:clickAction];
+    
+    UIAlertAction *touchAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Touch", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        self.viewModel.controlModel = @1;
+    }];
+    [alertController addAction:touchAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - getters and setters

@@ -64,7 +64,9 @@
 
 - (void)getData {
     self.deviceImage = [UIImage imageNamed:self.device.image];
+    self.deviceTouchImage = [UIImage imageNamed:self.device.touchImage];
     self.deviceName = self.device.name;
+    self.controlModel = [NSNumber numberWithInteger:self.device.controlModel];
 }
 
 #pragma mark - setters and getters

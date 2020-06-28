@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) KinconyRelay *kinconyRelay;
 @property (nonatomic, strong) NSString *imageName;
+@property (nonatomic, strong) NSString *touchImageName;
 
 @end
 
@@ -23,17 +24,25 @@
 
 #pragma mark - DeviceImageChooseVMDelegate
 
-- (void)choosedImageName:(NSString *)imageName {
-    self.imageName = imageName;
-    self.deviceImage = [UIImage imageNamed:self.imageName];
+- (void)choosedImageName:(NSString *)imageName chooseType:(DeviceImageChooseVMType)chooseType {
+    if (chooseType == ChooseTypeDevice) {
+        self.imageName = imageName;
+        self.deviceImage = [UIImage imageNamed:self.imageName];
+    } else {
+        self.touchImageName = imageName;
+        self.deviceTouchImage = [UIImage imageNamed:self.touchImageName];
+    }
 }
 
 #pragma mark - public methods
 
 - (void)getData {
     self.deviceImage = [UIImage imageNamed:self.device.image];
+    self.deviceTouchImage = [UIImage imageNamed:self.device.touchImage];
     self.deviceName = self.device.name;
     self.imageName = self.device.image;
+    self.touchImageName = self.device.touchImage;
+    self.controlModel = [NSNumber numberWithInteger:self.device.controlModel];
 }
 
 - (BOOL)isValidInput {
@@ -45,13 +54,21 @@
 }
 
 - (void)editDevice {
-    [self.kinconyRelay editDevice:self.device name:self.deviceName deviceImageName:self.imageName];
+    [self.kinconyRelay editDevice:self.device name:self.deviceName deviceImageName:self.imageName deviceTouchImageName:self.touchImageName controlMode:self.controlModel.integerValue];
     [self.editDeviceSignal sendNext:@""];
 }
 
 - (DeviceImageChooseVM*)getDeviceImageChooseVM {
     DeviceImageChooseVM *deviceImageChooseVM = [[DeviceImageChooseVM alloc] init];
     deviceImageChooseVM.delegate = self;
+    deviceImageChooseVM.chooseType = ChooseTypeDevice;
+    return deviceImageChooseVM;
+}
+
+- (DeviceImageChooseVM*)getDeviceTouchImageChooseVM {
+    DeviceImageChooseVM *deviceImageChooseVM = [[DeviceImageChooseVM alloc] init];
+    deviceImageChooseVM.delegate = self;
+    deviceImageChooseVM.chooseType = ChooseTypeTouch;
     return deviceImageChooseVM;
 }
 

@@ -21,7 +21,7 @@
 - (void)initializeData {
     self.getDevicesSignal = [RACSubject subject];
     self.chooseDeviceSignal = [RACSubject subject];
-};
+}
 
 #pragma mark - public methods
 
