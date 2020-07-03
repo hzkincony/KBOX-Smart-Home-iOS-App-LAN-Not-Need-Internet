@@ -74,11 +74,13 @@
     [[self.touchButton rac_signalForControlEvents:(UIControlEventTouchDown)] subscribeNext:^(__kindof UIControl * _Nullable x) {
         @strongify(self);
         [self.viewModel changeDeviceState:YES];
+        self.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1.00];
     }];
     
     [[self.touchButton rac_signalForControlEvents:(UIControlEventTouchUpInside)] subscribeNext:^(__kindof UIControl * _Nullable x) {
         @strongify(self);
         [self.viewModel changeDeviceState:NO];
+        self.backgroundColor = [UIColor whiteColor];
     }];
 }
 

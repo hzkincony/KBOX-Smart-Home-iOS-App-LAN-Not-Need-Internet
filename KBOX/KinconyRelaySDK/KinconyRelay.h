@@ -19,7 +19,7 @@ typedef void (^DeviceAddResultBlock) (NSError *error);
 
 @interface KinconyRelay : NSObject
 
-- (void)addDevice:(NSString*)ipAddress withPort:(NSInteger)port withBlock:(DeviceAddResultBlock)block;
+- (void)addDevice:(NSString*)ipAddress withPort:(NSInteger)port withNum:(NSInteger)num withBlock:(DeviceAddResultBlock)block;
 
 - (void)connectAllDevices;
 

@@ -15,8 +15,6 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
 
 @interface KinconyRelay()
 
-@property (nonatomic, copy) DeviceAddResultBlock deviceAddResultBlock;
-
 @end
 
 @implementation KinconyRelay
@@ -25,7 +23,6 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
     if ((self = [super init])) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readData:) name:KinconySocketReadDataNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socketDidConnect:) name:KinconySocketDidConnectNotification object:nil];
-        self.deviceAddResultBlock = nil;
     }
     return self;
 }
@@ -36,12 +33,11 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
 
 #pragma mark - public methods
 
-- (void)addDevice:(NSString*)ipAddress withPort:(NSInteger)port withBlock:(DeviceAddResultBlock)block {
-    self.deviceAddResultBlock = block;
+- (void)addDevice:(NSString*)ipAddress withPort:(NSInteger)port withNum:(NSInteger)num withBlock:(DeviceAddResultBlock)block {
     
-    if ([[KinconyDeviceManager sharedManager] findDeviceByIp:ipAddress] != nil) {
-        self.deviceAddResultBlock([NSError errorWithDomain:@"" code:DeviceAddErrorCode_AlreadyExists userInfo:nil]);
-        self.deviceAddResultBlock = nil;
+    NSError *error = [[KinconyDeviceManager sharedManager] addDevice:num withIp:ipAddress withPort:port];
+    if (error != nil) {
+        block([NSError errorWithDomain:@"" code:DeviceAddErrorCode_AlreadyExists userInfo:nil]);
         return;
     }
     
@@ -49,6 +45,7 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
     device.ipAddress = ipAddress;
     device.port = port;
     [[KinconySocketManager sharedManager] connectToDevice:@[device]];
+    block([NSError errorWithDomain:@"" code:0 userInfo:nil]);
 }
 
 - (void)connectAllDevices {
@@ -130,23 +127,11 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
     NSString *ipAddress = [dic objectForKey:@"ipAddress"];
     NSInteger port = [[dic objectForKey:@"port"] integerValue];
     NSLog(@"read data:%@", text);
-    
+
     NSArray *dataArray = [text componentsSeparatedByString:@","];
     NSString *stateStr = dataArray.lastObject;
     if ([stateStr isEqualToString:@"OK"]) {
-        if ([dataArray.firstObject isEqualToString:@"RELAY-SCAN_DEVICE-CHANNEL_8"]) {
-            NSError *error = [[KinconyDeviceManager sharedManager] addDevice:8 withIp:ipAddress withPort:port];
-            if (self.deviceAddResultBlock != nil) {
-                self.deviceAddResultBlock(error);
-                self.deviceAddResultBlock = nil;
-            }
-        } else if ([dataArray.firstObject isEqualToString:@"RELAY-SCAN_DEVICE-CHANNEL_32"]) {
-            NSError *error = [[KinconyDeviceManager sharedManager] addDevice:32 withIp:ipAddress withPort:port];
-            if (self.deviceAddResultBlock != nil) {
-                self.deviceAddResultBlock(error);
-                self.deviceAddResultBlock = nil;
-            }
-        } else if ([dataArray.firstObject isEqualToString:@"RELAY-STATE-1"]) {
+        if ([dataArray.firstObject isEqualToString:@"RELAY-STATE-1"]) {
             [self decodeDeviceState:[dataArray subarrayWithRange:NSMakeRange(1, dataArray.count - 2)] withIpaddress:ipAddress withPort:port];
         }
     }

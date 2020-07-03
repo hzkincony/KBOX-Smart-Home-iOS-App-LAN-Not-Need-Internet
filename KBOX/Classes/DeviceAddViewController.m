@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *portTextField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet UILabel *modelLabel;
+@property (weak, nonatomic) IBOutlet UILabel *deviceTypeTitle;
 
 @end
 
@@ -24,6 +25,7 @@
     [self initialzieModel];
     [self setupViews];
     self.modelLabel.text = @" ";
+    self.deviceTypeTitle.text = NSLocalizedString(@"Model", nil);
 }
 
 #pragma mark - Table view data source

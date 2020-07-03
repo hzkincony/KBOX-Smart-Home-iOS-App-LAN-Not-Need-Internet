@@ -14,10 +14,8 @@
 
 @interface DeviceListViewController ()
 
-@property (nonatomic, strong) JCAlertController *addAlertController;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 
-- (IBAction)addDeviceBtnAction:(id)sender;
 - (IBAction)eidtBtnAction:(id)sender;
 
 @end
@@ -111,10 +109,6 @@
 
 #pragma mark - actions
 
-- (IBAction)addDeviceBtnAction:(id)sender {
-    [JCPresentController presentViewControllerLIFO:self.addAlertController presentCompletion:nil dismissCompletion:nil];
-}
-
 - (IBAction)eidtBtnAction:(id)sender {
     self.tableView.editing = !self.tableView.editing;
     if (self.tableView.editing) {
@@ -128,14 +122,6 @@
 
 - (void)initialzieModel {
     @weakify(self);
-    [self.viewModel.addDeviceSignal subscribeNext:^(id  _Nullable x) {
-        @strongify(self);
-        if ([x isKindOfClass:[NSError class]]) {
-            [self showTextHud:[(NSError *)x domain]];
-        } else {
-            [self.viewModel getDevices];
-        }
-    }];
     
     [self.viewModel.getDevicesSignal subscribeNext:^(id  _Nullable x) {
         @strongify(self);
@@ -144,7 +130,6 @@
         } else {
             [self.tableView reloadData];
             [self.viewModel searchDevicesState];
-//            [self.tableView.mj_header beginRefreshing];
         }
     }];
     
@@ -161,36 +146,6 @@
         self.viewModel = [[DeviceListVM alloc] init];
     }
     return _viewModel;
-}
-
-- (JCAlertController*)addAlertController {
-    if (_addAlertController == nil) {
-        UIView *contentVeiw = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [JCAlertStyle shareStyle].alertView.width, 110)];
-        contentVeiw.backgroundColor = [UIColor whiteColor];
-        UITextField *ipTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 10, contentVeiw.frame.size.width - 30, 40)];
-        ipTextField.placeholder = NSLocalizedString(@"inputAddressPlaceholder", nil);
-        ipTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-        ipTextField.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
-        ipTextField.layer.cornerRadius = 5.0f;
-        UITextField *portTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 60, contentVeiw.frame.size.width - 30, 40)];
-        portTextField.placeholder = NSLocalizedString(@"inputPortPlaceholder", nil);
-        portTextField.keyboardType = UIKeyboardTypeNumberPad;
-        portTextField.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
-        portTextField.layer.cornerRadius = 5.0f;
-        [contentVeiw addSubview:ipTextField];
-        [contentVeiw addSubview:portTextField];
-        
-        self.addAlertController = [JCAlertController alertWithTitle:NSLocalizedString(@"addDeviceAlertTitle", nil) contentView:contentVeiw];
-        [self.addAlertController addButtonWithTitle:NSLocalizedString(@"cancelBtn", nil) type:(JCButtonTypeCancel) clicked:nil];
-        @weakify(self);
-        [self.addAlertController addButtonWithTitle:NSLocalizedString(@"doneBtn", nil) type:(JCButtonTypeNormal) clicked:^{
-            @strongify(self);
-            self.viewModel.ipAddress = ipTextField.text;
-            self.viewModel.port = portTextField.text;
-            [self.viewModel addDevice];
-        }];
-    }
-    return _addAlertController;
 }
 
 @end

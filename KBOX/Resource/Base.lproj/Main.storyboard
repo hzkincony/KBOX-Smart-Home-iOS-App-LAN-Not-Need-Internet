@@ -372,6 +372,7 @@
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="m5p-b6-sBg"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="deviceTypeTitle" destination="w4v-Gw-5J6" id="UlW-Yk-Xqa"/>
                         <outlet property="ipTextField" destination="d7F-wm-mjl" id="6qn-MG-dLM"/>
                         <outlet property="modelLabel" destination="xiY-UE-Klo" id="kHZ-r0-U4T"/>
                         <outlet property="portTextField" destination="ikM-Fk-gqh" id="V35-f8-WYb"/>

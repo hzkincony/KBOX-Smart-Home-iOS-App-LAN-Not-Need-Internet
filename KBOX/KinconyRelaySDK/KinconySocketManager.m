@@ -50,9 +50,9 @@ static KinconySocketManager *sharedManager = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:KinconySocketReadDataNotification object:nil userInfo:@{@"data": text, @"ipAddress": sock.connectedHost, @"port": [NSNumber numberWithInteger:sock.connectedPort]}];
     
     [sock readDataWithTimeout:-1 tag:0];
-    if ([text isEqualToString:@"RELAY-SCAN_DEVICE-CHANNEL_8,OK"] || [text isEqualToString:@"RELAY-SCAN_DEVICE-CHANNEL_32,OK"]) {
-        [self sendData:@"RELAY-TEST-NOW" bySock:sock];
-    }
+//    if ([text isEqualToString:@"RELAY-SCAN_DEVICE-CHANNEL_8,OK"] || [text isEqualToString:@"RELAY-SCAN_DEVICE-CHANNEL_32,OK"]) {
+//        [self sendData:@"RELAY-TEST-NOW" bySock:sock];
+//    }
 }
 
 #pragma mark - public methods

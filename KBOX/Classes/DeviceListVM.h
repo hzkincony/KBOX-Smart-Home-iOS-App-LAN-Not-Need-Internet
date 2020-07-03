@@ -14,12 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *ipAddress;
 @property (nonatomic, strong) NSString *port;
-@property (nonatomic, strong) RACSubject *addDeviceSignal;
 @property (nonatomic, strong) RACSubject *getDevicesSignal;
 @property (nonatomic, strong) RACSubject *getDevicesStateSignal;
 @property (nonatomic, strong) NSMutableArray *deviceCellVMList;
 
-- (void)addDevice;
 - (void)getDevices;
 - (void)exchangeDeviceAtIndex:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
 - (void)searchDevicesState;

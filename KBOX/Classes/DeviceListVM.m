@@ -22,7 +22,6 @@
 - (void)initializeData {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceStateNotification:) name:KinconyDeviceStateNotification object:nil];
     
-    self.addDeviceSignal = [RACSubject subject];
     self.getDevicesSignal = [RACSubject subject];
     self.getDevicesStateSignal = [RACSubject subject];
     NSLog(@"%@", [RLMRealmConfiguration defaultConfiguration].fileURL);
@@ -48,18 +47,6 @@
 }
 
 #pragma mark - public methods
-
-- (void)addDevice {
-    @weakify(self);
-    [self.kinconyRelay addDevice:self.ipAddress withPort:[self.port integerValue] withBlock:^(NSError * _Nonnull error) {
-        @strongify(self);
-        if (error.code == DeviceAddErrorCode_AlreadyExists) {
-            [self.addDeviceSignal sendNext:[NSError errorWithDomain:NSLocalizedString(@"deviceAlreadyExists", nil) code:1 userInfo:nil]];
-        } else {
-            [self.addDeviceSignal sendNext:nil];
-        }
-    }];
-}
 
 - (void)getDevices {
     RLMResults *devices = [self.kinconyRelay getAllDevices];
