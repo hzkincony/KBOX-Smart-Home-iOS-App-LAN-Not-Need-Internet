@@ -2,7 +2,7 @@
 //  SceneCellVM.h
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/19.
+//  Created by gulu on 2019/4/19.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SceneCellVM : GLViewModel
 
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) UIImage *image;
 
 - (id)initWithScene:(KinconySceneRLMObject*)scene;
 - (void)deleteScene;

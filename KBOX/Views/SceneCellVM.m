@@ -2,7 +2,7 @@
 //  SceneCellVM.m
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/19.
+//  Created by gulu on 2019/4/19.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
@@ -30,6 +30,7 @@
 
 - (void)getData {
     self.name = self.scene.name;
+    self.image = [UIImage imageNamed:self.scene.image];
 }
 
 - (void)deleteScene {

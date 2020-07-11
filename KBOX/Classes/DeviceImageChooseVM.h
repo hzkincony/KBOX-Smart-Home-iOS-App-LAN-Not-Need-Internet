@@ -2,7 +2,7 @@
 //  DeviceImageChooseVM.h
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/8.
+//  Created by gulu on 2019/4/8.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
@@ -12,7 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum {
-    ChooseTypeDevice = 0,
+    ChooseTypeNone = 0,
+    ChooseTypeDevice,
     ChooseTypeTouch
 } DeviceImageChooseVMType;
 

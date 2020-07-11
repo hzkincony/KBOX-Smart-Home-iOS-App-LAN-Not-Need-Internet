@@ -2,7 +2,7 @@
   Localizable.strings
   KBOX
 
-  Created by 顾越超 on 2019/4/2.
+  Created by gulu on 2019/4/2.
   Copyright © 2019 kincony. All rights reserved.
 */
 
@@ -21,11 +21,12 @@
 "settingDevices" = "设备";
 "settingVersionCellTitle" = "版本号";
 "devicesListTitle" = "设备";
-"tabbarScene" = "情景模式";
+"tabbarScene" = "场景模式";
 "sceneEditTitleAdd" = "新增";
 "sceneEditTitleEdit" = "编辑";
-"sceneEditNameInput" = "输入情景模式名称";
+"sceneEditNameInput" = "输入场景模式名称";
 "sceneEditChooseDeviceBtn" = "选择设备";
+"sceneMode" = "场景模式";
 "chooseDeviceVcTitle" = "选择设备";
 "noSceneNameHudMsg" = "请输入名称";
 "sceneCellDelete" = "删除";
@@ -41,3 +42,4 @@
 "TouchIcon" = "触控图标";
 "Click" = "点击";
 "Touch" = "触摸";
+"Icon" = "图标";

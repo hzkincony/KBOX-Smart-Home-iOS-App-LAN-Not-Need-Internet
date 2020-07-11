@@ -2,7 +2,7 @@
 //  DeviceAddViewController.m
 //  KBOX
 //
-//  Created by 顾越超 on 2020/6/23.
+//  Created by gulu on 2020/6/23.
 //  Copyright © 2020 kincony. All rights reserved.
 //
 

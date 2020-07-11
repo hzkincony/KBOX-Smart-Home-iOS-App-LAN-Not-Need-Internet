@@ -2,7 +2,7 @@
 //  DeviceManager.m
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/2.
+//  Created by gulu on 2019/4/2.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 

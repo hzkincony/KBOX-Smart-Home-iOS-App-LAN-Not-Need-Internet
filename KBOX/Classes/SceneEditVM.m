@@ -2,7 +2,7 @@
 //  SceneEditVM.m
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/18.
+//  Created by gulu on 2019/4/18.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
@@ -10,10 +10,11 @@
 #import "SceneDeviceCellVM.h"
 #import "KinconyRelay.h"
 
-@interface SceneEditVM() <ChooseSceneDeviceVMDelegate>
+@interface SceneEditVM() <ChooseSceneDeviceVMDelegate, DeviceImageChooseVMDelegate>
 
 @property (nonatomic, strong) KinconyRelay *kinconyRelay;
 @property (nonatomic, strong) KinconySceneRLMObject *oldScene;
+@property (nonatomic, strong) NSString *sceneImageName;
 
 @end
 
@@ -24,6 +25,12 @@
 - (void)initializeData {
     self.getSceneDevicesSignal = [RACSubject subject];
     self.saveSceneSignal = [RACSubject subject];
+    
+    self.sceneImageName = @"icon1";
+    self.controlModel = @0;
+    [RACObserve(self, sceneImageName) subscribeNext:^(id  _Nullable x) {
+        self.sceneImage = [UIImage imageNamed:x];
+    }];
 };
 
 #pragma mark - ChooseSceneDeviceVMDelegate
@@ -32,6 +39,12 @@
     if ([self validDeviceById:device.deviceId]) {
         [self addSceneDevice:device];
     }
+}
+
+#pragma mark - DeviceImageChooseVMDelegate
+
+- (void)choosedImageName:(NSString *)imageName chooseType:(DeviceImageChooseVMType)chooseType {
+    self.sceneImageName = imageName;
 }
 
 #pragma mark - public methods
@@ -57,6 +70,8 @@
     }
     
     self.scene.name = self.name;
+    self.scene.image = self.sceneImageName;
+    self.scene.controlModel = self.controlModel.integerValue;
     [self.kinconyRelay saveScene:self.scene];
     [self.saveSceneSignal sendNext:@""];
 }
@@ -145,6 +160,15 @@
         self.kinconyRelay = [[KinconyRelay alloc] init];
     }
     return _kinconyRelay;
+}
+
+- (DeviceImageChooseVM *)deviceImageChooseVM {
+    if (_deviceImageChooseVM == nil) {
+        self.deviceImageChooseVM = [[DeviceImageChooseVM alloc] init];
+        self.deviceImageChooseVM.chooseType = ChooseTypeNone;
+        self.deviceImageChooseVM.delegate = self;
+    }
+    return _deviceImageChooseVM;
 }
 
 @end

@@ -2,7 +2,7 @@
 //  SettingViewController.m
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/9.
+//  Created by gulu on 2019/4/9.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
@@ -11,6 +11,7 @@
 @interface SettingViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *deviceCellTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sceneCellTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *versionCellTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
@@ -24,6 +25,7 @@
     self.title = NSLocalizedString(@"tabbarSetting", nil);
     self.deviceCellTitleLabel.text = NSLocalizedString(@"settingDevices", nil);
     self.versionCellTitleLabel.text = NSLocalizedString(@"settingVersionCellTitle", nil);
+    self.sceneCellTitleLabel.text = NSLocalizedString(@"sceneMode", nil);
     
     [self initialzieModel];
 }

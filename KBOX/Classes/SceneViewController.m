@@ -2,7 +2,7 @@
 //  SceneViewController.m
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/17.
+//  Created by gulu on 2019/4/17.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
@@ -24,6 +24,8 @@
     self.title = NSLocalizedString(@"tabbarScene", nil);
     
     [self initialzieModel];
+    
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -38,6 +40,10 @@
     return self.viewModel.sceneCellVMList.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SceneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneCell" forIndexPath:indexPath];
     
@@ -48,7 +54,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.viewModel commandScene:indexPath.row];
+//    [self.viewModel commandScene:indexPath.row];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

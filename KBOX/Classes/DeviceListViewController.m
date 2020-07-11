@@ -2,7 +2,7 @@
 //  DeviceListViewController.m
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/2.
+//  Created by gulu on 2019/4/2.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
@@ -11,6 +11,7 @@
 #import "DeviceEditViewController.h"
 #import "MJRefresh.h"
 #import "JCAlertController.h"
+#import "HomeSecneControlCell.h"
 
 @interface DeviceListViewController ()
 
@@ -34,6 +35,7 @@
         [self.tableView.mj_header endRefreshing];
         [self.viewModel searchDevicesState];
     }];
+    [self.tableView registerClass:[HomeSecneControlCell class] forCellReuseIdentifier:@"HomeSecneControlCell"];
     
     [self initialzieModel];
 }
@@ -42,24 +44,41 @@
     [super viewWillAppear:animated];
     
     [self.viewModel getDevices];
+    [self.viewModel updateSecene];
 }
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return 1;
+    }
     return self.viewModel.deviceCellVMList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return 85;
+    }
     return 60.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    RelayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RelayCell" forIndexPath:indexPath];
-    
-    cell.viewModel = [self.viewModel.deviceCellVMList objectAtIndex:indexPath.row];
-    
-    return cell;
+    if (indexPath.section == 1) {
+        RelayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RelayCell" forIndexPath:indexPath];
+        
+        cell.viewModel = [self.viewModel.deviceCellVMList objectAtIndex:indexPath.row];
+        
+        return cell;
+    } else {
+        HomeSecneControlCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeSecneControlCell"];
+        cell.viewModel = self.viewModel.homeSeceneControlCellVM;
+        return cell;
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -134,6 +153,11 @@
     }];
     
     [self.viewModel.getDevicesStateSignal subscribeNext:^(id  _Nullable x) {
+        @strongify(self);
+        [self.tableView reloadData];
+    }];
+    
+    [self.viewModel.getSeceneSignal subscribeNext:^(id  _Nullable x) {
         @strongify(self);
         [self.tableView reloadData];
     }];

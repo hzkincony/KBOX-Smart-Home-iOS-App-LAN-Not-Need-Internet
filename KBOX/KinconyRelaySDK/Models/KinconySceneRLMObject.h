@@ -2,7 +2,7 @@
 //  KinconySceneRLMObject.h
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/18.
+//  Created by gulu on 2019/4/18.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property NSString *sceneId;
 @property NSString *name;
+@property NSString *image;
+@property NSInteger controlModel;               //0:click   1:touch
 @property RLMArray<KinconySceneDeviceRLMObject *><KinconySceneDeviceRLMObject> *sceneDevices;
 
 @end

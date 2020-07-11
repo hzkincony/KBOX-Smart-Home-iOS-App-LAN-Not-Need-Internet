@@ -2,11 +2,12 @@
 //  DeviceListVM.h
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/2.
+//  Created by gulu on 2019/4/2.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
 #import "GLViewModel.h"
+#import "HomeSeceneControlCellVM.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,11 +17,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *port;
 @property (nonatomic, strong) RACSubject *getDevicesSignal;
 @property (nonatomic, strong) RACSubject *getDevicesStateSignal;
+@property (nonatomic, strong) RACSubject *getSeceneSignal;
 @property (nonatomic, strong) NSMutableArray *deviceCellVMList;
+@property (nonatomic, strong) HomeSeceneControlCellVM *homeSeceneControlCellVM;
 
 - (void)getDevices;
 - (void)exchangeDeviceAtIndex:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
 - (void)searchDevicesState;
+- (void)updateSecene;
 
 @end
 

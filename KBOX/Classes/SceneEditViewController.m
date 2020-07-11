@@ -2,18 +2,25 @@
 //  SceneEditViewController.m
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/18.
+//  Created by gulu on 2019/4/18.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
 #import "SceneEditViewController.h"
 #import "ChooseSceneDeviceViewController.h"
 #import "SceneDeviceCell.h"
+#import "DeviceImageChooseViewController.h"
 
 @interface SceneEditViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *chooseDeviceButton;
+@property (weak, nonatomic) IBOutlet UIView *chooseImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *sceneImage;
+@property (weak, nonatomic) IBOutlet UILabel *sceneIconLabel;
+@property (weak, nonatomic) IBOutlet UILabel *controlModeTitle;
+@property (weak, nonatomic) IBOutlet UILabel *controlModeLabel;
+@property (weak, nonatomic) IBOutlet UIView *chooseControlModeView;
 
 @end
 
@@ -26,6 +33,8 @@
     [self.chooseDeviceButton setTitle:NSLocalizedString(@"sceneEditChooseDeviceBtn", nil) forState:(UIControlStateNormal)];
     
     self.nameTextField.text = self.viewModel.name;
+    self.sceneIconLabel.text = NSLocalizedString(@"Icon", nil);
+    self.controlModeTitle.text = NSLocalizedString(@"ControlModel", nil);
     [self initialzieModel];
 }
 
@@ -56,6 +65,9 @@
     if ([segue.identifier isEqualToString:@"ShowChooseSceneDeviceSegue"]) {
         ChooseSceneDeviceViewController *chooseSceneDeviceViewController = [segue destinationViewController];
         chooseSceneDeviceViewController.viewModel = [self.viewModel getChooseSceneDeviceVM];
+    } else if ([segue.identifier isEqualToString:@"ShowSceneImageChooseSegue"]) {
+        DeviceImageChooseViewController *deviceImageChooseViewController = [segue destinationViewController];
+        deviceImageChooseViewController.viewModel = self.viewModel.deviceImageChooseVM;
     }
 }
 
@@ -64,12 +76,31 @@
 - (void)initialzieModel {
     RAC(self, title) = RACObserve(self.viewModel, title);
     RAC(self.viewModel, name) = self.nameTextField.rac_textSignal;
-    
+    RAC(self.sceneImage, image) = RACObserve(self.viewModel, sceneImage);
     @weakify(self);
-    [self.viewModel.getSceneDevicesSignal subscribeNext:^(id  _Nullable x) {
-        @strongify(self);
-        [self.tableView reloadData];
+    [RACObserve(self.viewModel, controlModel) subscribeNext:^(id  _Nullable x) {
+        if ([x isEqualToNumber:@1]) {
+            self.controlModeLabel.text = NSLocalizedString(@"Touch", nil);
+        } else {
+            self.controlModeLabel.text = NSLocalizedString(@"Click", nil);
+        }
     }];
+    
+    self.chooseImageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] init];
+    [[tap rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer * tap) {
+        @strongify(self);
+        [self performSegueWithIdentifier:@"ShowSceneImageChooseSegue" sender:nil];
+    }];
+    [self.chooseImageView addGestureRecognizer:tap];
+    
+    self.chooseControlModeView.userInteractionEnabled = YES;
+    UITapGestureRecognizer * controlModeTap = [[UITapGestureRecognizer alloc] init];
+    [[controlModeTap rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer * controlModeTap) {
+        @strongify(self);
+        [self showControlModelChooseAlert];
+    }];
+    [self.chooseControlModeView addGestureRecognizer:controlModeTap];
     
     self.saveButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         @strongify(self);
@@ -88,6 +119,27 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
     }];
+    
+    [self.viewModel.getSceneDevicesSignal subscribeNext:^(id  _Nullable x) {
+        @strongify(self);
+        [self.tableView reloadData];
+    }];
+}
+
+- (void)showControlModelChooseAlert {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
+    
+    UIAlertAction *clickAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Click", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        self.viewModel.controlModel = @0;
+    }];
+    [alertController addAction:clickAction];
+    
+    UIAlertAction *touchAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Touch", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        self.viewModel.controlModel = @1;
+    }];
+    [alertController addAction:touchAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - setters and getters

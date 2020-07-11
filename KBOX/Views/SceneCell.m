@@ -2,7 +2,7 @@
 //  SceneCell.m
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/19.
+//  Created by gulu on 2019/4/19.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 @interface SceneCell()
 
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end
 
@@ -38,7 +38,15 @@
 #pragma mark - private methods
 
 - (void)initialzieModel {
-    RAC(self.nameLabel, text) = [RACObserve(self.viewModel, name) takeUntil:self.rac_prepareForReuseSignal];
+    RAC(self.textLabel, text) = [RACObserve(self.viewModel, name) takeUntil:self.rac_prepareForReuseSignal];
+    RAC(self.imageView, image) = RACObserve(self.viewModel, image);
+    
+    CGSize itemSize = CGSizeMake(40, 40);
+    UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+    CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+    [self.imageView.image drawInRect:imageRect];
+    self.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
 }
 
 @end

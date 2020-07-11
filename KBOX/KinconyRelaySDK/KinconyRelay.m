@@ -2,7 +2,7 @@
 //  KinconyRelay.m
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/3.
+//  Created by gulu on 2019/4/3.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
@@ -10,10 +10,14 @@
 #import "KinconySocketManager.h"
 #import "KinconyDevice.h"
 #import "KinconySceneManager.h"
+#import "KinconySceneCommand.h"
 
 NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotification";
 
 @interface KinconyRelay()
+
+@property (nonatomic, strong) NSMutableArray *sceneCommandArray;
+@property (nonatomic, strong) KinconySceneRLMObject *nowScene;
 
 @end
 
@@ -113,9 +117,22 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
 }
 
 - (void)sceneCommand:(KinconySceneRLMObject*)scene {
-    for (KinconySceneDeviceRLMObject *sceneDevice in scene.sceneDevices) {
-        BOOL isOn = sceneDevice.state;
-        [self changeDeviceState:isOn device:sceneDevice.device];
+    NSArray *array = [self getAllSceneDevices:scene];
+    [self.sceneCommandArray removeAllObjects];
+    for (KinconyDevice *kinconyDevice in array) {
+        KinconySceneCommand *sceneCommand = [[KinconySceneCommand alloc] init];
+        sceneCommand.kinconyDevice = kinconyDevice;
+        [self.sceneCommandArray addObject:sceneCommand];
+    }
+    self.nowScene = scene;
+    [self searchDevicesState:array];
+}
+
+- (void)sceneCommandTouchUp {
+    for (KinconySceneCommand *sceneCommand in self.sceneCommandArray) {
+        NSString *sceneCommandStr = [self getOldSceneCommandStr:sceneCommand];
+        NSString *commandStr = [NSString stringWithFormat:@"RELAY-SET_ALL-255,%@OK", sceneCommandStr];
+        [[KinconySocketManager sharedManager] sendData:commandStr toDevice:sceneCommand.kinconyDevice];
     }
 }
 
@@ -143,8 +160,101 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
 
 #pragma mark - private methods
 
+- (void)searchDevicesState:(NSArray*)devices {
+    for (KinconyDevice *device in devices) {
+        [[KinconySocketManager sharedManager] sendData:@"RELAY-STATE-1" toDevice:device];
+    }
+}
+
+- (void)addStateToSceneCommands:(NSString*)state withIpaddress:(NSString*)ipAddress withPort:(NSInteger)port {
+    for (KinconySceneCommand *sceneCommand in self.sceneCommandArray) {
+        if ([sceneCommand.kinconyDevice.ipAddress isEqualToString:ipAddress] && sceneCommand.kinconyDevice.port == port) {
+            sceneCommand.commandStr = state;
+            break;
+        }
+    }
+    
+    Boolean canSendSceneCommand = YES;
+    for (KinconySceneCommand *sceneCommand in self.sceneCommandArray) {
+        if (sceneCommand.commandStr == nil) {
+            canSendSceneCommand = NO;
+            break;
+        }
+    }
+    
+    if (canSendSceneCommand) {
+        [self sendSceneCommand];
+    }
+}
+
+- (void)sendSceneCommand {
+    for (KinconySceneCommand *sceneCommand in self.sceneCommandArray) {
+        NSString *sceneCommandStr = [self getSceneCommandStr:sceneCommand];
+        NSString *commandStr = [NSString stringWithFormat:@"RELAY-SET_ALL-255,%@OK", sceneCommandStr];
+        [[KinconySocketManager sharedManager] sendData:commandStr toDevice:sceneCommand.kinconyDevice];
+    }
+}
+
+- (NSString*)getSceneCommandStr:(KinconySceneCommand *)sceneCommand {
+    NSMutableString *commandStr = [NSMutableString stringWithString:sceneCommand.commandStr];
+    for (KinconySceneDeviceRLMObject *sceneDevice in self.nowScene.sceneDevices) {
+        if ([sceneDevice.device.ipAddress isEqualToString:sceneCommand.kinconyDevice.ipAddress] && sceneDevice.device.port == sceneCommand.kinconyDevice.port) {
+            [commandStr replaceCharactersInRange:NSMakeRange([sceneDevice.device.num integerValue], 1) withString:[NSString stringWithFormat:@"%ld", (long)sceneDevice.state]];
+        }
+    }
+    commandStr = [NSMutableString stringWithString:[self reverseWordsInString:commandStr]];
+    NSString *command = commandStr;
+    
+    NSMutableString *resultCommandStr = [[NSMutableString alloc] init];
+    
+    while (command.length >= 8) {
+        NSString *tempStr = [command substringToIndex:7];
+        command = [command substringFromIndex:8];
+        [resultCommandStr appendString:[NSString stringWithFormat:@"%ld,", (long)[self getDecimalByBinary:tempStr]]];
+    }
+    
+    return resultCommandStr;
+}
+
+- (NSString*)getOldSceneCommandStr:(KinconySceneCommand*)sceneCommand {
+    NSString *commandStr = [NSMutableString stringWithString:[self reverseWordsInString:sceneCommand.commandStr]];
+    NSString *command = commandStr;
+    
+    NSMutableString *resultCommandStr = [[NSMutableString alloc] init];
+    
+    while (command.length >= 8) {
+        NSString *tempStr = [command substringToIndex:7];
+        command = [command substringFromIndex:8];
+        [resultCommandStr appendString:[NSString stringWithFormat:@"%ld,", (long)[self getDecimalByBinary:tempStr]]];
+    }
+    
+    return resultCommandStr;
+}
+
+- (NSInteger)getDecimalByBinary:(NSString *)binary {
+    NSInteger decimal = 0;
+    for (int i=0; i<binary.length; i++) {
+        
+        NSString *number = [binary substringWithRange:NSMakeRange(binary.length - i - 1, 1)];
+        if ([number isEqualToString:@"1"]) {
+            
+            decimal += pow(2, i);
+        }
+    }
+    return decimal;
+}
+
+- (NSString*)reverseWordsInString:(NSString*)oldStr {
+    NSMutableString *newStr = [[NSMutableString alloc] initWithCapacity:oldStr.length];
+    for (int i = (int)oldStr.length - 1; i >= 0; i --) {
+        unichar character = [oldStr characterAtIndex:i];
+        [newStr appendFormat:@"%c",character];
+    }
+    return newStr;
+}
+
 - (void)decodeDeviceState:(NSArray*)stateArray withIpaddress:(NSString*)ipAddress withPort:(NSInteger)port {
-    NSMutableArray *resultStateStrArray = [[NSMutableArray alloc] init];
+    NSMutableString *resultStateStr = [[NSMutableString alloc] init];
     NSMutableArray *resultStateArray = [[NSMutableArray alloc] init];
     for (int i = (int)stateArray.count - 1; i >= 0; i--) {
         NSString *stateStr = [self toBinarySystemWithDecimalSystem:stateArray[i]];
@@ -153,7 +263,7 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
             if (j <= stateStr.length) {
                 state = [stateStr substringWithRange:NSMakeRange(stateStr.length - j, 1)];
             }
-            [resultStateStrArray addObject:state];
+            [resultStateStr appendString:state];
             
             KinconyDeviceState *kinconyDeviceState = [[KinconyDeviceState alloc] init];
             kinconyDeviceState.ipAddress = ipAddress;
@@ -162,6 +272,7 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
             [resultStateArray addObject:kinconyDeviceState];
         }
     }
+    [self addStateToSceneCommands:resultStateStr withIpaddress:ipAddress withPort:port];
     [[NSNotificationCenter defaultCenter] postNotificationName:KinconyDeviceStateNotification object:nil userInfo:@{@"stateArray": resultStateArray}];
 }
 
@@ -193,6 +304,33 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
     }
     
     return result;
+}
+
+- (NSArray*)getAllSceneDevices:(KinconySceneRLMObject*)scene {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    for (KinconySceneDeviceRLMObject *sceneDevice in scene.sceneDevices) {
+        [dic setObject:[NSNumber numberWithInteger:sceneDevice.device.port] forKey:sceneDevice.device.ipAddress];
+    }
+    
+    for (NSString *key in dic.allKeys) {
+        KinconyDevice *device = [[KinconyDevice alloc] init];
+        device.ipAddress = key;
+        device.port = [[dic objectForKey:key] integerValue];
+        [array addObject:device];
+    }
+    
+    return array;
+}
+
+#pragma mark - setters and getters
+
+- (NSMutableArray *)sceneCommandArray {
+    if (_sceneCommandArray == nil) {
+        self.sceneCommandArray = [[NSMutableArray alloc] init];
+    }
+    return _sceneCommandArray;
 }
 
 @end

@@ -54,8 +54,12 @@
 		657EECA22268501200708CCD /* ChooseSceneDeviceVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA12268501200708CCD /* ChooseSceneDeviceVM.m */; };
 		657EECA52268518E00708CCD /* SceneDeviceChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA42268518E00708CCD /* SceneDeviceChooseCell.m */; };
 		657EECA8226851A600708CCD /* SceneDeviceChooseCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA7226851A600708CCD /* SceneDeviceChooseCellVM.m */; };
+		65AB1DA724B561F80057FCA3 /* KinconySceneCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AB1DA624B561F80057FCA3 /* KinconySceneCommand.m */; };
 		65C392CB24A21A7A00AFBF12 /* DeviceAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C392CA24A21A7A00AFBF12 /* DeviceAddViewController.m */; };
 		65C392CE24A21AC600AFBF12 /* DeviceAddVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C392CD24A21AC600AFBF12 /* DeviceAddVM.m */; };
+		65D441A824B99004001DBE01 /* UIButton+MCLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D441A624B99004001DBE01 /* UIButton+MCLayout.m */; };
+		65D441AB24B99122001DBE01 /* HomeSecneControlCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D441AA24B99122001DBE01 /* HomeSecneControlCell.m */; };
+		65D441AE24B99163001DBE01 /* HomeSeceneControlCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D441AD24B99163001DBE01 /* HomeSeceneControlCellVM.m */; };
 		E81906082EF64AE3584A1903 /* libPods-KBOX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 941BCD525FEE9D0CBC5D85CD /* libPods-KBOX.a */; };
 /* End PBXBuildFile section */
 
@@ -154,10 +158,18 @@
 		657EECA42268518E00708CCD /* SceneDeviceChooseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDeviceChooseCell.m; sourceTree = "<group>"; };
 		657EECA6226851A600708CCD /* SceneDeviceChooseCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDeviceChooseCellVM.h; sourceTree = "<group>"; };
 		657EECA7226851A600708CCD /* SceneDeviceChooseCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDeviceChooseCellVM.m; sourceTree = "<group>"; };
+		65AB1DA524B561F80057FCA3 /* KinconySceneCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconySceneCommand.h; sourceTree = "<group>"; };
+		65AB1DA624B561F80057FCA3 /* KinconySceneCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconySceneCommand.m; sourceTree = "<group>"; };
 		65C392C924A21A7A00AFBF12 /* DeviceAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceAddViewController.h; sourceTree = "<group>"; };
 		65C392CA24A21A7A00AFBF12 /* DeviceAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceAddViewController.m; sourceTree = "<group>"; };
 		65C392CC24A21AC600AFBF12 /* DeviceAddVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceAddVM.h; sourceTree = "<group>"; };
 		65C392CD24A21AC600AFBF12 /* DeviceAddVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceAddVM.m; sourceTree = "<group>"; };
+		65D441A624B99004001DBE01 /* UIButton+MCLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+MCLayout.m"; sourceTree = "<group>"; };
+		65D441A724B99004001DBE01 /* UIButton+MCLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+MCLayout.h"; sourceTree = "<group>"; };
+		65D441A924B99122001DBE01 /* HomeSecneControlCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeSecneControlCell.h; sourceTree = "<group>"; };
+		65D441AA24B99122001DBE01 /* HomeSecneControlCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeSecneControlCell.m; sourceTree = "<group>"; };
+		65D441AC24B99163001DBE01 /* HomeSeceneControlCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeSeceneControlCellVM.h; sourceTree = "<group>"; };
+		65D441AD24B99163001DBE01 /* HomeSeceneControlCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeSeceneControlCellVM.m; sourceTree = "<group>"; };
 		918B1AF3AD3E311F26948FE1 /* Pods-KBOX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KBOX.release.xcconfig"; path = "Target Support Files/Pods-KBOX/Pods-KBOX.release.xcconfig"; sourceTree = "<group>"; };
 		941BCD525FEE9D0CBC5D85CD /* libPods-KBOX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KBOX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -236,6 +248,7 @@
 		6542483A2251AEBF00E30D54 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				65D441A524B99004001DBE01 /* MCButton */,
 				65151D672255D60C00BE8951 /* RelayCell.h */,
 				65151D682255D60C00BE8951 /* RelayCell.m */,
 				65151D6A2255D87300BE8951 /* RelayCellVM.h */,
@@ -260,6 +273,10 @@
 				655FA9252269AC21009EE0D9 /* SceneCell.m */,
 				655FA9272269AC32009EE0D9 /* SceneCellVM.h */,
 				655FA9282269AC32009EE0D9 /* SceneCellVM.m */,
+				65D441A924B99122001DBE01 /* HomeSecneControlCell.h */,
+				65D441AA24B99122001DBE01 /* HomeSecneControlCell.m */,
+				65D441AC24B99163001DBE01 /* HomeSeceneControlCellVM.h */,
+				65D441AD24B99163001DBE01 /* HomeSeceneControlCellVM.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -369,8 +386,19 @@
 				657EEC8F2268469500708CCD /* KinconySceneDeviceRLMObject.m */,
 				657EEC912268478400708CCD /* KinconySceneRLMObject.h */,
 				657EEC922268478400708CCD /* KinconySceneRLMObject.m */,
+				65AB1DA524B561F80057FCA3 /* KinconySceneCommand.h */,
+				65AB1DA624B561F80057FCA3 /* KinconySceneCommand.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		65D441A524B99004001DBE01 /* MCButton */ = {
+			isa = PBXGroup;
+			children = (
+				65D441A724B99004001DBE01 /* UIButton+MCLayout.h */,
+				65D441A624B99004001DBE01 /* UIButton+MCLayout.m */,
+			);
+			path = MCButton;
 			sourceTree = "<group>";
 		};
 		DC69D54C300D3F8C2476B757 /* Pods */ = {
@@ -507,6 +535,7 @@
 				65376CCE22670F64005CA511 /* SceneViewController.m in Sources */,
 				657DD53B2252F3E700C7C3B0 /* DeviceListVM.m in Sources */,
 				65151D692255D60C00BE8951 /* RelayCell.m in Sources */,
+				65D441AB24B99122001DBE01 /* HomeSecneControlCell.m in Sources */,
 				657EEC902268469500708CCD /* KinconySceneDeviceRLMObject.m in Sources */,
 				654E9526225B32AE00561050 /* DeviceEditVM.m in Sources */,
 				653E28EF225C2DF900774EAE /* DeviceImageCellVM.m in Sources */,
@@ -524,6 +553,7 @@
 				654248532251AFCC00E30D54 /* GLViewModel.m in Sources */,
 				654E952C225B379E00561050 /* DeviceImageChooseVM.m in Sources */,
 				653E2904225C7AB100774EAE /* DeviceManagerCellVM.m in Sources */,
+				65D441AE24B99163001DBE01 /* HomeSeceneControlCellVM.m in Sources */,
 				653A2F1122544A930058C6AB /* KinconyDevice.m in Sources */,
 				653E28EC225C2DE400774EAE /* DeviceImageCell.m in Sources */,
 				654248342251AE1E00E30D54 /* main.m in Sources */,
@@ -534,6 +564,8 @@
 				657DD5382252F38F00C7C3B0 /* DeviceListViewController.m in Sources */,
 				653E28F2225C409600774EAE /* TabBarViewController.m in Sources */,
 				654248522251AFCC00E30D54 /* GLBaseTableViewController.m in Sources */,
+				65AB1DA724B561F80057FCA3 /* KinconySceneCommand.m in Sources */,
+				65D441A824B99004001DBE01 /* UIButton+MCLayout.m in Sources */,
 				657EEC96226848B700708CCD /* KinconySceneManager.m in Sources */,
 				653E2901225C7A9E00774EAE /* DeviceManagerCell.m in Sources */,
 				653E28FE225C720F00774EAE /* DeviceManagerVM.m in Sources */,

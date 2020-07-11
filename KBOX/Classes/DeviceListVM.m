@@ -2,7 +2,7 @@
 //  DeviceListVM.m
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/2.
+//  Created by gulu on 2019/4/2.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
@@ -24,6 +24,7 @@
     
     self.getDevicesSignal = [RACSubject subject];
     self.getDevicesStateSignal = [RACSubject subject];
+    self.getSeceneSignal = [RACSubject subject];
     NSLog(@"%@", [RLMRealmConfiguration defaultConfiguration].fileURL);
     [self.kinconyRelay connectAllDevices];
     [self getDevices];
@@ -79,6 +80,11 @@
     [self.kinconyRelay searchDevicesState];
 }
 
+- (void)updateSecene {
+    self.homeSeceneControlCellVM.scenes = [self.kinconyRelay getSceces];
+    [self.getSeceneSignal sendNext:@""];
+}
+
 #pragma mark - setters and getters
 
 - (KinconyRelay*)kinconyRelay {
@@ -93,6 +99,13 @@
         self.deviceCellVMList = [[NSMutableArray alloc] init];
     }
     return _deviceCellVMList;
+}
+
+- (HomeSeceneControlCellVM *)homeSeceneControlCellVM {
+    if (_homeSeceneControlCellVM == nil) {
+        self.homeSeceneControlCellVM = [[HomeSeceneControlCellVM alloc] init];
+    }
+    return _homeSeceneControlCellVM;
 }
 
 @end

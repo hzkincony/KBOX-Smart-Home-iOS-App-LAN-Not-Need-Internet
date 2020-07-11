@@ -2,12 +2,14 @@
 //  AppDelegate.m
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/1.
+//  Created by gulu on 2019/4/1.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
 #import "AppDelegate.h"
 #import "IQKeyboardManager.h"
+#import "RLMRealm.h"
+#import "RLMRealmConfiguration.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +21,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [IQKeyboardManager sharedManager].enable = YES;
+    
+    //Realm Migrations
+    RLMRealmConfiguration *config = [RLMRealmConfiguration defaultConfiguration];
+    config.schemaVersion = 2;
+    config.migrationBlock = ^(RLMMigration *migration, uint64_t oldSchemaVersion) {
+        if (oldSchemaVersion < 2) {
+            
+        }
+    };
+    [RLMRealmConfiguration setDefaultConfiguration:config];
+    [RLMRealm defaultRealm];
     
     return YES;
 }

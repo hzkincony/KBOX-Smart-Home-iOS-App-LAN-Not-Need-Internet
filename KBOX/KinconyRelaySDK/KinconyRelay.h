@@ -2,7 +2,7 @@
 //  KinconyRelay.h
 //  KBOX
 //
-//  Created by 顾越超 on 2019/4/3.
+//  Created by gulu on 2019/4/3.
 //  Copyright © 2019 kincony. All rights reserved.
 //
 
@@ -44,6 +44,8 @@ typedef void (^DeviceAddResultBlock) (NSError *error);
 - (void)deleteScene:(KinconySceneRLMObject*)scene;
 
 - (void)sceneCommand:(KinconySceneRLMObject*)scene;
+
+- (void)sceneCommandTouchUp;
 
 @end
 
