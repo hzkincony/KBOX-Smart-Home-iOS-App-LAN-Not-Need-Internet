@@ -23,13 +23,34 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
 
 @implementation KinconyRelay
 
-- (id)init {
-    if ((self = [super init])) {
+static KinconyRelay *sharedManager = nil;
+
++ (KinconyRelay*)sharedManager {
+    static dispatch_once_t once;
+    dispatch_once(&once,^{
+        sharedManager = [[self alloc] init];
+
+    });
+    return sharedManager;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readData:) name:KinconySocketReadDataNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socketDidConnect:) name:KinconySocketDidConnectNotification object:nil];
     }
     return self;
 }
+
+//- (id)init {
+//    if ((self = [super init])) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readData:) name:KinconySocketReadDataNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socketDidConnect:) name:KinconySocketDidConnectNotification object:nil];
+//    }
+//    return self;
+//}
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -68,7 +89,7 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
     KinconyDevice *connectDevice = [[KinconyDevice alloc] init];
     connectDevice.ipAddress = device.ipAddress;
     connectDevice.port = device.port;
-    NSString *commandStr = [NSString stringWithFormat:@"RELAY-SET-1,%@,%d", device.num, on];
+    NSString *commandStr = [NSString stringWithFormat:@"RELAY-SET-255,%@,%d", device.num, on];
     [[KinconySocketManager sharedManager] sendData:commandStr toDevice:connectDevice];
 }
 
@@ -83,10 +104,15 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
         device.num = oldDevice.num;
         device.name = oldDevice.name;
         device.image = oldDevice.image;
+        device.touchImage = oldDevice.touchImage;
+        device.controlModel = oldDevice.controlModel;
         [newDevices addObject:device];
     }
+    [[KinconySceneManager sharedManager] updateSceneTempDevices];
     [[KinconyDeviceManager sharedManager] deleteAllDevice];
     [[KinconyDeviceManager sharedManager] addDevices:newDevices];
+    [self updateSceneDevices];
+    [self deleteAllTempDevices];
 }
 
 - (void)editDevice:(KinconyDeviceRLMObject*)device name:(NSString*)name deviceImageName:(NSString*)imageName deviceTouchImageName:(NSString*)touchImageName controlMode:(NSInteger)controlModel {
@@ -134,6 +160,8 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
         NSString *commandStr = [NSString stringWithFormat:@"RELAY-SET_ALL-255,%@OK", sceneCommandStr];
         [[KinconySocketManager sharedManager] sendData:commandStr toDevice:sceneCommand.kinconyDevice];
     }
+    self.nowScene = nil;
+    [self searchDevicesState];
 }
 
 #pragma mark - notifications
@@ -167,6 +195,10 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
 }
 
 - (void)addStateToSceneCommands:(NSString*)state withIpaddress:(NSString*)ipAddress withPort:(NSInteger)port {
+    if (self.nowScene == nil) {
+        return;
+    }
+    
     for (KinconySceneCommand *sceneCommand in self.sceneCommandArray) {
         if ([sceneCommand.kinconyDevice.ipAddress isEqualToString:ipAddress] && sceneCommand.kinconyDevice.port == port) {
             sceneCommand.commandStr = state;
@@ -193,13 +225,19 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
         NSString *commandStr = [NSString stringWithFormat:@"RELAY-SET_ALL-255,%@OK", sceneCommandStr];
         [[KinconySocketManager sharedManager] sendData:commandStr toDevice:sceneCommand.kinconyDevice];
     }
+    if (self.nowScene.controlModel == 0) {
+        self.nowScene = nil;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self searchDevicesState];
+        });
+    }
 }
 
 - (NSString*)getSceneCommandStr:(KinconySceneCommand *)sceneCommand {
     NSMutableString *commandStr = [NSMutableString stringWithString:sceneCommand.commandStr];
     for (KinconySceneDeviceRLMObject *sceneDevice in self.nowScene.sceneDevices) {
         if ([sceneDevice.device.ipAddress isEqualToString:sceneCommand.kinconyDevice.ipAddress] && sceneDevice.device.port == sceneCommand.kinconyDevice.port) {
-            [commandStr replaceCharactersInRange:NSMakeRange([sceneDevice.device.num integerValue], 1) withString:[NSString stringWithFormat:@"%ld", (long)sceneDevice.state]];
+            [commandStr replaceCharactersInRange:NSMakeRange([sceneDevice.device.num integerValue] - 1, 1) withString:[NSString stringWithFormat:@"%ld", (long)sceneDevice.state]];
         }
     }
     commandStr = [NSMutableString stringWithString:[self reverseWordsInString:commandStr]];
@@ -208,7 +246,7 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
     NSMutableString *resultCommandStr = [[NSMutableString alloc] init];
     
     while (command.length >= 8) {
-        NSString *tempStr = [command substringToIndex:7];
+        NSString *tempStr = [command substringToIndex:8];
         command = [command substringFromIndex:8];
         [resultCommandStr appendString:[NSString stringWithFormat:@"%ld,", (long)[self getDecimalByBinary:tempStr]]];
     }
@@ -223,7 +261,7 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
     NSMutableString *resultCommandStr = [[NSMutableString alloc] init];
     
     while (command.length >= 8) {
-        NSString *tempStr = [command substringToIndex:7];
+        NSString *tempStr = [command substringToIndex:8];
         command = [command substringFromIndex:8];
         [resultCommandStr appendString:[NSString stringWithFormat:@"%ld,", (long)[self getDecimalByBinary:tempStr]]];
     }
@@ -273,7 +311,9 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
         }
     }
     [self addStateToSceneCommands:resultStateStr withIpaddress:ipAddress withPort:port];
-    [[NSNotificationCenter defaultCenter] postNotificationName:KinconyDeviceStateNotification object:nil userInfo:@{@"stateArray": resultStateArray}];
+    if (self.nowScene == nil) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:KinconyDeviceStateNotification object:nil userInfo:@{@"stateArray": resultStateArray}];
+    }
 }
 
 - (NSString *)toBinarySystemWithDecimalSystem:(NSString *)decimal {
@@ -322,6 +362,28 @@ NSString * const KinconyDeviceStateNotification = @"KinconyDeviceStateNotificati
     }
     
     return array;
+}
+
+- (void)updateSceneDevices {
+    RLMResults *scenes = [[KinconySceneManager sharedManager] getScenes];
+    for (KinconySceneRLMObject *scene in scenes) {
+        NSMutableArray *tempDevicesArray = [[NSMutableArray alloc] init];
+        for (KinconySceneDeviceRLMObject *sceneDevice in scene.sceneDevices) {
+            KinconyDeviceRLMObject *device = [[KinconyDeviceManager sharedManager] findDeviceByIp:sceneDevice.tempDevice.ipAddress withNum:sceneDevice.tempDevice.num];
+            if (device != nil) {
+                [tempDevicesArray addObject:device];
+            }
+        }
+        [[KinconySceneManager sharedManager] updateSceneDevice:scene withDevice:tempDevicesArray];
+    }
+}
+
+- (void)deleteAllTempDevices {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    RLMResults *tempDevices = [KinconyTempDeviceRLMObject allObjects];
+    [realm deleteObjects:tempDevices];
+    [realm commitWriteTransaction];
 }
 
 #pragma mark - setters and getters

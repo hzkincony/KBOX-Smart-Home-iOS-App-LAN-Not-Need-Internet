@@ -11,7 +11,7 @@
 
 @interface DeviceManagerVM()
 
-@property (nonatomic, strong) KinconyRelay *kinconyRelay;
+//@property (nonatomic, strong) KinconyRelay *kinconyRelay;
 
 @end
 
@@ -25,7 +25,7 @@
 
 - (void)getConnectDevices {
     [self.deviceManagerCellVMList removeAllObjects];
-    NSArray *list = [self.kinconyRelay getAllConnectDevice];
+    NSArray *list = [[KinconyRelay sharedManager] getAllConnectDevice];
     for (KinconyDevice *device in list) {
         DeviceManagerCellVM *deviceManagerCellVM = [[DeviceManagerCellVM alloc] initWithDevice:device];
         [self.deviceManagerCellVMList addObject:deviceManagerCellVM];
@@ -35,12 +35,12 @@
 
 #pragma mark - setters and getters
 
-- (KinconyRelay*)kinconyRelay {
-    if (_kinconyRelay == nil) {
-        self.kinconyRelay = [[KinconyRelay alloc] init];
-    }
-    return _kinconyRelay;
-}
+//- (KinconyRelay*)kinconyRelay {
+//    if (_kinconyRelay == nil) {
+//        self.kinconyRelay = [[KinconyRelay alloc] init];
+//    }
+//    return _kinconyRelay;
+//}
 
 - (NSMutableArray*)deviceManagerCellVMList {
     if (_deviceManagerCellVMList == nil) {

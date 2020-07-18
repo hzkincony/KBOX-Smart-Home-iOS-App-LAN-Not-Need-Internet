@@ -12,7 +12,7 @@
 @interface SceneCellVM()
 
 @property (nonatomic, strong) KinconySceneRLMObject *scene;
-@property (nonatomic, strong) KinconyRelay *kinconyRelay;
+//@property (nonatomic, strong) KinconyRelay *kinconyRelay;
 
 @end
 
@@ -34,7 +34,7 @@
 }
 
 - (void)deleteScene {
-    [self.kinconyRelay deleteScene:self.scene];
+    [[KinconyRelay sharedManager] deleteScene:self.scene];
 }
 
 - (KinconySceneRLMObject*)getScene {
@@ -43,11 +43,11 @@
 
 #pragma mark - setters and getters
 
-- (KinconyRelay*)kinconyRelay {
-    if (_kinconyRelay == nil) {
-        self.kinconyRelay = [[KinconyRelay alloc] init];
-    }
-    return _kinconyRelay;
-}
+//- (KinconyRelay*)kinconyRelay {
+//    if (_kinconyRelay == nil) {
+//        self.kinconyRelay = [[KinconyRelay alloc] init];
+//    }
+//    return _kinconyRelay;
+//}
 
 @end

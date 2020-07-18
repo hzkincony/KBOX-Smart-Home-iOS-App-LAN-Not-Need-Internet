@@ -56,6 +56,7 @@
     hud.label.text = msg;
     hud.margin = 10.0f;
     hud.removeFromSuperViewOnHide = YES;
+    hud.userInteractionEnabled = NO;
     [hud hideAnimated:YES afterDelay:1.5];
 }
 

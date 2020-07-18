@@ -108,7 +108,10 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    return true;
+    if (indexPath.section == 0) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
@@ -134,6 +137,7 @@
         [self.editButton setTitle:NSLocalizedString(@"doneBtn", nil)];
     } else {
         [self.editButton setTitle:NSLocalizedString(@"editBtn", nil)];
+//        [[KinconyRelay sharedManager] deleteAllTempDevices];
     }
 }
 

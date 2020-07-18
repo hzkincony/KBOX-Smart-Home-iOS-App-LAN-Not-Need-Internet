@@ -12,7 +12,7 @@
 
 @interface SceneVM()
 
-@property (nonatomic, strong) KinconyRelay *kinconyRelay;
+//@property (nonatomic, strong) KinconyRelay *kinconyRelay;
 
 @end
 
@@ -40,7 +40,7 @@
 
 - (void)getScenes {
     [self.sceneCellVMList removeAllObjects];
-    RLMResults *sceces = [self.kinconyRelay getSceces];
+    RLMResults *sceces = [[KinconyRelay sharedManager] getSceces];
     for (KinconySceneRLMObject *scene in sceces) {
         SceneCellVM *sceneCellVM = [[SceneCellVM alloc] initWithScene:scene];
         [self.sceneCellVMList addObject:sceneCellVM];
@@ -56,17 +56,17 @@
 
 - (void)commandScene:(NSInteger)index {
     SceneCellVM *sceneCellVM = [self.sceneCellVMList objectAtIndex:index];
-    [self.kinconyRelay sceneCommand:[sceneCellVM getScene]];
+    [[KinconyRelay sharedManager] sceneCommand:[sceneCellVM getScene]];
 }
 
 #pragma mark - setters and getters
 
-- (KinconyRelay*)kinconyRelay {
-    if (_kinconyRelay == nil) {
-        self.kinconyRelay = [[KinconyRelay alloc] init];
-    }
-    return _kinconyRelay;
-}
+//- (KinconyRelay*)kinconyRelay {
+//    if (_kinconyRelay == nil) {
+//        self.kinconyRelay = [[KinconyRelay alloc] init];
+//    }
+//    return _kinconyRelay;
+//}
 
 - (NSMutableArray*)sceneCellVMList {
     if (_sceneCellVMList == nil) {

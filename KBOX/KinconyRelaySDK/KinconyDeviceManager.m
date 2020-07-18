@@ -64,6 +64,14 @@ static KinconyDeviceManager *sharedManager = nil;
     return nil;
 }
 
+- (KinconyDeviceRLMObject *)findDeviceByIp:(NSString *)ipAddress withNum:(NSString*)num {
+    RLMResults<KinconyDeviceRLMObject*> *devices = [KinconyDeviceRLMObject objectsWhere:[NSString stringWithFormat:@"ipAddress = '%@' AND num = '%@'", ipAddress, num]];
+    if (devices.count > 0) {
+        return devices.firstObject;
+    }
+    return nil;
+}
+
 - (NSArray*)getAllConnectDevice {
     NSMutableArray *connectDevices = [[NSMutableArray alloc] init];
     

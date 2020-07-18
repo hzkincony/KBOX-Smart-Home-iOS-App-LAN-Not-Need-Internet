@@ -42,6 +42,35 @@ static KinconySceneManager *sharedManager = nil;
     [realm commitWriteTransaction];
 }
 
+- (void)updateSceneTempDevices {
+    RLMResults *scenes = [self getScenes];
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    for (KinconySceneRLMObject *scene in scenes) {
+        for (KinconySceneDeviceRLMObject *sceneDevice in scene.sceneDevices) {
+            KinconyTempDeviceRLMObject *tempDevice = [[KinconyTempDeviceRLMObject alloc] init];
+            tempDevice.ipAddress = sceneDevice.device.ipAddress;
+            tempDevice.port = sceneDevice.device.port;
+            tempDevice.num = sceneDevice.device.num;
+            sceneDevice.tempDevice = tempDevice;
+        }
+    }
+    [realm commitWriteTransaction];
+}
+
+- (void)updateSceneDevice:(KinconySceneRLMObject *)scene withDevice:(NSArray *)devices {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    for (KinconySceneDeviceRLMObject *sceneDevice in scene.sceneDevices) {
+        for (KinconyDeviceRLMObject *device in devices) {
+            if ([sceneDevice.tempDevice.ipAddress isEqualToString:device.ipAddress] && [sceneDevice.tempDevice.num isEqualToString:device.num]) {
+                sceneDevice.device = device;
+            }
+        }
+    }
+    [realm commitWriteTransaction];
+}
+
 #pragma mark - private methods
 
 

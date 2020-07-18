@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getSceneDevices;
 - (void)saveScene;
 - (BOOL)isValidInput;
+- (void)deleteSceneDevice:(NSInteger)index;
 
 @end
 

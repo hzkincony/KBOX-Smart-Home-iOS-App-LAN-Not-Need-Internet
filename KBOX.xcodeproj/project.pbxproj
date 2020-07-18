@@ -54,6 +54,7 @@
 		657EECA22268501200708CCD /* ChooseSceneDeviceVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA12268501200708CCD /* ChooseSceneDeviceVM.m */; };
 		657EECA52268518E00708CCD /* SceneDeviceChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA42268518E00708CCD /* SceneDeviceChooseCell.m */; };
 		657EECA8226851A600708CCD /* SceneDeviceChooseCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA7226851A600708CCD /* SceneDeviceChooseCellVM.m */; };
+		6595C0B424C355F300EF6C90 /* KinconyTempDeviceRLMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6595C0B324C355F300EF6C90 /* KinconyTempDeviceRLMObject.m */; };
 		65AB1DA724B561F80057FCA3 /* KinconySceneCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AB1DA624B561F80057FCA3 /* KinconySceneCommand.m */; };
 		65C392CB24A21A7A00AFBF12 /* DeviceAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C392CA24A21A7A00AFBF12 /* DeviceAddViewController.m */; };
 		65C392CE24A21AC600AFBF12 /* DeviceAddVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C392CD24A21AC600AFBF12 /* DeviceAddVM.m */; };
@@ -158,6 +159,8 @@
 		657EECA42268518E00708CCD /* SceneDeviceChooseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDeviceChooseCell.m; sourceTree = "<group>"; };
 		657EECA6226851A600708CCD /* SceneDeviceChooseCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDeviceChooseCellVM.h; sourceTree = "<group>"; };
 		657EECA7226851A600708CCD /* SceneDeviceChooseCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDeviceChooseCellVM.m; sourceTree = "<group>"; };
+		6595C0B224C355F300EF6C90 /* KinconyTempDeviceRLMObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconyTempDeviceRLMObject.h; sourceTree = "<group>"; };
+		6595C0B324C355F300EF6C90 /* KinconyTempDeviceRLMObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconyTempDeviceRLMObject.m; sourceTree = "<group>"; };
 		65AB1DA524B561F80057FCA3 /* KinconySceneCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconySceneCommand.h; sourceTree = "<group>"; };
 		65AB1DA624B561F80057FCA3 /* KinconySceneCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconySceneCommand.m; sourceTree = "<group>"; };
 		65C392C924A21A7A00AFBF12 /* DeviceAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceAddViewController.h; sourceTree = "<group>"; };
@@ -388,6 +391,8 @@
 				657EEC922268478400708CCD /* KinconySceneRLMObject.m */,
 				65AB1DA524B561F80057FCA3 /* KinconySceneCommand.h */,
 				65AB1DA624B561F80057FCA3 /* KinconySceneCommand.m */,
+				6595C0B224C355F300EF6C90 /* KinconyTempDeviceRLMObject.h */,
+				6595C0B324C355F300EF6C90 /* KinconyTempDeviceRLMObject.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -536,6 +541,7 @@
 				657DD53B2252F3E700C7C3B0 /* DeviceListVM.m in Sources */,
 				65151D692255D60C00BE8951 /* RelayCell.m in Sources */,
 				65D441AB24B99122001DBE01 /* HomeSecneControlCell.m in Sources */,
+				6595C0B424C355F300EF6C90 /* KinconyTempDeviceRLMObject.m in Sources */,
 				657EEC902268469500708CCD /* KinconySceneDeviceRLMObject.m in Sources */,
 				654E9526225B32AE00561050 /* DeviceEditVM.m in Sources */,
 				653E28EF225C2DF900774EAE /* DeviceImageCellVM.m in Sources */,

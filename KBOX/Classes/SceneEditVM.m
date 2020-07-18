@@ -12,7 +12,7 @@
 
 @interface SceneEditVM() <ChooseSceneDeviceVMDelegate, DeviceImageChooseVMDelegate>
 
-@property (nonatomic, strong) KinconyRelay *kinconyRelay;
+//@property (nonatomic, strong) KinconyRelay *kinconyRelay;
 @property (nonatomic, strong) KinconySceneRLMObject *oldScene;
 @property (nonatomic, strong) NSString *sceneImageName;
 
@@ -66,13 +66,13 @@
 
 - (void)saveScene {
     if (self.type == SceneEditVMTypeEdit) {
-        [self.kinconyRelay deleteScene:self.oldScene];
+        [[KinconyRelay sharedManager] deleteScene:self.oldScene];
     }
     
     self.scene.name = self.name;
     self.scene.image = self.sceneImageName;
     self.scene.controlModel = self.controlModel.integerValue;
-    [self.kinconyRelay saveScene:self.scene];
+    [[KinconyRelay sharedManager] saveScene:self.scene];
     [self.saveSceneSignal sendNext:@""];
 }
 
@@ -82,6 +82,10 @@
         return NO;
     }
     return YES;
+}
+
+- (void)deleteSceneDevice:(NSInteger)index {
+    [self.scene.sceneDevices removeObjectAtIndex:index];
 }
 
 #pragma mark - private methods
@@ -136,6 +140,8 @@
     KinconySceneRLMObject *newScene = [[KinconySceneRLMObject alloc] init];
     newScene.sceneId = scene.sceneId;
     newScene.name = scene.name;
+    newScene.controlModel = scene.controlModel;
+    newScene.image = scene.image;
     
     for (KinconySceneDeviceRLMObject *sceneDevice in scene.sceneDevices) {
         KinconySceneDeviceRLMObject *newSceneDevice = [[KinconySceneDeviceRLMObject alloc] init];
@@ -146,6 +152,8 @@
     
     _scene = newScene;
     self.name = _scene.name;
+    self.sceneImageName = _scene.image == nil ? @"icon1": _scene.image;
+    self.controlModel = [NSNumber numberWithInteger:_scene.controlModel];
 }
 
 - (NSMutableArray*)sceneDeviceCellVMList {
@@ -155,12 +163,12 @@
     return _sceneDeviceCellVMList;
 }
 
-- (KinconyRelay*)kinconyRelay {
-    if (_kinconyRelay == nil) {
-        self.kinconyRelay = [[KinconyRelay alloc] init];
-    }
-    return _kinconyRelay;
-}
+//- (KinconyRelay*)kinconyRelay {
+//    if (_kinconyRelay == nil) {
+//        self.kinconyRelay = [[KinconyRelay alloc] init];
+//    }
+//    return _kinconyRelay;
+//}
 
 - (DeviceImageChooseVM *)deviceImageChooseVM {
     if (_deviceImageChooseVM == nil) {

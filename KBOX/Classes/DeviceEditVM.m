@@ -7,10 +7,11 @@
 //
 
 #import "DeviceEditVM.h"
+#import "KinconyRelay.h"
 
 @interface DeviceEditVM()<DeviceImageChooseVMDelegate>
 
-@property (nonatomic, strong) KinconyRelay *kinconyRelay;
+//@property (nonatomic, strong) KinconyRelay *kinconyRelay;
 @property (nonatomic, strong) NSString *imageName;
 @property (nonatomic, strong) NSString *touchImageName;
 
@@ -54,7 +55,7 @@
 }
 
 - (void)editDevice {
-    [self.kinconyRelay editDevice:self.device name:self.deviceName deviceImageName:self.imageName deviceTouchImageName:self.touchImageName controlMode:self.controlModel.integerValue];
+    [[KinconyRelay sharedManager] editDevice:self.device name:self.deviceName deviceImageName:self.imageName deviceTouchImageName:self.touchImageName controlMode:self.controlModel.integerValue];
     [self.editDeviceSignal sendNext:@""];
 }
 
@@ -74,11 +75,11 @@
 
 #pragma mark - setters and getters
 
-- (KinconyRelay*)kinconyRelay {
-    if (_kinconyRelay == nil) {
-        self.kinconyRelay = [[KinconyRelay alloc] init];
-    }
-    return _kinconyRelay;
-}
+//- (KinconyRelay*)kinconyRelay {
+//    if (_kinconyRelay == nil) {
+//        self.kinconyRelay = [[KinconyRelay alloc] init];
+//    }
+//    return _kinconyRelay;
+//}
 
 @end

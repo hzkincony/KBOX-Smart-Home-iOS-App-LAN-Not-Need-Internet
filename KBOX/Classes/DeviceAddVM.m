@@ -12,7 +12,7 @@
 
 @interface DeviceAddVM()
 
-@property (nonatomic, strong) KinconyRelay *kinconyRelay;
+//@property (nonatomic, strong) KinconyRelay *kinconyRelay;
 
 @end
 
@@ -43,7 +43,7 @@
 
 - (void)doAddDevice {
     @weakify(self);
-    [self.kinconyRelay addDevice:self.ip withPort:[self.port integerValue] withNum:self.num withBlock:^(NSError * _Nonnull error) {
+    [[KinconyRelay sharedManager] addDevice:self.ip withPort:[self.port integerValue] withNum:self.num withBlock:^(NSError * _Nonnull error) {
         @strongify(self);
         if (error.code == DeviceAddErrorCode_AlreadyExists) {
             [self.addDeviceSignal sendNext:[NSError errorWithDomain:NSLocalizedString(@"deviceAlreadyExists", nil) code:1 userInfo:nil]];
@@ -55,11 +55,11 @@
 
 #pragma mark - setters and getters
 
-- (KinconyRelay *)kinconyRelay {
-    if (_kinconyRelay == nil) {
-        self.kinconyRelay = [[KinconyRelay alloc] init];
-    }
-    return _kinconyRelay;
-}
+//- (KinconyRelay *)kinconyRelay {
+//    if (_kinconyRelay == nil) {
+//        self.kinconyRelay = [[KinconyRelay alloc] init];
+//    }
+//    return _kinconyRelay;
+//}
 
 @end

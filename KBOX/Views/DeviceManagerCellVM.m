@@ -12,7 +12,7 @@
 @interface DeviceManagerCellVM()
 
 @property (nonatomic, strong) KinconyDevice *device;
-@property (nonatomic, strong) KinconyRelay *kinconyRelay;
+//@property (nonatomic, strong) KinconyRelay *kinconyRelay;
 
 @end
 
@@ -29,7 +29,7 @@
 #pragma mark - public methods
 
 - (void)deleteDevice {
-    [self.kinconyRelay deleteDevice:self.device];
+    [[KinconyRelay sharedManager] deleteDevice:self.device];
 }
 
 #pragma mark - private methods
@@ -41,11 +41,11 @@
 
 #pragma mark - setters and getters
 
-- (KinconyRelay*)kinconyRelay {
-    if (_kinconyRelay == nil) {
-        self.kinconyRelay = [[KinconyRelay alloc] init];
-    }
-    return _kinconyRelay;
-}
+//- (KinconyRelay*)kinconyRelay {
+//    if (_kinconyRelay == nil) {
+//        self.kinconyRelay = [[KinconyRelay alloc] init];
+//    }
+//    return _kinconyRelay;
+//}
 
 @end

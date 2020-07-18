@@ -85,7 +85,7 @@
 }
 
 - (void)getData {
-    [self.deviceSwitch setOn:[self.viewModel.deviceOn boolValue] animated:YES];
+    [self.deviceSwitch setOn:[self.viewModel.deviceOn boolValue] animated:NO];
 }
 
 @end

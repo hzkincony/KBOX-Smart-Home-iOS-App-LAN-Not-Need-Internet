@@ -13,7 +13,7 @@
 
 @interface DeviceListVM()
 
-@property (nonatomic, strong) KinconyRelay *kinconyRelay;
+//@property (nonatomic, strong) KinconyRelay *kinconyRelay;
 
 @end
 
@@ -26,7 +26,7 @@
     self.getDevicesStateSignal = [RACSubject subject];
     self.getSeceneSignal = [RACSubject subject];
     NSLog(@"%@", [RLMRealmConfiguration defaultConfiguration].fileURL);
-    [self.kinconyRelay connectAllDevices];
+    [[KinconyRelay sharedManager] connectAllDevices];
     [self getDevices];
 };
 
@@ -50,7 +50,7 @@
 #pragma mark - public methods
 
 - (void)getDevices {
-    RLMResults *devices = [self.kinconyRelay getAllDevices];
+    RLMResults *devices = [[KinconyRelay sharedManager] getAllDevices];
     [self.deviceCellVMList removeAllObjects];
     for (KinconyDeviceRLMObject *device in devices) {
         RelayCellVM *relayCellVM = [[RelayCellVM alloc] initWithDevice:device];
@@ -73,26 +73,26 @@
     for (RelayCellVM *cellVM in self.deviceCellVMList) {
         [changedArray addObject:[cellVM getDevice]];
     }
-    [self.kinconyRelay exchangeDevicesIndex:changedArray];
+    [[KinconyRelay sharedManager] exchangeDevicesIndex:changedArray];
 }
 
 - (void)searchDevicesState {
-    [self.kinconyRelay searchDevicesState];
+    [[KinconyRelay sharedManager] searchDevicesState];
 }
 
 - (void)updateSecene {
-    self.homeSeceneControlCellVM.scenes = [self.kinconyRelay getSceces];
+    self.homeSeceneControlCellVM.scenes = [[KinconyRelay sharedManager] getSceces];
     [self.getSeceneSignal sendNext:@""];
 }
 
 #pragma mark - setters and getters
 
-- (KinconyRelay*)kinconyRelay {
-    if (_kinconyRelay == nil) {
-        self.kinconyRelay = [[KinconyRelay alloc] init];
-    }
-    return _kinconyRelay;
-}
+//- (KinconyRelay*)kinconyRelay {
+//    if (_kinconyRelay == nil) {
+//        self.kinconyRelay = [[KinconyRelay alloc] init];
+//    }
+//    return _kinconyRelay;
+//}
 
 - (NSMutableArray*)deviceCellVMList {
     if (_deviceCellVMList == nil) {

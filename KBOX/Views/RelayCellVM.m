@@ -12,7 +12,7 @@
 @interface RelayCellVM()
 
 @property (nonatomic, strong) KinconyDeviceRLMObject *device;
-@property (nonatomic, strong) KinconyRelay *kinconyRelay;
+//@property (nonatomic, strong) KinconyRelay *kinconyRelay;
 
 @end
 
@@ -46,7 +46,7 @@
 #pragma mark - public methods
 
 - (void)changeDeviceState:(BOOL)on {
-    [self.kinconyRelay changeDeviceState:on device:self.device];
+    [[KinconyRelay sharedManager] changeDeviceState:on device:self.device];
     self.deviceOn = [NSNumber numberWithBool:on];
 }
 
@@ -71,11 +71,11 @@
 
 #pragma mark - setters and getters
 
-- (KinconyRelay*)kinconyRelay {
-    if (_kinconyRelay == nil) {
-        self.kinconyRelay = [[KinconyRelay alloc] init];
-    }
-    return _kinconyRelay;
-}
+//- (KinconyRelay*)kinconyRelay {
+//    if (_kinconyRelay == nil) {
+//        self.kinconyRelay = [[KinconyRelay alloc] init];
+//    }
+//    return _kinconyRelay;
+//}
 
 @end

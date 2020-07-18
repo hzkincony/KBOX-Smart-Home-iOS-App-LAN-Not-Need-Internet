@@ -11,7 +11,7 @@
 
 @interface HomeSeceneControlCellVM()
 
-@property (nonatomic, strong) KinconyRelay *kinconyRelay;
+//@property (nonatomic, strong) KinconyRelay *kinconyRelay;
 
 @end
 
@@ -20,26 +20,26 @@
 #pragma mark - public methods
 
 - (void)scenesBtnTouchUp:(KinconySceneRLMObject *)scene {
-    if (scene.controlModel == 0) {
-        [self.kinconyRelay sceneCommand:scene];
+    if (scene.controlModel == 1) {
+        [[KinconyRelay sharedManager] sceneCommandTouchUp];
+    } else {
+        [[KinconyRelay sharedManager] sceneCommand:scene];
     }
 }
 
 - (void)scenesBtnTouchDown:(KinconySceneRLMObject *)scene {
-    if (scene.controlModel == 0) {
-        [self.kinconyRelay sceneCommandTouchUp];
-    } else {
-        [self.kinconyRelay sceneCommand:scene];
+    if (scene.controlModel == 1) {
+        [[KinconyRelay sharedManager] sceneCommand:scene];
     }
 }
 
 #pragma mark - setters and getters
 
-- (KinconyRelay*)kinconyRelay {
-    if (_kinconyRelay == nil) {
-        self.kinconyRelay = [[KinconyRelay alloc] init];
-    }
-    return _kinconyRelay;
-}
+//- (KinconyRelay*)kinconyRelay {
+//    if (_kinconyRelay == nil) {
+//        self.kinconyRelay = [[KinconyRelay alloc] init];
+//    }
+//    return _kinconyRelay;
+//}
 
 @end

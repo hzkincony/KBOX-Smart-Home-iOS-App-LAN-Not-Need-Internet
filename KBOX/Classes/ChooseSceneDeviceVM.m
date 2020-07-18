@@ -12,7 +12,7 @@
 
 @interface ChooseSceneDeviceVM()
 
-@property (nonatomic, strong) KinconyRelay *kinconyRelay;
+//@property (nonatomic, strong) KinconyRelay *kinconyRelay;
 
 @end
 
@@ -26,7 +26,7 @@
 #pragma mark - public methods
 
 - (void)getDevices {
-    RLMResults *devices = [self.kinconyRelay getAllDevices];
+    RLMResults *devices = [[KinconyRelay sharedManager] getAllDevices];
     [self.deviceCellVMList removeAllObjects];
     for (KinconyDeviceRLMObject *device in devices) {
         SceneDeviceChooseCellVM *sceneDeviceChooseCellVM = [[SceneDeviceChooseCellVM alloc] initWithDevice:device];
@@ -43,12 +43,12 @@
 
 #pragma mark - setters and getters
 
-- (KinconyRelay*)kinconyRelay {
-    if (_kinconyRelay == nil) {
-        self.kinconyRelay = [[KinconyRelay alloc] init];
-    }
-    return _kinconyRelay;
-}
+//- (KinconyRelay*)kinconyRelay {
+//    if (_kinconyRelay == nil) {
+//        self.kinconyRelay = [[KinconyRelay alloc] init];
+//    }
+//    return _kinconyRelay;
+//}
 
 - (NSMutableArray*)deviceCellVMList {
     if (_deviceCellVMList == nil) {

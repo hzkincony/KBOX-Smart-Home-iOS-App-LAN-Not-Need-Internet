@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)deleteScene:(KinconySceneRLMObject*)scene;
 
+- (void)updateSceneTempDevices;
+
+- (void)updateSceneDevice:(KinconySceneRLMObject*)scene withDevice:(NSArray*)devices;
+
 @end
 
 NS_ASSUME_NONNULL_END

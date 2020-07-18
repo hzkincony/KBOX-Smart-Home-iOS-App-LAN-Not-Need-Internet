@@ -27,6 +27,7 @@ typedef enum {
 
 - (NSError*)addDevice:(NSInteger)relayNum withIp:(NSString*)ipAddress withPort:(NSInteger)port;
 - (KinconyDeviceRLMObject*)findDeviceByIp:(NSString*)ipAddress;
+- (KinconyDeviceRLMObject*)findDeviceByIp:(NSString*)ipAddress withNum:(NSString*)num;
 - (NSArray*)getAllConnectDevice;
 - (RLMResults*)getAllDevice;
 - (void)deleteDevice:(KinconyDevice*)device;
