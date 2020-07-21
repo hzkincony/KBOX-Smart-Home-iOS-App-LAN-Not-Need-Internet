@@ -65,10 +65,6 @@
 }
 
 - (void)saveScene {
-    if (self.type == SceneEditVMTypeEdit) {
-        [[KinconyRelay sharedManager] deleteScene:self.oldScene];
-    }
-    
     self.scene.name = self.name;
     self.scene.image = self.sceneImageName;
     self.scene.controlModel = self.controlModel.integerValue;
