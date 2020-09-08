@@ -43,7 +43,7 @@
 
 - (void)doAddDevice {
     @weakify(self);
-    [[KinconyRelay sharedManager] addDevice:self.ip withPort:[self.port integerValue] withNum:self.num withBlock:^(NSError * _Nonnull error) {
+    [[KinconyRelay sharedManager] addDevice:self.ip withPort:[self.port integerValue] withNum:self.num withSerial:self.serial withBlock:^(NSError * _Nonnull error) {
         @strongify(self);
         if (error.code == DeviceAddErrorCode_AlreadyExists) {
             [self.addDeviceSignal sendNext:[NSError errorWithDomain:NSLocalizedString(@"deviceAlreadyExists", nil) code:1 userInfo:nil]];

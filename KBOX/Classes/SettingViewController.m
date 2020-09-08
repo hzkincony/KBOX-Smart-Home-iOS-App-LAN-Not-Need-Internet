@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *sceneCellTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *versionCellTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *connectServerLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *connectServerSwitch;
 
 @end
 
@@ -22,10 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"tabbarSetting", nil);
-    self.deviceCellTitleLabel.text = NSLocalizedString(@"settingDevices", nil);
-    self.versionCellTitleLabel.text = NSLocalizedString(@"settingVersionCellTitle", nil);
-    self.sceneCellTitleLabel.text = NSLocalizedString(@"sceneMode", nil);
+    [self setupViews];
     
     [self initialzieModel];
 }
@@ -40,10 +39,31 @@
 }
 */
 
+#pragma mark - actions
+
+- (void)event:(UITapGestureRecognizer *)gesture {
+    [self performSegueWithIdentifier:@"showServerConfigSegue" sender:nil];
+}
+
 #pragma mark - private methods
+
+- (void)setupViews {
+    self.title = NSLocalizedString(@"tabbarSetting", nil);
+    self.deviceCellTitleLabel.text = NSLocalizedString(@"settingDevices", nil);
+    self.versionCellTitleLabel.text = NSLocalizedString(@"settingVersionCellTitle", nil);
+    self.sceneCellTitleLabel.text = NSLocalizedString(@"sceneMode", nil);
+    self.connectServerLabel.text = NSLocalizedString(@"connectServerLabel", nil);
+    
+    [self.connectServerSwitch setOn:[self.viewModel.useServer boolValue]];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(event:)];
+    [tapGesture setNumberOfTapsRequired:5];
+    [self.connectServerLabel addGestureRecognizer:tapGesture];
+}
 
 - (void)initialzieModel {
     RAC(self.versionLabel, text) = RACObserve(self.viewModel, version);
+    RAC(self.viewModel, useServer) = self.connectServerSwitch.rac_newOnChannel;
 }
 
 #pragma mark - setters and getters

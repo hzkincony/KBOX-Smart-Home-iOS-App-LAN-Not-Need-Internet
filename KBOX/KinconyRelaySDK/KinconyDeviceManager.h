@@ -25,7 +25,7 @@ typedef enum {
 
 + (KinconyDeviceManager*)sharedManager;
 
-- (NSError*)addDevice:(NSInteger)relayNum withIp:(NSString*)ipAddress withPort:(NSInteger)port;
+- (NSError*)addDevice:(NSInteger)relayNum withIp:(NSString*)ipAddress withPort:(NSInteger)port withSerial:(NSString*)serial;
 - (KinconyDeviceRLMObject*)findDeviceByIp:(NSString*)ipAddress;
 - (KinconyDeviceRLMObject*)findDeviceByIp:(NSString*)ipAddress withNum:(NSString*)num;
 - (NSArray*)getAllConnectDevice;

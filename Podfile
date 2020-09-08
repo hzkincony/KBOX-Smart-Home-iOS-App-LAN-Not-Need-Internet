@@ -16,5 +16,6 @@ target 'KBOX' do
   pod 'MJRefresh', '~> 3.1.16'
   pod 'JCAlertController', '~> 3.0.4'
   pod 'IQKeyboardManager', '~> 6.2.1'
+  pod 'YYCache', '~> 1.0.4'
 
 end

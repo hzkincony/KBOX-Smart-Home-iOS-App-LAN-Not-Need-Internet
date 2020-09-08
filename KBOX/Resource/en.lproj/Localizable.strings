@@ -10,6 +10,7 @@
 "cancelBtn" = "Cancel";
 "inputAddressPlaceholder" = "Input IP";
 "inputPortPlaceholder" = "Input port";
+"inputSerialPlaceholder" = "Input serial";
 "doneBtn" = "Done";
 "deviceAlreadyExists" = "device already exists";
 "editBtn" = "Edit";
@@ -43,3 +44,8 @@
 "Click" = "Click";
 "Touch" = "Touch";
 "Icon" = "Icon";
+"connectServerLabel" = "Connect server";
+"serverConfigLabel" = "Server config";
+"serverConfigTitle" = "Server config";
+"ipAddress" = "IP Address";
+"port" = "Port";

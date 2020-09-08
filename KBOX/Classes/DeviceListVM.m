@@ -39,7 +39,7 @@
         KinconyDeviceRLMObject *device = [relayCellVM getDevice];
         if ([device.num integerValue] <= stateArray.count) {
             KinconyDeviceState *deviceState = [stateArray objectAtIndex:[device.num integerValue] - 1];
-            if ([device.ipAddress isEqualToString:deviceState.ipAddress] && device.port == deviceState.port) {
+            if (([device.ipAddress isEqualToString:deviceState.ipAddress] && device.port == deviceState.port) || [deviceState.serial hasPrefix:device.serial]) {
                 relayCellVM.deviceOn = [NSNumber numberWithInteger:deviceState.state];
             }
         }

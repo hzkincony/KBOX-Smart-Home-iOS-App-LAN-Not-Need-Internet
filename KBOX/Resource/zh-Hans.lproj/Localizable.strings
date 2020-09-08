@@ -10,6 +10,7 @@
 "cancelBtn" = "取消";
 "inputAddressPlaceholder" = "输入IP";
 "inputPortPlaceholder" = "输入端口";
+"inputSerialPlaceholder" = "输入序列号";
 "doneBtn" = "确定";
 "deviceAlreadyExists" = "设备已存在";
 "editBtn" = "编辑";
@@ -43,3 +44,8 @@
 "Click" = "点击";
 "Touch" = "触摸";
 "Icon" = "图标";
+"connectServerLabel" = "连接服务器";
+"serverConfigLabel" = "服务器配置";
+"serverConfigTitle" = "服务器配置";
+"ipAddress" = "IP地址";
+"port" = "端口";

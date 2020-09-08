@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface KinconyDeviceState : NSObject
 
 @property (nonatomic, strong) NSString *ipAddress;
+@property (nonatomic, strong) NSString *serial;
 @property (nonatomic, assign) NSInteger port;
 @property (nonatomic, assign) NSInteger state;
 

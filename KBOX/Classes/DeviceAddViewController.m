@@ -11,6 +11,7 @@
 @interface DeviceAddViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *ipTextField;
 @property (weak, nonatomic) IBOutlet UITextField *portTextField;
+@property (weak, nonatomic) IBOutlet UITextField *serialTextField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet UILabel *modelLabel;
 @property (weak, nonatomic) IBOutlet UILabel *deviceTypeTitle;
@@ -53,6 +54,7 @@
 - (void)initialzieModel {
     RAC(self.viewModel, ip) = self.ipTextField.rac_textSignal;
     RAC(self.viewModel, port) = self.portTextField.rac_textSignal;
+    RAC(self.viewModel, serial) = self.serialTextField.rac_textSignal;
     
     @weakify(self);
     self.saveButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
@@ -78,6 +80,7 @@
 - (void)setupViews {
     self.ipTextField.placeholder = NSLocalizedString(@"inputAddressPlaceholder", nil);
     self.portTextField.placeholder = NSLocalizedString(@"inputPortPlaceholder", nil);
+    self.serialTextField.placeholder = NSLocalizedString(@"inputSerialPlaceholder", nil);
 }
 
 - (void)showChooseModelAlert {

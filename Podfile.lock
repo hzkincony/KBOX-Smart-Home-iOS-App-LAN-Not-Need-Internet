@@ -8,6 +8,7 @@ PODS:
   - Realm (3.14.1):
     - Realm/Headers (= 3.14.1)
   - Realm/Headers (3.14.1)
+  - YYCache (1.0.4)
 
 DEPENDENCIES:
   - CocoaAsyncSocket (~> 7.6.3)
@@ -17,6 +18,7 @@ DEPENDENCIES:
   - MJRefresh (~> 3.1.16)
   - ReactiveObjC (~> 3.1.0)
   - Realm (= 3.14.1)
+  - YYCache (~> 1.0.4)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -27,6 +29,7 @@ SPEC REPOS:
     - MJRefresh
     - ReactiveObjC
     - Realm
+    - YYCache
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
@@ -36,7 +39,8 @@ SPEC CHECKSUMS:
   MJRefresh: ee5b68f639775462faba4db0fd243baf4d42c2cf
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   Realm: e12c9c2387d05c5bba3a9c394838f5870e85763b
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 97a3385a94428847bf76fd3095ed3843e41f367e
+PODFILE CHECKSUM: f57782d17ccfbf5ab240125c486fdfb98ea3a50d
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0.beta.1

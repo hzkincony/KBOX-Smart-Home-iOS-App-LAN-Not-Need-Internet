@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *ip;
 @property (nonatomic, strong) NSString *port;
 @property (nonatomic, assign) NSInteger num;
+@property (nonatomic, strong) NSString *serial;
 
 - (BOOL)isValidInput;
 - (void)doAddDevice;

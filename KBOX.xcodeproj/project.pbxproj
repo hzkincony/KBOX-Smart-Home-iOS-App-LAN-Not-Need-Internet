@@ -56,6 +56,9 @@
 		657EECA8226851A600708CCD /* SceneDeviceChooseCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA7226851A600708CCD /* SceneDeviceChooseCellVM.m */; };
 		6595C0B424C355F300EF6C90 /* KinconyTempDeviceRLMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6595C0B324C355F300EF6C90 /* KinconyTempDeviceRLMObject.m */; };
 		65AB1DA724B561F80057FCA3 /* KinconySceneCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AB1DA624B561F80057FCA3 /* KinconySceneCommand.m */; };
+		65B2B1D62505C6D500927060 /* ServerConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B2B1D52505C6D500927060 /* ServerConfigViewController.m */; };
+		65B2B1D92505C6F200927060 /* ServerConfigVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B2B1D82505C6F200927060 /* ServerConfigVM.m */; };
+		65B2B1DC2505CA0A00927060 /* KinconyServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B2B1DB2505CA0A00927060 /* KinconyServerManager.m */; };
 		65C392CB24A21A7A00AFBF12 /* DeviceAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C392CA24A21A7A00AFBF12 /* DeviceAddViewController.m */; };
 		65C392CE24A21AC600AFBF12 /* DeviceAddVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C392CD24A21AC600AFBF12 /* DeviceAddVM.m */; };
 		65D441A824B99004001DBE01 /* UIButton+MCLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D441A624B99004001DBE01 /* UIButton+MCLayout.m */; };
@@ -163,6 +166,12 @@
 		6595C0B324C355F300EF6C90 /* KinconyTempDeviceRLMObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconyTempDeviceRLMObject.m; sourceTree = "<group>"; };
 		65AB1DA524B561F80057FCA3 /* KinconySceneCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconySceneCommand.h; sourceTree = "<group>"; };
 		65AB1DA624B561F80057FCA3 /* KinconySceneCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconySceneCommand.m; sourceTree = "<group>"; };
+		65B2B1D42505C6D500927060 /* ServerConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerConfigViewController.h; sourceTree = "<group>"; };
+		65B2B1D52505C6D500927060 /* ServerConfigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServerConfigViewController.m; sourceTree = "<group>"; };
+		65B2B1D72505C6F200927060 /* ServerConfigVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerConfigVM.h; sourceTree = "<group>"; };
+		65B2B1D82505C6F200927060 /* ServerConfigVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServerConfigVM.m; sourceTree = "<group>"; };
+		65B2B1DA2505CA0A00927060 /* KinconyServerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconyServerManager.h; sourceTree = "<group>"; };
+		65B2B1DB2505CA0A00927060 /* KinconyServerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconyServerManager.m; sourceTree = "<group>"; };
 		65C392C924A21A7A00AFBF12 /* DeviceAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceAddViewController.h; sourceTree = "<group>"; };
 		65C392CA24A21A7A00AFBF12 /* DeviceAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceAddViewController.m; sourceTree = "<group>"; };
 		65C392CC24A21AC600AFBF12 /* DeviceAddVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceAddVM.h; sourceTree = "<group>"; };
@@ -209,6 +218,8 @@
 				657DD55522533AC800C7C3B0 /* KinconySocketManager.m */,
 				657EEC94226848B700708CCD /* KinconySceneManager.h */,
 				657EEC95226848B700708CCD /* KinconySceneManager.m */,
+				65B2B1DA2505CA0A00927060 /* KinconyServerManager.h */,
+				65B2B1DB2505CA0A00927060 /* KinconyServerManager.m */,
 			);
 			path = KinconyRelaySDK;
 			sourceTree = "<group>";
@@ -302,14 +313,14 @@
 				654E9528225B378A00561050 /* DeviceImageChooseViewController.m */,
 				654E952A225B379E00561050 /* DeviceImageChooseVM.h */,
 				654E952B225B379E00561050 /* DeviceImageChooseVM.m */,
-				653E28F3225C6BA000774EAE /* SettingViewController.h */,
-				653E28F4225C6BA000774EAE /* SettingViewController.m */,
-				653E28F6225C6BB200774EAE /* SettingVM.h */,
-				653E28F7225C6BB200774EAE /* SettingVM.m */,
 				653E28F9225C71F200774EAE /* DeviceManagerViewController.h */,
 				653E28FA225C71F200774EAE /* DeviceManagerViewController.m */,
 				653E28FC225C720F00774EAE /* DeviceManagerVM.h */,
 				653E28FD225C720F00774EAE /* DeviceManagerVM.m */,
+				653E28F3225C6BA000774EAE /* SettingViewController.h */,
+				653E28F4225C6BA000774EAE /* SettingViewController.m */,
+				653E28F6225C6BB200774EAE /* SettingVM.h */,
+				653E28F7225C6BB200774EAE /* SettingVM.m */,
 				65376CCC22670F64005CA511 /* SceneViewController.h */,
 				65376CCD22670F64005CA511 /* SceneViewController.m */,
 				65376CCF22670F76005CA511 /* SceneVM.h */,
@@ -326,6 +337,10 @@
 				65C392CA24A21A7A00AFBF12 /* DeviceAddViewController.m */,
 				65C392CC24A21AC600AFBF12 /* DeviceAddVM.h */,
 				65C392CD24A21AC600AFBF12 /* DeviceAddVM.m */,
+				65B2B1D42505C6D500927060 /* ServerConfigViewController.h */,
+				65B2B1D52505C6D500927060 /* ServerConfigViewController.m */,
+				65B2B1D72505C6F200927060 /* ServerConfigVM.h */,
+				65B2B1D82505C6F200927060 /* ServerConfigVM.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -546,6 +561,7 @@
 				654E9526225B32AE00561050 /* DeviceEditVM.m in Sources */,
 				653E28EF225C2DF900774EAE /* DeviceImageCellVM.m in Sources */,
 				654E9523225B329E00561050 /* DeviceEditViewController.m in Sources */,
+				65B2B1DC2505CA0A00927060 /* KinconyServerManager.m in Sources */,
 				65151D6C2255D87300BE8951 /* RelayCellVM.m in Sources */,
 				653A2F0D2254447A0058C6AB /* KinconyRelay.m in Sources */,
 				657EEC9F22684FFE00708CCD /* ChooseSceneDeviceViewController.m in Sources */,
@@ -558,6 +574,7 @@
 				653E28FB225C71F200774EAE /* DeviceManagerViewController.m in Sources */,
 				654248532251AFCC00E30D54 /* GLViewModel.m in Sources */,
 				654E952C225B379E00561050 /* DeviceImageChooseVM.m in Sources */,
+				65B2B1D92505C6F200927060 /* ServerConfigVM.m in Sources */,
 				653E2904225C7AB100774EAE /* DeviceManagerCellVM.m in Sources */,
 				65D441AE24B99163001DBE01 /* HomeSeceneControlCellVM.m in Sources */,
 				653A2F1122544A930058C6AB /* KinconyDevice.m in Sources */,
@@ -572,6 +589,7 @@
 				654248522251AFCC00E30D54 /* GLBaseTableViewController.m in Sources */,
 				65AB1DA724B561F80057FCA3 /* KinconySceneCommand.m in Sources */,
 				65D441A824B99004001DBE01 /* UIButton+MCLayout.m in Sources */,
+				65B2B1D62505C6D500927060 /* ServerConfigViewController.m in Sources */,
 				657EEC96226848B700708CCD /* KinconySceneManager.m in Sources */,
 				653E2901225C7A9E00774EAE /* DeviceManagerCell.m in Sources */,
 				653E28FE225C720F00774EAE /* DeviceManagerVM.m in Sources */,
@@ -736,7 +754,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = FCKZPWQ8Z4;
 				INFOPLIST_FILE = KBOX/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -744,7 +762,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hificat.KBOX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "kbox dev profile";
@@ -759,7 +777,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = FCKZPWQ8Z4;
 				INFOPLIST_FILE = KBOX/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -767,7 +785,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hificat.KBOX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "KBOX dis profile";

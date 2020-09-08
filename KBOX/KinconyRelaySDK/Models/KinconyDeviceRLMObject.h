@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface KinconyDeviceRLMObject : RLMObject
 
 @property NSString *deviceId;
+@property NSString *serial;
 @property NSString *ipAddress;
 @property NSInteger port;
 @property NSString *num;

@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SettingVM : GLViewModel
 
 @property (nonatomic, strong) NSString *version;
+@property (nonatomic, strong) NSNumber *useServer;
 
 @end
 

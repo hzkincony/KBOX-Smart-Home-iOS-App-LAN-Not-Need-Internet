@@ -44,23 +44,15 @@ static KinconyRelay *sharedManager = nil;
     return self;
 }
 
-//- (id)init {
-//    if ((self = [super init])) {
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readData:) name:KinconySocketReadDataNotification object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socketDidConnect:) name:KinconySocketDidConnectNotification object:nil];
-//    }
-//    return self;
-//}
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - public methods
 
-- (void)addDevice:(NSString*)ipAddress withPort:(NSInteger)port withNum:(NSInteger)num withBlock:(DeviceAddResultBlock)block {
+- (void)addDevice:(NSString*)ipAddress withPort:(NSInteger)port withNum:(NSInteger)num withSerial:(NSString*)serial withBlock:(DeviceAddResultBlock)block {
     
-    NSError *error = [[KinconyDeviceManager sharedManager] addDevice:num withIp:ipAddress withPort:port];
+    NSError *error = [[KinconyDeviceManager sharedManager] addDevice:num withIp:ipAddress withPort:port withSerial:serial];
     if (error != nil) {
         block([NSError errorWithDomain:@"" code:DeviceAddErrorCode_AlreadyExists userInfo:nil]);
         return;
@@ -69,6 +61,7 @@ static KinconyRelay *sharedManager = nil;
     KinconyDevice *device = [[KinconyDevice alloc] init];
     device.ipAddress = ipAddress;
     device.port = port;
+    device.serial = serial;
     [[KinconySocketManager sharedManager] connectToDevice:@[device]];
     block([NSError errorWithDomain:@"" code:0 userInfo:nil]);
 }
@@ -89,6 +82,7 @@ static KinconyRelay *sharedManager = nil;
     KinconyDevice *connectDevice = [[KinconyDevice alloc] init];
     connectDevice.ipAddress = device.ipAddress;
     connectDevice.port = device.port;
+    connectDevice.serial = device.serial;
     NSString *commandStr = [NSString stringWithFormat:@"RELAY-SET-255,%@,%d", device.num, on];
     [[KinconySocketManager sharedManager] sendData:commandStr toDevice:connectDevice];
 }
@@ -171,13 +165,14 @@ static KinconyRelay *sharedManager = nil;
     NSString *text = [dic objectForKey:@"data"];
     NSString *ipAddress = [dic objectForKey:@"ipAddress"];
     NSInteger port = [[dic objectForKey:@"port"] integerValue];
+    NSString *serial = [dic objectForKey:@"serial"];
     NSLog(@"read data:%@", text);
 
     NSArray *dataArray = [text componentsSeparatedByString:@","];
     NSString *stateStr = dataArray.lastObject;
-    if ([stateStr isEqualToString:@"OK"]) {
+    if ([stateStr containsString:@"OK"]) {
         if ([dataArray.firstObject isEqualToString:@"RELAY-STATE-1"]) {
-            [self decodeDeviceState:[dataArray subarrayWithRange:NSMakeRange(1, dataArray.count - 2)] withIpaddress:ipAddress withPort:port];
+            [self decodeDeviceState:[dataArray subarrayWithRange:NSMakeRange(1, dataArray.count - 2)] withIpaddress:ipAddress withPort:port withSerial:serial];
         }
     }
 }
@@ -194,13 +189,13 @@ static KinconyRelay *sharedManager = nil;
     }
 }
 
-- (void)addStateToSceneCommands:(NSString*)state withIpaddress:(NSString*)ipAddress withPort:(NSInteger)port {
+- (void)addStateToSceneCommands:(NSString*)state withIpaddress:(NSString*)ipAddress withPort:(NSInteger)port withSerial:(NSString*)serial {
     if (self.nowScene == nil) {
         return;
     }
     
     for (KinconySceneCommand *sceneCommand in self.sceneCommandArray) {
-        if ([sceneCommand.kinconyDevice.ipAddress isEqualToString:ipAddress] && sceneCommand.kinconyDevice.port == port) {
+        if (([sceneCommand.kinconyDevice.ipAddress isEqualToString:ipAddress] && sceneCommand.kinconyDevice.port == port) || [serial hasPrefix:sceneCommand.kinconyDevice.serial]) {
             sceneCommand.commandStr = state;
             break;
         }
@@ -291,7 +286,7 @@ static KinconyRelay *sharedManager = nil;
     return newStr;
 }
 
-- (void)decodeDeviceState:(NSArray*)stateArray withIpaddress:(NSString*)ipAddress withPort:(NSInteger)port {
+- (void)decodeDeviceState:(NSArray*)stateArray withIpaddress:(NSString*)ipAddress withPort:(NSInteger)port withSerial:(NSString*)serial {
     NSMutableString *resultStateStr = [[NSMutableString alloc] init];
     NSMutableArray *resultStateArray = [[NSMutableArray alloc] init];
     for (int i = (int)stateArray.count - 1; i >= 0; i--) {
@@ -306,11 +301,12 @@ static KinconyRelay *sharedManager = nil;
             KinconyDeviceState *kinconyDeviceState = [[KinconyDeviceState alloc] init];
             kinconyDeviceState.ipAddress = ipAddress;
             kinconyDeviceState.port = port;
+            kinconyDeviceState.serial = serial;
             kinconyDeviceState.state = [state integerValue];
             [resultStateArray addObject:kinconyDeviceState];
         }
     }
-    [self addStateToSceneCommands:resultStateStr withIpaddress:ipAddress withPort:port];
+    [self addStateToSceneCommands:resultStateStr withIpaddress:ipAddress withPort:port withSerial:serial];
     if (self.nowScene == nil) {
         [[NSNotificationCenter defaultCenter] postNotificationName:KinconyDeviceStateNotification object:nil userInfo:@{@"stateArray": resultStateArray}];
     }
@@ -349,15 +345,29 @@ static KinconyRelay *sharedManager = nil;
 - (NSArray*)getAllSceneDevices:(KinconySceneRLMObject*)scene {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     
+//    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+//    for (KinconySceneDeviceRLMObject *sceneDevice in scene.sceneDevices) {
+//        [dic setObject:[NSNumber numberWithInteger:sceneDevice.device.port] forKey:sceneDevice.device.ipAddress];
+//    }
+//
+//    for (NSString *key in dic.allKeys) {
+//        KinconyDevice *device = [[KinconyDevice alloc] init];
+//        device.ipAddress = key;
+//        device.port = [[dic objectForKey:key] integerValue];
+//        [array addObject:device];
+//    }
+    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     for (KinconySceneDeviceRLMObject *sceneDevice in scene.sceneDevices) {
-        [dic setObject:[NSNumber numberWithInteger:sceneDevice.device.port] forKey:sceneDevice.device.ipAddress];
+        [dic setObject:sceneDevice.device forKey:sceneDevice.device.ipAddress];
     }
     
     for (NSString *key in dic.allKeys) {
+        KinconyDeviceRLMObject *rlmDevice = [dic objectForKey:key];
         KinconyDevice *device = [[KinconyDevice alloc] init];
         device.ipAddress = key;
-        device.port = [[dic objectForKey:key] integerValue];
+        device.port = rlmDevice.port;
+        device.serial = rlmDevice.serial;
         [array addObject:device];
     }
     

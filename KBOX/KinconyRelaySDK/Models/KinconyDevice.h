@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *ipAddress;
 @property (nonatomic, assign) NSInteger port;
+@property (nonatomic, strong) NSString *serial;
 
 @end
 

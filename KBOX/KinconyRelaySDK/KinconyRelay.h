@@ -21,7 +21,7 @@ typedef void (^DeviceAddResultBlock) (NSError *error);
 
 + (KinconyRelay*)sharedManager;
 
-- (void)addDevice:(NSString*)ipAddress withPort:(NSInteger)port withNum:(NSInteger)num withBlock:(DeviceAddResultBlock)block;
+- (void)addDevice:(NSString*)ipAddress withPort:(NSInteger)port withNum:(NSInteger)num withSerial:(NSString*)serial withBlock:(DeviceAddResultBlock)block;
 
 - (void)connectAllDevices;
 
