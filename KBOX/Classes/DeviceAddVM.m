@@ -12,8 +12,6 @@
 
 @interface DeviceAddVM()
 
-//@property (nonatomic, strong) KinconyRelay *kinconyRelay;
-
 @end
 
 @implementation DeviceAddVM
@@ -54,12 +52,5 @@
 }
 
 #pragma mark - setters and getters
-
-//- (KinconyRelay *)kinconyRelay {
-//    if (_kinconyRelay == nil) {
-//        self.kinconyRelay = [[KinconyRelay alloc] init];
-//    }
-//    return _kinconyRelay;
-//}
 
 @end

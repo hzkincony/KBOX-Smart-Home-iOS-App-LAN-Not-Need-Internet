@@ -7,14 +7,17 @@
 //
 
 #import "DeviceAddViewController.h"
+#import "ScanQrViewController.h"
 
-@interface DeviceAddViewController ()
+@interface DeviceAddViewController ()<ScanQrViewControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *ipTextField;
 @property (weak, nonatomic) IBOutlet UITextField *portTextField;
 @property (weak, nonatomic) IBOutlet UITextField *serialTextField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet UILabel *modelLabel;
 @property (weak, nonatomic) IBOutlet UILabel *deviceTypeTitle;
+@property (weak, nonatomic) IBOutlet UIButton *scanBtn;
 
 @end
 
@@ -47,6 +50,13 @@
 }
 */
 
+#pragma mark - ScanQrViewControllerDelegate
+
+- (void)scanQrViewControllerResult:(NSString *)result {
+    self.serialTextField.text = result;
+    self.viewModel.serial = result;
+}
+
 #pragma mark - actions
 
 #pragma mark - private methods
@@ -63,6 +73,17 @@
             [self showActivityHudByText:nil];
             [self.viewModel doAddDevice];
         }
+        return [RACSignal empty];
+    }];
+    
+    self.scanBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
+        @strongify(self);
+        
+        ScanQrViewController *vc = [[ScanQrViewController alloc] init];
+        vc.delegate = self;
+        vc.modalPresentationStyle = UIModalPresentationCurrentContext;
+        [self presentViewController:vc animated:nil completion:nil];
+        
         return [RACSignal empty];
     }];
     

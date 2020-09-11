@@ -61,6 +61,8 @@
 		65B2B1DC2505CA0A00927060 /* KinconyServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B2B1DB2505CA0A00927060 /* KinconyServerManager.m */; };
 		65C392CB24A21A7A00AFBF12 /* DeviceAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C392CA24A21A7A00AFBF12 /* DeviceAddViewController.m */; };
 		65C392CE24A21AC600AFBF12 /* DeviceAddVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C392CD24A21AC600AFBF12 /* DeviceAddVM.m */; };
+		65C70199250B5D4400CC83E5 /* ScanQrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C70198250B5D4400CC83E5 /* ScanQrViewController.m */; };
+		65C7019C250B5D6200CC83E5 /* ScanQrVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C7019B250B5D6200CC83E5 /* ScanQrVM.m */; };
 		65D441A824B99004001DBE01 /* UIButton+MCLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D441A624B99004001DBE01 /* UIButton+MCLayout.m */; };
 		65D441AB24B99122001DBE01 /* HomeSecneControlCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D441AA24B99122001DBE01 /* HomeSecneControlCell.m */; };
 		65D441AE24B99163001DBE01 /* HomeSeceneControlCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D441AD24B99163001DBE01 /* HomeSeceneControlCellVM.m */; };
@@ -176,6 +178,10 @@
 		65C392CA24A21A7A00AFBF12 /* DeviceAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceAddViewController.m; sourceTree = "<group>"; };
 		65C392CC24A21AC600AFBF12 /* DeviceAddVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceAddVM.h; sourceTree = "<group>"; };
 		65C392CD24A21AC600AFBF12 /* DeviceAddVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceAddVM.m; sourceTree = "<group>"; };
+		65C70197250B5D4400CC83E5 /* ScanQrViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanQrViewController.h; sourceTree = "<group>"; };
+		65C70198250B5D4400CC83E5 /* ScanQrViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanQrViewController.m; sourceTree = "<group>"; };
+		65C7019A250B5D6200CC83E5 /* ScanQrVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanQrVM.h; sourceTree = "<group>"; };
+		65C7019B250B5D6200CC83E5 /* ScanQrVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanQrVM.m; sourceTree = "<group>"; };
 		65D441A624B99004001DBE01 /* UIButton+MCLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+MCLayout.m"; sourceTree = "<group>"; };
 		65D441A724B99004001DBE01 /* UIButton+MCLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+MCLayout.h"; sourceTree = "<group>"; };
 		65D441A924B99122001DBE01 /* HomeSecneControlCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeSecneControlCell.h; sourceTree = "<group>"; };
@@ -341,6 +347,10 @@
 				65B2B1D52505C6D500927060 /* ServerConfigViewController.m */,
 				65B2B1D72505C6F200927060 /* ServerConfigVM.h */,
 				65B2B1D82505C6F200927060 /* ServerConfigVM.m */,
+				65C70197250B5D4400CC83E5 /* ScanQrViewController.h */,
+				65C70198250B5D4400CC83E5 /* ScanQrViewController.m */,
+				65C7019A250B5D6200CC83E5 /* ScanQrVM.h */,
+				65C7019B250B5D6200CC83E5 /* ScanQrVM.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -577,9 +587,11 @@
 				65B2B1D92505C6F200927060 /* ServerConfigVM.m in Sources */,
 				653E2904225C7AB100774EAE /* DeviceManagerCellVM.m in Sources */,
 				65D441AE24B99163001DBE01 /* HomeSeceneControlCellVM.m in Sources */,
+				65C7019C250B5D6200CC83E5 /* ScanQrVM.m in Sources */,
 				653A2F1122544A930058C6AB /* KinconyDevice.m in Sources */,
 				653E28EC225C2DE400774EAE /* DeviceImageCell.m in Sources */,
 				654248342251AE1E00E30D54 /* main.m in Sources */,
+				65C70199250B5D4400CC83E5 /* ScanQrViewController.m in Sources */,
 				653E28F8225C6BB200774EAE /* SettingVM.m in Sources */,
 				657EEC99226848E400708CCD /* SceneEditViewController.m in Sources */,
 				653A2F1422549D910058C6AB /* KinconyDeviceRLMObject.m in Sources */,
