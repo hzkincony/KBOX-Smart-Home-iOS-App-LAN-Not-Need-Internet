@@ -70,6 +70,10 @@ static KinconyRelay *sharedManager = nil;
     [[KinconySocketManager sharedManager] connectToDevice:[[KinconyDeviceManager sharedManager] getAllConnectDevice]];
 }
 
+- (void)disConnectAllDevices {
+    [[KinconySocketManager sharedManager] disConnectAllDevice];
+}
+
 - (NSArray*)getAllConnectDevice {
     return [[KinconyDeviceManager sharedManager] getAllConnectDevice];
 }

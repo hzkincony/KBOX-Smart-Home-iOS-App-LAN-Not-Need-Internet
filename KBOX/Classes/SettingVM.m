@@ -8,6 +8,7 @@
 
 #import "SettingVM.h"
 #import "KinconyServerManager.h"
+#import "KinconyRelay.h"
 
 @implementation SettingVM
 
@@ -21,6 +22,12 @@
 - (void)setUseServer:(NSNumber *)useServer {
     _useServer = useServer;
     [KinconyServerManager sharedManager].useServer = useServer.boolValue;
+    
+    if ([useServer boolValue]) {
+        [[KinconyRelay sharedManager] disConnectAllDevices];
+    } else {
+        [[KinconyRelay sharedManager] connectAllDevices];
+    }
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "IQKeyboardManager.h"
 #import "RLMRealm.h"
 #import "RLMRealmConfiguration.h"
+#import "SYSafeCategory.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +20,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [SYSafeCategory callSafeCategory];
     
     [IQKeyboardManager sharedManager].enable = YES;
     

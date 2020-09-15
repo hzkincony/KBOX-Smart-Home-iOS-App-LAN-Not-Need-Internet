@@ -35,8 +35,6 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
     [super viewDidLoad];
     
     [self setupViews];
-    
-    [session startRunning];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -65,8 +63,6 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 
 - (void)setupViews {
     [self configUI];
-    
-    [self.view addSubview:self.backBtn];
 }
 
 - (void)configUI {
@@ -135,6 +131,8 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
     _middleView.layer.borderWidth = 5;
     _middleView.layer.borderColor = [UIColor orangeColor].CGColor;
     [_cameraView addSubview:_middleView];
+    
+    [self.view addSubview:self.backBtn];
 }
 
 - (void)captureOutput:(AVCaptureOutput *)output didOutputMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects fromConnection:(AVCaptureConnection *)connection {

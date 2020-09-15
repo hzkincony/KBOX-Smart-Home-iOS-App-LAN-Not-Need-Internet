@@ -10,6 +10,7 @@
 #import "KinconyRelay.h"
 #import "RLMRealmConfiguration.h"
 #import "RelayCellVM.h"
+#import "KinconyServerManager.h"
 
 @interface DeviceListVM()
 
@@ -26,7 +27,10 @@
     self.getDevicesStateSignal = [RACSubject subject];
     self.getSeceneSignal = [RACSubject subject];
     NSLog(@"%@", [RLMRealmConfiguration defaultConfiguration].fileURL);
-    [[KinconyRelay sharedManager] connectAllDevices];
+    
+    if (![KinconyServerManager sharedManager].useServer) {
+        [[KinconyRelay sharedManager] connectAllDevices];
+    }
     [self getDevices];
 };
 

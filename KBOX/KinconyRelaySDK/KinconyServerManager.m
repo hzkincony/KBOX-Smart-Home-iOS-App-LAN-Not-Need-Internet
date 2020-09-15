@@ -9,6 +9,9 @@
 #import "KinconyServerManager.h"
 #import <YYCache.h>
 
+static NSString * const DefaultIP = @"47.254.135.197";
+static NSInteger const DefaultPort = 9000;
+
 static NSString * const ServerCacheName = @"ServerCache";
 static NSString * const ServerCache_useServer = @"ServerCache_useServer";
 static NSString * const ServerCache_ipAddress = @"ServerCache_ipAddress";
@@ -39,14 +42,14 @@ static KinconyServerManager *sharedManager = nil;
         if (ipAddress != nil) {
             sharedManager.ipAddress = ipAddress;
         } else {
-            sharedManager.ipAddress = @"47.254.135.197";
+            sharedManager.ipAddress = DefaultIP;
         }
         
         NSNumber *portNum = (NSNumber*)[sharedManager.cache objectForKey:ServerCache_port];
         if (portNum != nil) {
             sharedManager.port = [portNum integerValue];
         } else {
-            sharedManager.port = 9000;
+            sharedManager.port = DefaultPort;
         }
     });
     return sharedManager;

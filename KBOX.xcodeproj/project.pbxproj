@@ -56,6 +56,9 @@
 		657EECA8226851A600708CCD /* SceneDeviceChooseCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 657EECA7226851A600708CCD /* SceneDeviceChooseCellVM.m */; };
 		6595C0B424C355F300EF6C90 /* KinconyTempDeviceRLMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6595C0B324C355F300EF6C90 /* KinconyTempDeviceRLMObject.m */; };
 		65AB1DA724B561F80057FCA3 /* KinconySceneCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AB1DA624B561F80057FCA3 /* KinconySceneCommand.m */; };
+		65B0E0FE251047A700AB2111 /* SYSafeCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B0E0FB251047A600AB2111 /* SYSafeCategory.m */; };
+		65B0E0FF251047A700AB2111 /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B0E0FD251047A600AB2111 /* JRSwizzle.m */; };
+		65B0E10225104D5900AB2111 /* KinconySendData.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B0E10125104D5900AB2111 /* KinconySendData.m */; };
 		65B2B1D62505C6D500927060 /* ServerConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B2B1D52505C6D500927060 /* ServerConfigViewController.m */; };
 		65B2B1D92505C6F200927060 /* ServerConfigVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B2B1D82505C6F200927060 /* ServerConfigVM.m */; };
 		65B2B1DC2505CA0A00927060 /* KinconyServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B2B1DB2505CA0A00927060 /* KinconyServerManager.m */; };
@@ -168,6 +171,12 @@
 		6595C0B324C355F300EF6C90 /* KinconyTempDeviceRLMObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconyTempDeviceRLMObject.m; sourceTree = "<group>"; };
 		65AB1DA524B561F80057FCA3 /* KinconySceneCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconySceneCommand.h; sourceTree = "<group>"; };
 		65AB1DA624B561F80057FCA3 /* KinconySceneCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconySceneCommand.m; sourceTree = "<group>"; };
+		65B0E0FA251047A600AB2111 /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
+		65B0E0FB251047A600AB2111 /* SYSafeCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSafeCategory.m; sourceTree = "<group>"; };
+		65B0E0FC251047A600AB2111 /* SYSafeCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSafeCategory.h; sourceTree = "<group>"; };
+		65B0E0FD251047A600AB2111 /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
+		65B0E10025104D5900AB2111 /* KinconySendData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinconySendData.h; sourceTree = "<group>"; };
+		65B0E10125104D5900AB2111 /* KinconySendData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KinconySendData.m; sourceTree = "<group>"; };
 		65B2B1D42505C6D500927060 /* ServerConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerConfigViewController.h; sourceTree = "<group>"; };
 		65B2B1D52505C6D500927060 /* ServerConfigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServerConfigViewController.m; sourceTree = "<group>"; };
 		65B2B1D72505C6F200927060 /* ServerConfigVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerConfigVM.h; sourceTree = "<group>"; };
@@ -384,6 +393,7 @@
 		6542483F2251AEBF00E30D54 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				65B0E0F9251047A600AB2111 /* SySafeCategory */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -418,8 +428,21 @@
 				65AB1DA624B561F80057FCA3 /* KinconySceneCommand.m */,
 				6595C0B224C355F300EF6C90 /* KinconyTempDeviceRLMObject.h */,
 				6595C0B324C355F300EF6C90 /* KinconyTempDeviceRLMObject.m */,
+				65B0E10025104D5900AB2111 /* KinconySendData.h */,
+				65B0E10125104D5900AB2111 /* KinconySendData.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		65B0E0F9251047A600AB2111 /* SySafeCategory */ = {
+			isa = PBXGroup;
+			children = (
+				65B0E0FA251047A600AB2111 /* JRSwizzle.h */,
+				65B0E0FD251047A600AB2111 /* JRSwizzle.m */,
+				65B0E0FC251047A600AB2111 /* SYSafeCategory.h */,
+				65B0E0FB251047A600AB2111 /* SYSafeCategory.m */,
+			);
+			path = SySafeCategory;
 			sourceTree = "<group>";
 		};
 		65D441A524B99004001DBE01 /* MCButton */ = {
@@ -569,6 +592,7 @@
 				6595C0B424C355F300EF6C90 /* KinconyTempDeviceRLMObject.m in Sources */,
 				657EEC902268469500708CCD /* KinconySceneDeviceRLMObject.m in Sources */,
 				654E9526225B32AE00561050 /* DeviceEditVM.m in Sources */,
+				65B0E10225104D5900AB2111 /* KinconySendData.m in Sources */,
 				653E28EF225C2DF900774EAE /* DeviceImageCellVM.m in Sources */,
 				654E9523225B329E00561050 /* DeviceEditViewController.m in Sources */,
 				65B2B1DC2505CA0A00927060 /* KinconyServerManager.m in Sources */,
@@ -592,6 +616,7 @@
 				653E28EC225C2DE400774EAE /* DeviceImageCell.m in Sources */,
 				654248342251AE1E00E30D54 /* main.m in Sources */,
 				65C70199250B5D4400CC83E5 /* ScanQrViewController.m in Sources */,
+				65B0E0FE251047A700AB2111 /* SYSafeCategory.m in Sources */,
 				653E28F8225C6BB200774EAE /* SettingVM.m in Sources */,
 				657EEC99226848E400708CCD /* SceneEditViewController.m in Sources */,
 				653A2F1422549D910058C6AB /* KinconyDeviceRLMObject.m in Sources */,
@@ -607,6 +632,7 @@
 				653E28FE225C720F00774EAE /* DeviceManagerVM.m in Sources */,
 				655FA9202269632E009EE0D9 /* SceneDeviceCell.m in Sources */,
 				657DD55622533AC800C7C3B0 /* KinconySocketManager.m in Sources */,
+				65B0E0FF251047A700AB2111 /* JRSwizzle.m in Sources */,
 				657EEC932268478400708CCD /* KinconySceneRLMObject.m in Sources */,
 				654248512251AFCC00E30D54 /* GLBaseViewController.m in Sources */,
 				654248262251AE1C00E30D54 /* AppDelegate.m in Sources */,

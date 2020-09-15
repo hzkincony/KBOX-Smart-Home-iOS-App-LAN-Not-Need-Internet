@@ -25,6 +25,8 @@ typedef void (^DeviceAddResultBlock) (NSError *error);
 
 - (void)connectAllDevices;
 
+- (void)disConnectAllDevices;
+
 - (RLMResults*)getAllDevices;
 
 - (NSArray*)getAllConnectDevice;

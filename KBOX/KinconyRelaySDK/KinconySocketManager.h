@@ -20,6 +20,8 @@ extern NSString * const KinconySocketDidConnectNotification;
 
 - (void)connectToDevice:(NSArray*)deviceArray;
 
+- (void)disConnectAllDevice;
+
 - (void)sendData:(NSString*)dataStr toDevice:(KinconyDevice*)device;
 
 @end

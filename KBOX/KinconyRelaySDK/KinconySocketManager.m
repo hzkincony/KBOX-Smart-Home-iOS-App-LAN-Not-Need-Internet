@@ -10,6 +10,9 @@
 #import "GCDAsyncSocket.h"
 #import "GCDAsyncUdpSocket.h"
 #import "KinconyServerManager.h"
+#import "KinconySendData.h"
+
+#define RESEND_NUM 3
 
 NSString * const KinconySocketReadDataNotification = @"KinconySocketReadDataNotification";
 NSString * const KinconySocketDidConnectNotification = @"KinconySocketDidConnectNotification";
@@ -18,10 +21,13 @@ NSString * const KinconySocketDidConnectNotification = @"KinconySocketDidConnect
 
 @property (nonatomic, strong) NSMutableArray *socketArray;
 @property (nonatomic, strong) GCDAsyncUdpSocket *udpSocket;
+@property (nonatomic, strong) NSMutableArray<KinconySendData*> *sendDataLoop;
 
 @end
 
-@implementation KinconySocketManager
+@implementation KinconySocketManager {
+    dispatch_source_t _timer;
+}
 
 static KinconySocketManager *sharedManager = nil;
 
@@ -30,6 +36,7 @@ static KinconySocketManager *sharedManager = nil;
     dispatch_once(&once,^{
         sharedManager = [[self alloc] init];
         [sharedManager setupSocket];
+        [sharedManager startResend];
     });
     return sharedManager;
 }
@@ -73,6 +80,8 @@ static KinconySocketManager *sharedManager = nil;
     NSData *newData = [data subdataWithRange:NSMakeRange(44, data.length - 44)];
     NSString *contentStr = [[NSString alloc]initWithData:newData encoding:NSASCIIStringEncoding];
     
+    [self removeSendLoopDataBy:contentStr];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:KinconySocketReadDataNotification object:nil userInfo:@{@"data": contentStr, @"serial": serialStr}];
 }
 
@@ -85,10 +94,18 @@ static KinconySocketManager *sharedManager = nil;
     }
 }
 
+- (void)disConnectAllDevice {
+    for (GCDAsyncSocket *socket in self.socketArray) {
+        [socket disconnect];
+    }
+    [self.socketArray removeAllObjects];
+}
+
 - (void)sendData:(NSString *)dataStr toDevice:(KinconyDevice *)device {
     KinconyServerManager *serverManager = [KinconyServerManager sharedManager];
     if (serverManager.useServer) {
-        [self sendUdpData:dataStr withSerial:device.serial];
+        NSString *udpSendData = [self udpSendData:dataStr withSerial:device.serial];
+        [self sendUdpData:udpSendData withSerial:device.serial];
     } else {
         for (GCDAsyncSocket* sock in self.socketArray) {
             if ([sock.connectedHost isEqualToString:device.ipAddress]) {
@@ -100,6 +117,16 @@ static KinconySocketManager *sharedManager = nil;
 }
 
 #pragma mark - private methods
+
+- (void)startResend {
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 0.5 * NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_timer, ^{
+        [self reSendUpdData];
+    });
+    dispatch_resume(_timer);
+}
 
 - (void)setupSocket {
     NSError *error = nil;
@@ -115,6 +142,54 @@ static KinconySocketManager *sharedManager = nil;
         [self.udpSocket close];
         return;
     }
+}
+
+- (NSString*)udpSendData:(NSString*)sendData withSerial:(NSString*)serial {
+    NSString *udpSendDataStr = @"";
+    
+    NSInteger index = 0;
+    if (self.sendDataLoop.count > 0) {
+        if (self.sendDataLoop.lastObject.index < 255) {
+            index = self.sendDataLoop.lastObject.index + 1;
+        }
+    }
+    
+    NSString *regulaString = @"-([\\d]+)";
+    NSRange range = [sendData rangeOfString:regulaString options:NSRegularExpressionSearch];
+    
+    udpSendDataStr = [sendData stringByReplacingCharactersInRange:range withString:[NSString stringWithFormat:@"-%ld", (long)index]];
+    
+    KinconySendData *sendLoopData = [[KinconySendData alloc] init];
+    sendLoopData.index = index;
+    sendLoopData.sendNum = 1;
+    sendLoopData.sendDataStr = udpSendDataStr;
+    sendLoopData.serial = serial;
+    [self.sendDataLoop addObject:sendLoopData];
+    
+    return udpSendDataStr;
+}
+
+- (void)removeSendLoopDataBy:(NSString*)readStr {
+    NSInteger index = [self getSendDataIndex:readStr];
+    for (KinconySendData *sendData in self.sendDataLoop) {
+        if (sendData.index == index) {
+            [self.sendDataLoop removeObject:sendData];
+            return;
+        }
+    }
+}
+
+- (NSInteger)getSendDataIndex:(NSString*)sendData {
+    NSInteger index = 0;
+    
+    NSString *regulaString = @"-([\\d]+)";
+    NSRange range = [sendData rangeOfString:regulaString options:NSRegularExpressionSearch];
+    NSString *indexStr = [sendData substringWithRange:NSMakeRange(range.location + 1, range.length - 1)];
+    if (indexStr != nil) {
+        index = indexStr.integerValue;
+    }
+    
+    return index;
 }
 
 - (void)sendData:(NSString*)dataStr bySock:(GCDAsyncSocket*)sock {
@@ -149,6 +224,24 @@ static KinconySocketManager *sharedManager = nil;
     [self.udpSocket sendData:[NSData dataWithBytes:data length:100] toHost:serverManager.ipAddress port:serverManager.port withTimeout:-1 tag:0];
 }
 
+- (void)reSendUpdData {
+    for (KinconySendData *sendData in self.sendDataLoop) {
+        if (sendData.sendNum < RESEND_NUM) {
+            sendData.sendNum ++;
+            NSLog(@"resend data:%@,num:%ld", sendData.sendDataStr, (long)sendData.sendNum);
+            [self sendUdpData:sendData.sendDataStr withSerial:sendData.serial];
+        }
+    }
+    
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    for (KinconySendData *sendData in self.sendDataLoop) {
+        if (sendData.sendNum < RESEND_NUM) {
+            [tempArray addObject:sendData];
+        }
+    }
+    self.sendDataLoop = tempArray;
+}
+
 #pragma mark - getters and setters
 
 - (NSMutableArray*)socketArray {
@@ -156,6 +249,13 @@ static KinconySocketManager *sharedManager = nil;
         self.socketArray = [[NSMutableArray alloc] init];
     }
     return _socketArray;
+}
+
+- (NSMutableArray<KinconySendData*> *)sendDataLoop {
+    if (_sendDataLoop == nil) {
+        self.sendDataLoop = [[NSMutableArray<KinconySendData*> alloc] init];
+    }
+    return _sendDataLoop;
 }
 
 - (GCDAsyncUdpSocket *)udpSocket {
