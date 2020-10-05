@@ -175,7 +175,7 @@ static KinconyRelay *sharedManager = nil;
     NSArray *dataArray = [text componentsSeparatedByString:@","];
     NSString *stateStr = dataArray.lastObject;
     if ([stateStr containsString:@"OK"]) {
-        if ([dataArray.firstObject isEqualToString:@"RELAY-STATE-1"]) {
+        if ([dataArray.firstObject hasPrefix:@"RELAY-STATE-"]) {
             [self decodeDeviceState:[dataArray subarrayWithRange:NSMakeRange(1, dataArray.count - 2)] withIpaddress:ipAddress withPort:port withSerial:serial];
         }
     }

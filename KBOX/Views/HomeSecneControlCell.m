@@ -20,7 +20,8 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-        [self addSubview:self.scrollView];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self.contentView addSubview:self.scrollView];
     }
     return self;
 }

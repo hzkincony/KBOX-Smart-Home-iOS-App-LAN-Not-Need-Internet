@@ -36,7 +36,7 @@ static KinconySocketManager *sharedManager = nil;
     dispatch_once(&once,^{
         sharedManager = [[self alloc] init];
         [sharedManager setupSocket];
-        [sharedManager startResend];
+//        [sharedManager startResend];
     });
     return sharedManager;
 }
@@ -80,7 +80,7 @@ static KinconySocketManager *sharedManager = nil;
     NSData *newData = [data subdataWithRange:NSMakeRange(44, data.length - 44)];
     NSString *contentStr = [[NSString alloc]initWithData:newData encoding:NSASCIIStringEncoding];
     
-    [self removeSendLoopDataBy:contentStr];
+//    [self removeSendLoopDataBy:contentStr];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:KinconySocketReadDataNotification object:nil userInfo:@{@"data": contentStr, @"serial": serialStr}];
 }
@@ -102,10 +102,11 @@ static KinconySocketManager *sharedManager = nil;
 }
 
 - (void)sendData:(NSString *)dataStr toDevice:(KinconyDevice *)device {
+    NSLog(@"send dataStr:%@", dataStr);
     KinconyServerManager *serverManager = [KinconyServerManager sharedManager];
     if (serverManager.useServer) {
-        NSString *udpSendData = [self udpSendData:dataStr withSerial:device.serial];
-        [self sendUdpData:udpSendData withSerial:device.serial];
+//        NSString *udpSendData = [self udpSendData:dataStr withSerial:device.serial];
+        [self sendUdpData:dataStr withSerial:device.serial];
     } else {
         for (GCDAsyncSocket* sock in self.socketArray) {
             if ([sock.connectedHost isEqualToString:device.ipAddress]) {
@@ -121,7 +122,7 @@ static KinconySocketManager *sharedManager = nil;
 - (void)startResend {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 0.5 * NSEC_PER_SEC, 0);
+    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 1 * NSEC_PER_SEC, 0);
     dispatch_source_set_event_handler(_timer, ^{
         [self reSendUpdData];
     });
@@ -164,6 +165,7 @@ static KinconySocketManager *sharedManager = nil;
     sendLoopData.sendNum = 1;
     sendLoopData.sendDataStr = udpSendDataStr;
     sendLoopData.serial = serial;
+    sendLoopData.firstSendTime = [[NSDate date] timeIntervalSince1970];
     [self.sendDataLoop addObject:sendLoopData];
     
     return udpSendDataStr;
@@ -226,8 +228,9 @@ static KinconySocketManager *sharedManager = nil;
 
 - (void)reSendUpdData {
     for (KinconySendData *sendData in self.sendDataLoop) {
-        if (sendData.sendNum < RESEND_NUM) {
+        if (sendData.sendNum < RESEND_NUM && [[NSDate date] timeIntervalSince1970] - sendData.firstSendTime >= 3) {
             sendData.sendNum ++;
+            sendData.firstSendTime = [[NSDate date] timeIntervalSince1970];
             NSLog(@"resend data:%@,num:%ld", sendData.sendDataStr, (long)sendData.sendNum);
             [self sendUdpData:sendData.sendDataStr withSerial:sendData.serial];
         }

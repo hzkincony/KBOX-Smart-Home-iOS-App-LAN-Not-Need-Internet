@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger sendNum;
 @property (nonatomic, strong) NSString *sendDataStr;
 @property (nonatomic, strong) NSString *serial;
+@property (nonatomic, assign) NSInteger firstSendTime;
 
 @end
 
