@@ -21,15 +21,15 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>App will use camera</string>
+	<string>App will use camera to scan the QR code</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>App will use Description</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>App will use microphone</string>
+	<string>App will use microphone to recording audio to send voice chat messages</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>App will use library</string>
+	<string>App will use library to save picture</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>App will use system library</string>
+	<string>App will use system library to browse pictures</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
