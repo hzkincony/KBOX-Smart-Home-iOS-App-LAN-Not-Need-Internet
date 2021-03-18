@@ -1,5 +1,5 @@
 PODS:
-  - CocoaAsyncSocket (7.6.4)
+  - CocoaAsyncSocket (7.6.5)
   - IQKeyboardManager (6.2.1)
   - JCAlertController (3.0.4)
   - MBProgressHUD (1.1.0)
@@ -32,7 +32,7 @@ SPEC REPOS:
     - YYCache
 
 SPEC CHECKSUMS:
-  CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   IQKeyboardManager: 964638372b4a61892cc74fdfa6fd26de8c9464a2
   JCAlertController: 701bfa442bba86c68dce9494a9162914297a2ba0
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
@@ -41,6 +41,6 @@ SPEC CHECKSUMS:
   Realm: e12c9c2387d05c5bba3a9c394838f5870e85763b
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: f57782d17ccfbf5ab240125c486fdfb98ea3a50d
+PODFILE CHECKSUM: 6023a25dc9c10d8079b76d2b916c2e798afb7a7a
 
-COCOAPODS: 1.10.0.beta.1
+COCOAPODS: 1.10.0
