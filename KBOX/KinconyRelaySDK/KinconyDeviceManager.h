@@ -18,14 +18,15 @@ typedef enum {
 } DeviceAddErrorCode;
 
 typedef enum {
-    KinconyDeviceType_Relay = 0
+    KinconyDeviceType_Relay = 0,
+    KinconyDeviceType_Dimmer
 }KinconyDeviceType;
 
 @interface KinconyDeviceManager : NSObject
 
 + (KinconyDeviceManager*)sharedManager;
 
-- (NSError*)addDevice:(NSInteger)relayNum withIp:(NSString*)ipAddress withPort:(NSInteger)port withSerial:(NSString*)serial;
+- (NSError*)addDevice:(NSInteger)relayNum withIp:(NSString*)ipAddress withPort:(NSInteger)port withDeviceType:(KinconyDeviceType)deviceType withSerial:(NSString*)serial;
 - (KinconyDeviceRLMObject*)findDeviceByIp:(NSString*)ipAddress;
 - (KinconyDeviceRLMObject*)findDeviceByIp:(NSString*)ipAddress withNum:(NSString*)num;
 - (NSArray*)getAllConnectDevice;

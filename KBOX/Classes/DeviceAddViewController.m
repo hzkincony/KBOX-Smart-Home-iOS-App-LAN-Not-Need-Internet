@@ -16,12 +16,16 @@
 @property (weak, nonatomic) IBOutlet UITextField *serialTextField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet UILabel *modelLabel;
-@property (weak, nonatomic) IBOutlet UILabel *deviceTypeTitle;
+@property (weak, nonatomic) IBOutlet UILabel *modelTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *scanBtn;
+@property (weak, nonatomic) IBOutlet UILabel *deviceTypeTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *deviceTypeLabel;
 
 @end
 
-@implementation DeviceAddViewController
+@implementation DeviceAddViewController {
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,13 +33,29 @@
     [self initialzieModel];
     [self setupViews];
     self.modelLabel.text = @" ";
-    self.deviceTypeTitle.text = NSLocalizedString(@"Model", nil);
+    self.deviceTypeLabel.text = @" ";
+    self.modelTitleLabel.text = NSLocalizedString(@"Model", nil);
+    self.deviceTypeTitleLabel.text = NSLocalizedString(@"hardwareType", nil);
+    self.deviceTypeLabel.text = NSLocalizedString(@"relay", nil);
 }
 
 #pragma mark - Table view data source
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 2) {
+        if (self.viewModel.deviceType == KinconyDeviceType_Dimmer) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+    return [super tableView:tableView numberOfRowsInSection:section];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 2 && indexPath.row == 0) {
+        [self showChooseHardwareAlert];
+    } else if (indexPath.section == 2 && indexPath.row == 1) {
         [self showChooseModelAlert];
     }
 }
@@ -126,13 +146,34 @@
         self.modelLabel.text = @"32 Channel";
         self.viewModel.num = 32;
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:(UIAlertActionStyleCancel) handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancelBtn", nil) style:(UIAlertActionStyleCancel) handler:nil];
     
     [alertController addAction:alertAction2];
     [alertController addAction:alertAction4];
     [alertController addAction:alertAction8];
     [alertController addAction:alertAction16];
     [alertController addAction:alertAction32];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)showChooseHardwareAlert {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
+    UIAlertAction *relayAlertAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"relay", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        self.deviceTypeLabel.text = NSLocalizedString(@"relay", nil);
+        self.viewModel.deviceType = KinconyDeviceType_Relay;
+        [self.tableView reloadData];
+    }];
+    UIAlertAction *dimmerAlertAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"dimmer", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        self.deviceTypeLabel.text = NSLocalizedString(@"dimmer", nil);
+        self.viewModel.deviceType = KinconyDeviceType_Dimmer;
+        [self.tableView reloadData];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancelBtn", nil) style:(UIAlertActionStyleCancel) handler:nil];
+    
+    [alertController addAction:relayAlertAction];
+    [alertController addAction:dimmerAlertAction];
     [alertController addAction:cancelAction];
     
     [self presentViewController:alertController animated:YES completion:nil];

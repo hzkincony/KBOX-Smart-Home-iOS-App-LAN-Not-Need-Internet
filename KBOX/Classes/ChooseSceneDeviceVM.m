@@ -29,8 +29,10 @@
     RLMResults *devices = [[KinconyRelay sharedManager] getAllDevices];
     [self.deviceCellVMList removeAllObjects];
     for (KinconyDeviceRLMObject *device in devices) {
-        SceneDeviceChooseCellVM *sceneDeviceChooseCellVM = [[SceneDeviceChooseCellVM alloc] initWithDevice:device];
-        [self.deviceCellVMList addObject:sceneDeviceChooseCellVM];
+        if (device.type == KinconyDeviceType_Relay) {
+            SceneDeviceChooseCellVM *sceneDeviceChooseCellVM = [[SceneDeviceChooseCellVM alloc] initWithDevice:device];
+            [self.deviceCellVMList addObject:sceneDeviceChooseCellVM];
+        }
     }
     [self.getDevicesSignal sendNext:@""];
 }

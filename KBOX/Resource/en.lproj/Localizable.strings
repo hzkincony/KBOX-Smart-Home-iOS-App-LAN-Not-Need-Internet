@@ -49,3 +49,6 @@
 "serverConfigTitle" = "Server config";
 "ipAddress" = "IP Address";
 "port" = "Port";
+"hardwareType" = "Hardware Type";
+"relay" = "Relay";
+"dimmer" = "Dimmer";

@@ -9,7 +9,6 @@
 #import "KinconySocketManager.h"
 #import "GCDAsyncSocket.h"
 #import "GCDAsyncUdpSocket.h"
-#import "KinconyServerManager.h"
 #import "KinconySendData.h"
 
 #define RESEND_NUM 3
@@ -36,7 +35,6 @@ static KinconySocketManager *sharedManager = nil;
     dispatch_once(&once,^{
         sharedManager = [[self alloc] init];
         [sharedManager setupSocket];
-//        [sharedManager startResend];
     });
     return sharedManager;
 }
@@ -55,7 +53,7 @@ static KinconySocketManager *sharedManager = nil;
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
-    NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSString *text = [str stringByTrimmingCharactersInSet:[NSCharacterSet controlCharacterSet]];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:KinconySocketReadDataNotification object:nil userInfo:@{@"data": text, @"ipAddress": sock.connectedHost, @"port": [NSNumber numberWithInteger:sock.connectedPort]}];
@@ -103,31 +101,15 @@ static KinconySocketManager *sharedManager = nil;
 
 - (void)sendData:(NSString *)dataStr toDevice:(KinconyDevice *)device {
     NSLog(@"send dataStr:%@", dataStr);
-    KinconyServerManager *serverManager = [KinconyServerManager sharedManager];
-    if (serverManager.useServer) {
-//        NSString *udpSendData = [self udpSendData:dataStr withSerial:device.serial];
-        [self sendUdpData:dataStr withSerial:device.serial];
-    } else {
-        for (GCDAsyncSocket* sock in self.socketArray) {
-            if ([sock.connectedHost isEqualToString:device.ipAddress]) {
-                [self sendData:dataStr bySock:sock];
-                return;
-            }
+    for (GCDAsyncSocket* sock in self.socketArray) {
+        if ([sock.connectedHost isEqualToString:device.ipAddress]) {
+            [self sendData:dataStr bySock:sock];
+            return;
         }
     }
 }
 
 #pragma mark - private methods
-
-- (void)startResend {
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 1 * NSEC_PER_SEC, 0);
-    dispatch_source_set_event_handler(_timer, ^{
-        [self reSendUpdData];
-    });
-    dispatch_resume(_timer);
-}
 
 - (void)setupSocket {
     NSError *error = nil;
@@ -198,51 +180,6 @@ static KinconySocketManager *sharedManager = nil;
     NSLog(@"======%@", dataStr);
     NSData *data = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
     [sock writeData:data withTimeout:-1 tag:0];
-}
-
-- (void)sendUdpData:(NSString*)dataStr withSerial:(NSString*)serial {
-    KinconyServerManager *serverManager = [KinconyServerManager sharedManager];
-    
-    char data[100];
-    for (int i = 0; i < 100; i ++) {
-        data[i] = (char)0x00;
-    }
-    data[0] = 0x5E;
-    data[1] = 0x01;
-    data[2] = 0xC0;
-    data[3] = 0x00;
-    
-    data[4] = (dataStr.length / 256);
-    data[5] = (dataStr.length % 256);
-    
-    for (int i = 6; i < (serial.length + 6); i++) {
-        data[i] = [serial characterAtIndex:i - 6];
-    }
-    
-    for (int i = 44; i < (dataStr.length + 44); i ++) {
-        data[i] = [dataStr characterAtIndex:i - 44];
-    }
-    
-    [self.udpSocket sendData:[NSData dataWithBytes:data length:100] toHost:serverManager.ipAddress port:serverManager.port withTimeout:-1 tag:0];
-}
-
-- (void)reSendUpdData {
-    for (KinconySendData *sendData in self.sendDataLoop) {
-        if (sendData.sendNum < RESEND_NUM && [[NSDate date] timeIntervalSince1970] - sendData.firstSendTime >= 3) {
-            sendData.sendNum ++;
-            sendData.firstSendTime = [[NSDate date] timeIntervalSince1970];
-            NSLog(@"resend data:%@,num:%ld", sendData.sendDataStr, (long)sendData.sendNum);
-            [self sendUdpData:sendData.sendDataStr withSerial:sendData.serial];
-        }
-    }
-    
-    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-    for (KinconySendData *sendData in self.sendDataLoop) {
-        if (sendData.sendNum < RESEND_NUM) {
-            [tempArray addObject:sendData];
-        }
-    }
-    self.sendDataLoop = tempArray;
 }
 
 #pragma mark - getters and setters

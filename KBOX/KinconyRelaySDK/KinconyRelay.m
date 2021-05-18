@@ -50,9 +50,9 @@ static KinconyRelay *sharedManager = nil;
 
 #pragma mark - public methods
 
-- (void)addDevice:(NSString*)ipAddress withPort:(NSInteger)port withNum:(NSInteger)num withSerial:(NSString*)serial withBlock:(DeviceAddResultBlock)block {
+- (void)addDevice:(NSString*)ipAddress withPort:(NSInteger)port withNum:(NSInteger)num withDeviceType:(KinconyDeviceType)deviceType withSerial:(NSString*)serial withBlock:(DeviceAddResultBlock)block {
     
-    NSError *error = [[KinconyDeviceManager sharedManager] addDevice:num withIp:ipAddress withPort:port withSerial:serial];
+    NSError *error = [[KinconyDeviceManager sharedManager] addDevice:num withIp:ipAddress withPort:port withDeviceType:deviceType withSerial:serial];
     if (error != nil) {
         block([NSError errorWithDomain:@"" code:DeviceAddErrorCode_AlreadyExists userInfo:nil]);
         return;
@@ -87,8 +87,21 @@ static KinconyRelay *sharedManager = nil;
     connectDevice.ipAddress = device.ipAddress;
     connectDevice.port = device.port;
     connectDevice.serial = device.serial;
-    NSString *commandStr = [NSString stringWithFormat:@"RELAY-SET-255,%@,%d", device.num, on];
-    [[KinconySocketManager sharedManager] sendData:commandStr toDevice:connectDevice];
+    if (device.type == KinconyDeviceType_Relay) {
+        NSString *commandStr = [NSString stringWithFormat:@"RELAY-SET-255,%@,%d", device.num, on];
+        [[KinconySocketManager sharedManager] sendData:commandStr toDevice:connectDevice];
+    }
+}
+
+- (void)changeDeviceValue:(NSInteger)value device:(KinconyDeviceRLMObject*)device {
+    KinconyDevice *connectDevice = [[KinconyDevice alloc] init];
+    connectDevice.ipAddress = device.ipAddress;
+    connectDevice.port = device.port;
+    connectDevice.serial = device.serial;
+    if (device.type == KinconyDeviceType_Dimmer) {
+        NSString *commandStr = [NSString stringWithFormat:@"DIMMER-SEND-%@,%ld", device.num, (long)value];
+        [[KinconySocketManager sharedManager] sendData:commandStr toDevice:connectDevice];
+    }
 }
 
 - (void)exchangeDevicesIndex:(NSMutableArray *)devices {
@@ -124,7 +137,11 @@ static KinconyRelay *sharedManager = nil;
 - (void)searchDevicesState {
     NSArray *devices = [[KinconyDeviceManager sharedManager] getAllConnectDevice];
     for (KinconyDevice *device in devices) {
-        [[KinconySocketManager sharedManager] sendData:@"RELAY-STATE-1" toDevice:device];
+        if (device.type == KinconyDeviceType_Relay) {
+            [[KinconySocketManager sharedManager] sendData:@"RELAY-STATE-1" toDevice:device];
+        } else {
+            [[KinconySocketManager sharedManager] sendData:@"DIMMER-READ-ALL" toDevice:device];
+        }
     }
 }
 
@@ -177,6 +194,12 @@ static KinconyRelay *sharedManager = nil;
     if ([stateStr containsString:@"OK"]) {
         if ([dataArray.firstObject hasPrefix:@"RELAY-STATE-"]) {
             [self decodeDeviceState:[dataArray subarrayWithRange:NSMakeRange(1, dataArray.count - 2)] withIpaddress:ipAddress withPort:port withSerial:serial];
+        } else if ([dataArray.firstObject hasPrefix:@"DIMMER-READ-"]) {
+            NSMutableArray *stateStrArray = [[NSMutableArray alloc] init];
+            NSString *firstStateStr = dataArray.firstObject;
+            [stateStrArray addObject:[[firstStateStr componentsSeparatedByString:@"-"] lastObject]];
+            [stateStrArray addObjectsFromArray:[dataArray subarrayWithRange:NSMakeRange(1, dataArray.count - 2)]];
+            [self decodeDimmerDeviceValue:stateStrArray withIpaddress:ipAddress withPort:port withSerial:serial];
         }
     }
 }
@@ -307,6 +330,7 @@ static KinconyRelay *sharedManager = nil;
             kinconyDeviceState.port = port;
             kinconyDeviceState.serial = serial;
             kinconyDeviceState.state = [state integerValue];
+            kinconyDeviceState.deviceType = KinconyDeviceType_Relay;
             [resultStateArray addObject:kinconyDeviceState];
         }
     }
@@ -314,6 +338,20 @@ static KinconyRelay *sharedManager = nil;
     if (self.nowScene == nil) {
         [[NSNotificationCenter defaultCenter] postNotificationName:KinconyDeviceStateNotification object:nil userInfo:@{@"stateArray": resultStateArray}];
     }
+}
+
+- (void)decodeDimmerDeviceValue:(NSArray*)valueArray withIpaddress:(NSString*)ipAddress withPort:(NSInteger)port withSerial:(NSString*)serial {
+    NSMutableArray *resultStateArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < valueArray.count; i++) {
+        KinconyDeviceState *kinconyDeviceState = [[KinconyDeviceState alloc] init];
+        kinconyDeviceState.ipAddress = ipAddress;
+        kinconyDeviceState.port = port;
+        kinconyDeviceState.serial = serial;
+        kinconyDeviceState.value = [valueArray[i] integerValue];
+        kinconyDeviceState.deviceType = KinconyDeviceType_Dimmer;
+        [resultStateArray addObject:kinconyDeviceState];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:KinconyDeviceStateNotification object:nil userInfo:@{@"stateArray": resultStateArray}];
 }
 
 - (NSString *)toBinarySystemWithDecimalSystem:(NSString *)decimal {

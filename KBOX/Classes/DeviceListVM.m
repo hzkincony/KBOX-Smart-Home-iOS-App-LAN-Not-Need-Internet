@@ -10,11 +10,9 @@
 #import "KinconyRelay.h"
 #import "RLMRealmConfiguration.h"
 #import "RelayCellVM.h"
-#import "KinconyServerManager.h"
+#import "DimmerCellVM.h"
 
 @interface DeviceListVM()
-
-//@property (nonatomic, strong) KinconyRelay *kinconyRelay;
 
 @end
 
@@ -28,9 +26,7 @@
     self.getSeceneSignal = [RACSubject subject];
     NSLog(@"%@", [RLMRealmConfiguration defaultConfiguration].fileURL);
     
-    if (![KinconyServerManager sharedManager].useServer) {
-        [[KinconyRelay sharedManager] connectAllDevices];
-    }
+    [[KinconyRelay sharedManager] connectAllDevices];
     [self getDevices];
 };
 
@@ -39,12 +35,21 @@
 - (void)deviceStateNotification:(NSNotification*)notification {
     NSArray *stateArray = [notification.userInfo objectForKey:@"stateArray"];
     
-    for (RelayCellVM *relayCellVM in self.deviceCellVMList) {
-        KinconyDeviceRLMObject *device = [relayCellVM getDevice];
+    for (GLViewModel *cellVM in self.deviceCellVMList) {
+        KinconyDeviceRLMObject *device;
+        if ([cellVM isKindOfClass:[RelayCellVM class]]) {
+            device = [((RelayCellVM*)cellVM) getDevice];
+        } else if ([cellVM isKindOfClass:[DimmerCellVM class]]) {
+            device = [((DimmerCellVM*)cellVM) getDevice];
+        }
         if ([device.num integerValue] <= stateArray.count) {
             KinconyDeviceState *deviceState = [stateArray objectAtIndex:[device.num integerValue] - 1];
             if (([device.ipAddress isEqualToString:deviceState.ipAddress] && device.port == deviceState.port) || [deviceState.serial hasPrefix:device.serial]) {
-                relayCellVM.deviceOn = [NSNumber numberWithInteger:deviceState.state];
+                if (device.type == KinconyDeviceType_Relay) {
+                    ((RelayCellVM*)cellVM).deviceOn = [NSNumber numberWithInteger:deviceState.state];
+                } else if (device.type == KinconyDeviceType_Dimmer) {
+                    ((DimmerCellVM*)cellVM).deviceSliderValue = [NSNumber numberWithInteger:deviceState.value];
+                }
             }
         }
     }
@@ -57,8 +62,13 @@
     RLMResults *devices = [[KinconyRelay sharedManager] getAllDevices];
     [self.deviceCellVMList removeAllObjects];
     for (KinconyDeviceRLMObject *device in devices) {
-        RelayCellVM *relayCellVM = [[RelayCellVM alloc] initWithDevice:device];
-        [self.deviceCellVMList addObject:relayCellVM];
+        if (device.type == KinconyDeviceType_Relay) {
+            RelayCellVM *relayCellVM = [[RelayCellVM alloc] initWithDevice:device];
+            [self.deviceCellVMList addObject:relayCellVM];
+        } else {
+            DimmerCellVM *dimmerCellVM = [[DimmerCellVM alloc] initWithDevice:device];
+            [self.deviceCellVMList addObject:dimmerCellVM];
+        }
     }
     [self.getDevicesSignal sendNext:@""];
 }
@@ -90,13 +100,6 @@
 }
 
 #pragma mark - setters and getters
-
-//- (KinconyRelay*)kinconyRelay {
-//    if (_kinconyRelay == nil) {
-//        self.kinconyRelay = [[KinconyRelay alloc] init];
-//    }
-//    return _kinconyRelay;
-//}
 
 - (NSMutableArray*)deviceCellVMList {
     if (_deviceCellVMList == nil) {

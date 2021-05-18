@@ -49,3 +49,6 @@
 "serverConfigTitle" = "服务器配置";
 "ipAddress" = "IP地址";
 "port" = "端口";
+"hardwareType" = "硬件类型";
+"relay" = "继电器";
+"dimmer" = "调光器";

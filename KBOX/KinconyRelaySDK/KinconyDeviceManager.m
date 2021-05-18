@@ -24,7 +24,7 @@ static KinconyDeviceManager *sharedManager = nil;
 
 #pragma mark - public methods
 
-- (NSError*)addDevice:(NSInteger)relayNum withIp:(NSString*)ipAddress withPort:(NSInteger)port withSerial:(NSString*)serial {
+- (NSError*)addDevice:(NSInteger)relayNum withIp:(NSString*)ipAddress withPort:(NSInteger)port withDeviceType:(KinconyDeviceType)deviceType withSerial:(NSString*)serial {
     NSError *error = nil;
     if ([self findDeviceByIp:ipAddress] != nil) {
         error = [NSError errorWithDomain:@"device already exists." code:DeviceAddErrorCode_AlreadyExists userInfo:nil];
@@ -43,7 +43,7 @@ static KinconyDeviceManager *sharedManager = nil;
         device.num = [NSString stringWithFormat:@"%d", i];
         device.name = [NSString stringWithFormat:@"%@-%d", ipLastNum, i];
         device.image = @"icon1";
-        device.type = KinconyDeviceType_Relay;
+        device.type = deviceType;
         device.controlModel = 0;
         device.touchImage = @"icon1";
         [deviceArray addObject:device];
@@ -83,6 +83,7 @@ static KinconyDeviceManager *sharedManager = nil;
             KinconyDevice *connectDevice = [[KinconyDevice alloc] init];
             connectDevice.ipAddress = device.ipAddress;
             connectDevice.port = device.port;
+            connectDevice.type = device.type;
             connectDevice.serial = device.serial;
             [connectDevices addObject:connectDevice];
         }

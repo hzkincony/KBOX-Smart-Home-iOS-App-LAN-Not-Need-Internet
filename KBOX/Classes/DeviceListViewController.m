@@ -8,6 +8,7 @@
 
 #import "DeviceListViewController.h"
 #import "RelayCell.h"
+#import "DimmerCell.h"
 #import "DeviceEditViewController.h"
 #import "MJRefresh.h"
 #import "JCAlertController.h"
@@ -69,11 +70,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        RelayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RelayCell" forIndexPath:indexPath];
-        
-        cell.viewModel = [self.viewModel.deviceCellVMList objectAtIndex:indexPath.row];
-        
-        return cell;
+        if ([[self.viewModel.deviceCellVMList objectAtIndex:indexPath.row] isKindOfClass:[RelayCellVM class]]) {
+            RelayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RelayCell" forIndexPath:indexPath];
+            cell.viewModel = [self.viewModel.deviceCellVMList objectAtIndex:indexPath.row];
+            return cell;
+        } else {
+            DimmerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DimmerCell" forIndexPath:indexPath];
+            cell.viewModel = [self.viewModel.deviceCellVMList objectAtIndex:indexPath.row];
+            return cell;
+        }
     } else {
         HomeSecneControlCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeSecneControlCell"];
         cell.viewModel = self.viewModel.homeSeceneControlCellVM;

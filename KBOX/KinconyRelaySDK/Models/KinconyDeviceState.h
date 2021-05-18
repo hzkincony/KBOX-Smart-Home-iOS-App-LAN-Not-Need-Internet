@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *serial;
 @property (nonatomic, assign) NSInteger port;
 @property (nonatomic, assign) NSInteger state;
+@property (nonatomic, assign) NSInteger deviceType;
+@property (nonatomic, assign) NSInteger value;
 
 @end
 
