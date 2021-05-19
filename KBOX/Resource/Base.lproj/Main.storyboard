@@ -618,6 +618,11 @@
                                                 <constraint firstAttribute="height" constant="29" id="1lz-vx-dwd"/>
                                                 <constraint firstAttribute="width" constant="150" id="O2R-ad-b0H"/>
                                             </constraints>
+                                            <connections>
+                                                <action selector="sliderTouchUpInside:" destination="O9Z-3x-HqC" eventType="touchUpInside" id="XKR-fs-Twt"/>
+                                                <action selector="sliderTouchUpOutside:" destination="O9Z-3x-HqC" eventType="touchUpOutside" id="aY5-si-QBA"/>
+                                                <action selector="sliderValueChanged:" destination="O9Z-3x-HqC" eventType="valueChanged" id="Dvb-Mb-LD8"/>
+                                            </connections>
                                         </slider>
                                     </subviews>
                                     <constraints>

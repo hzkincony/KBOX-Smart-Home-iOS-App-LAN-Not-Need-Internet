@@ -192,12 +192,10 @@ static KinconyRelay *sharedManager = nil;
     NSArray *dataArray = [text componentsSeparatedByString:@","];
     NSString *stateStr = dataArray.lastObject;
     if ([stateStr containsString:@"OK"]) {
-        if ([dataArray.firstObject hasPrefix:@"RELAY-STATE-"]) {
+        if ([dataArray.firstObject hasPrefix:@"RELAY-STATE-"] || [dataArray.firstObject hasPrefix:@"RELAY-SET_ALL-"]) {
             [self decodeDeviceState:[dataArray subarrayWithRange:NSMakeRange(1, dataArray.count - 2)] withIpaddress:ipAddress withPort:port withSerial:serial];
         } else if ([dataArray.firstObject hasPrefix:@"DIMMER-READ-"]) {
             NSMutableArray *stateStrArray = [[NSMutableArray alloc] init];
-            NSString *firstStateStr = dataArray.firstObject;
-            [stateStrArray addObject:[[firstStateStr componentsSeparatedByString:@"-"] lastObject]];
             [stateStrArray addObjectsFromArray:[dataArray subarrayWithRange:NSMakeRange(1, dataArray.count - 2)]];
             [self decodeDimmerDeviceValue:stateStrArray withIpaddress:ipAddress withPort:port withSerial:serial];
         }

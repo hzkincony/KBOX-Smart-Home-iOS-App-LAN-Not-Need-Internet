@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)initWithDevice:(KinconyDeviceRLMObject*)device;
 - (KinconyDeviceRLMObject*)getDevice;
 - (DeviceEditVM*)getDeviceEditVM;
+- (void)changeDeviceValue:(NSInteger)value;
 
 @end
 

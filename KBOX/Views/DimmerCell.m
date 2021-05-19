@@ -14,9 +14,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *deviceNameLabel;
 @property (weak, nonatomic) IBOutlet UISlider *deviceSlider;
 
+- (IBAction)sliderValueChanged:(id)sender;
+- (IBAction)sliderTouchUpInside:(id)sender;
+- (IBAction)sliderTouchUpOutside:(id)sender;
+
 @end
 
-@implementation DimmerCell
+@implementation DimmerCell {
+    float _tempValue;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -36,6 +42,23 @@
     [self initialzieModel];
     
     [self getData];
+}
+
+#pragma mark - actions
+
+- (IBAction)sliderTouchUpOutside:(id)sender {
+    [self.viewModel changeDeviceValue:(NSInteger)self.deviceSlider.value];
+}
+
+- (IBAction)sliderTouchUpInside:(id)sender {
+    [self.viewModel changeDeviceValue:(NSInteger)self.deviceSlider.value];
+}
+
+- (IBAction)sliderValueChanged:(id)sender {
+    if (fabsf(self.deviceSlider.value - _tempValue) > 5) {
+        _tempValue = self.deviceSlider.value;
+        [self.viewModel changeDeviceValue:(NSInteger)_tempValue];
+    }
 }
 
 #pragma mark - private methods

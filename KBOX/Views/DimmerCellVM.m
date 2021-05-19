@@ -20,9 +20,6 @@
     if ((self = [super init])) {
         self.device = device;
         [self getData];
-        [RACObserve(self, deviceSliderValue) subscribeNext:^(id  _Nullable x) {
-            [[KinconyRelay sharedManager] changeDeviceValue:[x integerValue] device:self.device];
-        }];
     }
     return self;
 }
@@ -37,6 +34,11 @@
     DeviceEditVM *devcieEditVM = [[DeviceEditVM alloc] init];
     devcieEditVM.device = self.device;
     return devcieEditVM;
+}
+
+- (void)changeDeviceValue:(NSInteger)value {
+    [[KinconyRelay sharedManager] changeDeviceValue:value device:self.device];
+    self.deviceSliderValue = [NSNumber numberWithInteger:value];
 }
 
 #pragma mark - private methods
