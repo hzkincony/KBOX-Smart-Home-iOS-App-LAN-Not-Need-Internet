@@ -18,6 +18,7 @@ NSString * const KinconySocketDidConnectNotification = @"KinconySocketDidConnect
 
 @interface KinconySocketManager()<GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelegate>
 
+@property (nonatomic, strong) NSArray *connectedDeviceArray;
 @property (nonatomic, strong) NSMutableArray *socketArray;
 @property (nonatomic, strong) GCDAsyncUdpSocket *udpSocket;
 @property (nonatomic, strong) NSMutableArray<KinconySendData*> *sendDataLoop;
@@ -42,14 +43,16 @@ static KinconySocketManager *sharedManager = nil;
 #pragma mark - GCDAsyncSocketDelegate
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
-    [self.socketArray addObject:sock];
+    if (![self socketArrayHaveSocket:sock]) {
+        [self.socketArray addObject:sock];
+    }
     [sock readDataWithTimeout:-1 tag:0];
     [self sendData:@"RELAY-SCAN_DEVICE-NOW" bySock:sock];
     [[NSNotificationCenter defaultCenter] postNotificationName:KinconySocketDidConnectNotification object:nil];
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    NSLog(@"Disconnect");
+    
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
@@ -86,6 +89,7 @@ static KinconySocketManager *sharedManager = nil;
 #pragma mark - public methods
 
 - (void)connectToDevice:(NSArray *)deviceArray {
+    self.connectedDeviceArray = deviceArray;
     for (KinconyDevice *device in deviceArray) {
         GCDAsyncSocket *socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
         [socket connectToHost:device.ipAddress onPort:device.port error:nil];
@@ -177,9 +181,27 @@ static KinconySocketManager *sharedManager = nil;
 }
 
 - (void)sendData:(NSString*)dataStr bySock:(GCDAsyncSocket*)sock {
+    if (sock.isDisconnected) {
+        [self reConnecteAllDevice];
+        return;
+    }
     NSLog(@"======%@", dataStr);
     NSData *data = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
     [sock writeData:data withTimeout:-1 tag:0];
+}
+
+- (BOOL)socketArrayHaveSocket:(GCDAsyncSocket*)sock {
+    for (GCDAsyncSocket *arraySock in self.socketArray) {
+        if ([sock.connectedHost isEqualToString:arraySock.connectedHost] && sock.connectedPort == arraySock.connectedPort) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (void)reConnecteAllDevice {
+    [self disConnectAllDevice];
+    [self connectToDevice:self.connectedDeviceArray];
 }
 
 #pragma mark - getters and setters

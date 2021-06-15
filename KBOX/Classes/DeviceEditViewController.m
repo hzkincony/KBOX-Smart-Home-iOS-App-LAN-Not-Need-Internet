@@ -46,6 +46,14 @@
 
 #pragma mark - UITableViewDelegate
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (self.viewModel.device.type == KinconyDeviceType_Relay) {
+        return 4;
+    } else {
+        return 2;
+    }
+}
+
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *header = @"";
     
