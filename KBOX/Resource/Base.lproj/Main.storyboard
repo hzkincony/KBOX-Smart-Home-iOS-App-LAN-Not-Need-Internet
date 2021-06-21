@@ -531,16 +531,24 @@
                                                 <constraint firstAttribute="height" constant="40" id="qxb-yS-BBb"/>
                                             </constraints>
                                         </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y40-Cb-Z34">
+                                            <rect key="frame" x="0.0" y="0.0" width="302" height="60"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="SCz-eW-HsD" secondAttribute="trailing" constant="16" id="4DT-mO-RnX"/>
                                         <constraint firstItem="CfO-uH-pJi" firstAttribute="centerY" secondItem="TxP-Pe-HGY" secondAttribute="centerY" id="ABB-mw-qDQ"/>
                                         <constraint firstItem="85u-x8-b2r" firstAttribute="leading" secondItem="rvU-9W-wSc" secondAttribute="trailing" constant="8" id="V80-Kj-NSP"/>
                                         <constraint firstItem="CfO-uH-pJi" firstAttribute="leading" secondItem="85u-x8-b2r" secondAttribute="trailing" constant="8" id="X62-nm-a4o"/>
+                                        <constraint firstAttribute="bottom" secondItem="Y40-Cb-Z34" secondAttribute="bottom" id="dp5-04-A3F"/>
+                                        <constraint firstItem="CfO-uH-pJi" firstAttribute="leading" secondItem="Y40-Cb-Z34" secondAttribute="trailing" constant="8" symbolic="YES" id="fxa-pD-oDE"/>
                                         <constraint firstItem="rvU-9W-wSc" firstAttribute="leading" secondItem="TxP-Pe-HGY" secondAttribute="leading" constant="16" id="gIG-VL-oz9"/>
+                                        <constraint firstItem="Y40-Cb-Z34" firstAttribute="leading" secondItem="TxP-Pe-HGY" secondAttribute="leading" id="gYf-9Q-Uo0"/>
                                         <constraint firstItem="rvU-9W-wSc" firstAttribute="centerY" secondItem="TxP-Pe-HGY" secondAttribute="centerY" id="gg4-4i-d6Q"/>
                                         <constraint firstAttribute="trailing" secondItem="CfO-uH-pJi" secondAttribute="trailing" constant="16" id="ljq-Av-FAH"/>
                                         <constraint firstItem="85u-x8-b2r" firstAttribute="centerY" secondItem="TxP-Pe-HGY" secondAttribute="centerY" id="ogr-7x-qOz"/>
+                                        <constraint firstItem="Y40-Cb-Z34" firstAttribute="top" secondItem="TxP-Pe-HGY" secondAttribute="top" id="wqR-OG-dL2"/>
                                         <constraint firstItem="SCz-eW-HsD" firstAttribute="centerY" secondItem="TxP-Pe-HGY" secondAttribute="centerY" id="y6H-br-t9K"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -549,6 +557,7 @@
                                     <outlet property="deviceNameLabel" destination="85u-x8-b2r" id="DWB-Xp-B5h"/>
                                     <outlet property="deviceSwitch" destination="CfO-uH-pJi" id="AUs-xo-2l4"/>
                                     <outlet property="touchButton" destination="SCz-eW-HsD" id="LJn-iJ-VrX"/>
+                                    <outlet property="touchView" destination="Y40-Cb-Z34" id="oXb-0R-giJ"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DimmerCell" rowHeight="60" id="O9Z-3x-HqC" customClass="DimmerCell">
@@ -587,14 +596,22 @@
                                                 <action selector="sliderValueChanged:" destination="O9Z-3x-HqC" eventType="valueChanged" id="Dvb-Mb-LD8"/>
                                             </connections>
                                         </slider>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUM-Hp-alx">
+                                            <rect key="frame" x="0.0" y="0.0" width="199" height="60"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="FUM-Hp-alx" firstAttribute="top" secondItem="toC-Fg-BgA" secondAttribute="top" id="3gh-ba-Fk1"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="c7Q-x4-t0g" secondAttribute="trailing" constant="2" id="49Y-Kn-ui7"/>
                                         <constraint firstItem="qUZ-YJ-J73" firstAttribute="centerY" secondItem="toC-Fg-BgA" secondAttribute="centerY" id="B1Z-09-mDA"/>
                                         <constraint firstItem="c7Q-x4-t0g" firstAttribute="leading" secondItem="qUZ-YJ-J73" secondAttribute="trailing" constant="8" symbolic="YES" id="HVS-sp-UbB"/>
+                                        <constraint firstItem="FUM-Hp-alx" firstAttribute="leading" secondItem="toC-Fg-BgA" secondAttribute="leading" id="ZZK-oH-gbY"/>
                                         <constraint firstItem="bfM-yS-QqD" firstAttribute="centerY" secondItem="toC-Fg-BgA" secondAttribute="centerY" id="a39-H4-Z5d"/>
                                         <constraint firstItem="bfM-yS-QqD" firstAttribute="leading" secondItem="toC-Fg-BgA" secondAttribute="leading" constant="16" id="aPa-en-pzq"/>
                                         <constraint firstItem="qUZ-YJ-J73" firstAttribute="leading" secondItem="bfM-yS-QqD" secondAttribute="trailing" constant="8" id="c29-Fi-mee"/>
+                                        <constraint firstItem="c7Q-x4-t0g" firstAttribute="leading" secondItem="FUM-Hp-alx" secondAttribute="trailing" constant="8" symbolic="YES" id="vpI-5Y-gIu"/>
+                                        <constraint firstAttribute="bottom" secondItem="FUM-Hp-alx" secondAttribute="bottom" id="yPx-Xa-tD5"/>
                                         <constraint firstItem="c7Q-x4-t0g" firstAttribute="centerY" secondItem="toC-Fg-BgA" secondAttribute="centerY" id="yjU-1z-YCv"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -602,6 +619,7 @@
                                     <outlet property="deviceImageView" destination="bfM-yS-QqD" id="vkG-8Y-7FM"/>
                                     <outlet property="deviceNameLabel" destination="qUZ-YJ-J73" id="Xe0-c8-DBc"/>
                                     <outlet property="deviceSlider" destination="c7Q-x4-t0g" id="jGO-Gf-Hph"/>
+                                    <outlet property="touchView" destination="FUM-Hp-alx" id="mKV-CK-Mh1"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

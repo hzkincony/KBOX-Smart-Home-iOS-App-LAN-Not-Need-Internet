@@ -93,6 +93,18 @@ static KinconyDeviceManager *sharedManager = nil;
     return connectDevices;
 }
 
+- (KinconyDevice*)getConnectDeviceByIp:(NSString*)ipAddress {
+    KinconyDeviceRLMObject *device = [self findDeviceByIp:ipAddress];
+    KinconyDevice *connectDevice = [[KinconyDevice alloc] init];
+    if (device != nil) {
+        connectDevice.ipAddress = device.ipAddress;
+        connectDevice.port = device.port;
+        connectDevice.type = device.type;
+        connectDevice.serial = device.serial;
+    }
+    return connectDevice;
+}
+
 - (RLMResults*)getAllDevice {
     RLMResults<KinconyDeviceRLMObject*> *devices = [KinconyDeviceRLMObject allObjects];
     return devices;

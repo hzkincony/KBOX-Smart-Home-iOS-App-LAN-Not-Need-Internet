@@ -145,6 +145,15 @@ static KinconyRelay *sharedManager = nil;
     }
 }
 
+- (void)searchDeviceState:(NSString*)ip {
+    KinconyDevice *device = [[KinconyDeviceManager sharedManager] getConnectDeviceByIp:ip];
+    if (device.type == KinconyDeviceType_Relay) {
+        [[KinconySocketManager sharedManager] sendData:@"RELAY-STATE-1" toDevice:device];
+    } else {
+        [[KinconySocketManager sharedManager] sendData:@"DIMMER-READ-ALL" toDevice:device];
+    }
+}
+
 - (void)saveScene:(KinconySceneRLMObject *)scene {
     [[KinconySceneManager sharedManager] saveScene:scene];
 }
@@ -194,6 +203,8 @@ static KinconyRelay *sharedManager = nil;
     if ([stateStr containsString:@"OK"]) {
         if ([dataArray.firstObject hasPrefix:@"RELAY-STATE-"] || [dataArray.firstObject hasPrefix:@"RELAY-SET_ALL-"]) {
             [self decodeDeviceState:[dataArray subarrayWithRange:NSMakeRange(1, dataArray.count - 2)] withIpaddress:ipAddress withPort:port withSerial:serial];
+        } else if ([dataArray.firstObject hasPrefix:@"RELAY-KEY-"]) {
+            [self searchDeviceState:ipAddress];
         } else if ([dataArray.firstObject hasPrefix:@"DIMMER-READ-"]) {
             NSMutableArray *stateStrArray = [[NSMutableArray alloc] init];
             [stateStrArray addObjectsFromArray:[dataArray subarrayWithRange:NSMakeRange(1, dataArray.count - 2)]];

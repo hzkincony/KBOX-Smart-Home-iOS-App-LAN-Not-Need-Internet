@@ -43,6 +43,8 @@ typedef void (^DeviceAddResultBlock) (NSError *error);
 
 - (void)searchDevicesState;
 
+- (void)searchDeviceState:(NSString*)ip;
+
 - (void)saveScene:(KinconySceneRLMObject*)scene;
 
 - (RLMResults*)getSceces;

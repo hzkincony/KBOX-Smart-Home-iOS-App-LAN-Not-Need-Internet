@@ -11,8 +11,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol RelayCellDelegate <NSObject>
+
+- (void)relayCellNeedEdit:(RelayCellVM*)cellVM;
+
+@end
+
 @interface RelayCell : UITableViewCell
 
+@property (nonatomic, weak) id<RelayCellDelegate> delegate;
 @property (nonatomic, strong) RelayCellVM *viewModel;
 
 @end

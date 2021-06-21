@@ -31,6 +31,7 @@ typedef enum {
 - (KinconyDeviceRLMObject*)findDeviceByIp:(NSString*)ipAddress withNum:(NSString*)num;
 - (NSArray*)getAllConnectDevice;
 - (RLMResults*)getAllDevice;
+- (KinconyDevice*)getConnectDeviceByIp:(NSString*)ipAddress;
 - (void)deleteDevice:(KinconyDevice*)device;
 - (void)deleteAllDevice;
 - (void)addDevices:(NSMutableArray*)devices;

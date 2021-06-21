@@ -107,6 +107,10 @@ static KinconySocketManager *sharedManager = nil;
     NSLog(@"send dataStr:%@", dataStr);
     for (GCDAsyncSocket* sock in self.socketArray) {
         if ([sock.connectedHost isEqualToString:device.ipAddress]) {
+            if (!sock.isConnected) {
+                [self disConnectAllDevice];
+                [self connectToDevice:self.connectedDeviceArray];
+            }
             [self sendData:dataStr bySock:sock];
             return;
         }

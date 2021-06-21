@@ -11,8 +11,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol DimmerCellDelegate <NSObject>
+
+- (void)dimmerCellNeedEdit:(DimmerCellVM*)cellVM;
+
+@end
+
 @interface DimmerCell : UITableViewCell
 
+@property (nonatomic, weak) id<DimmerCellDelegate> delegate;
 @property (nonatomic, strong) DimmerCellVM *viewModel;
 
 @end

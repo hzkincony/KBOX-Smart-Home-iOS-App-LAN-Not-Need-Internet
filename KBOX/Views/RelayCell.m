@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *deviceNameLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *deviceSwitch;
 @property (weak, nonatomic) IBOutlet UIButton *touchButton;
+@property (weak, nonatomic) IBOutlet UIView *touchView;
 
 - (IBAction)deviceSwitchChanged:(id)sender;
 
@@ -23,7 +24,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = 1.0;
+    [self.touchView addGestureRecognizer:lpgr];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -46,6 +50,12 @@
 
 - (IBAction)deviceSwitchChanged:(id)sender {
     [self.viewModel changeDeviceState:self.deviceSwitch.isOn];
+}
+
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
+    if ([self.delegate respondsToSelector:@selector(relayCellNeedEdit:)]) {
+        [self.delegate relayCellNeedEdit:self.viewModel];
+    }
 }
 
 #pragma mark - private methods

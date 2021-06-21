@@ -14,7 +14,7 @@
 #import "JCAlertController.h"
 #import "HomeSecneControlCell.h"
 
-@interface DeviceListViewController ()
+@interface DeviceListViewController ()<RelayCellDelegate, DimmerCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 
@@ -73,10 +73,12 @@
         if ([[self.viewModel.deviceCellVMList objectAtIndex:indexPath.row] isKindOfClass:[RelayCellVM class]]) {
             RelayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RelayCell" forIndexPath:indexPath];
             cell.viewModel = [self.viewModel.deviceCellVMList objectAtIndex:indexPath.row];
+            cell.delegate = self;
             return cell;
         } else {
             DimmerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DimmerCell" forIndexPath:indexPath];
             cell.viewModel = [self.viewModel.deviceCellVMList objectAtIndex:indexPath.row];
+            cell.delegate = self;
             return cell;
         }
     } else {
@@ -90,23 +92,23 @@
     return YES;
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return UITableViewCellEditingStyleNone;
-}
-
-- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:NSLocalizedString(@"sceneCellEdit", nil) handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        RelayCellVM *cellVM = [self.viewModel.deviceCellVMList objectAtIndex:indexPath.row];
-        [self performSegueWithIdentifier:@"ShowDeviceEditVCSegue" sender:[cellVM getDeviceEditVM]];
-    }];
-    
-    return @[action];
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
+//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return UITableViewCellEditingStyleNone;
+//}
+//
+//- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:NSLocalizedString(@"sceneCellEdit", nil) handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//        RelayCellVM *cellVM = [self.viewModel.deviceCellVMList objectAtIndex:indexPath.row];
+//        [self performSegueWithIdentifier:@"ShowDeviceEditVCSegue" sender:[cellVM getDeviceEditVM]];
+//    }];
+//
+//    return @[action];
+//}
+//
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//
+//}
 
 - (BOOL)tableView:(UITableView *)tableview shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
@@ -144,6 +146,34 @@
         [self.editButton setTitle:NSLocalizedString(@"editBtn", nil)];
 //        [[KinconyRelay sharedManager] deleteAllTempDevices];
     }
+}
+
+#pragma mark - RelayCellDelegate
+
+- (void)relayCellNeedEdit:(RelayCellVM *)cellVM {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"sceneCellEdit", nil) message:nil preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancelBtn", nil) style:(UIAlertActionStyleCancel) handler:nil];
+    UIAlertAction *doneACtion = [UIAlertAction actionWithTitle:NSLocalizedString(@"doneBtn", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        [self performSegueWithIdentifier:@"ShowDeviceEditVCSegue" sender:[cellVM getDeviceEditVM]];
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:doneACtion];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+#pragma mark - DimmerCellDelegate
+
+- (void)dimmerCellNeedEdit:(DimmerCellVM *)cellVM {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"sceneCellEdit", nil) message:nil preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancelBtn", nil) style:(UIAlertActionStyleCancel) handler:nil];
+    UIAlertAction *doneACtion = [UIAlertAction actionWithTitle:NSLocalizedString(@"doneBtn", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        [self performSegueWithIdentifier:@"ShowDeviceEditVCSegue" sender:[cellVM getDeviceEditVM]];
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:doneACtion];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - private methods

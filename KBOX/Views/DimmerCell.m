@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *deviceImageView;
 @property (weak, nonatomic) IBOutlet UILabel *deviceNameLabel;
 @property (weak, nonatomic) IBOutlet UISlider *deviceSlider;
+@property (weak, nonatomic) IBOutlet UIView *touchView;
 
 - (IBAction)sliderValueChanged:(id)sender;
 - (IBAction)sliderTouchUpInside:(id)sender;
@@ -26,6 +27,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = 1.0;
+    [self.touchView addGestureRecognizer:lpgr];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -58,6 +63,12 @@
     if (fabsf(self.deviceSlider.value - _tempValue) > 5) {
         _tempValue = self.deviceSlider.value;
         [self.viewModel changeDeviceValue:(NSInteger)_tempValue];
+    }
+}
+
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
+    if ([self.delegate respondsToSelector:@selector(dimmerCellNeedEdit:)]) {
+        [self.delegate dimmerCellNeedEdit:self.viewModel];
     }
 }
 
